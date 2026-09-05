@@ -38,25 +38,33 @@
     return match ? DATA.modules[match[1]] : null;
   }
 
+  function setText(element, value) {
+    if (element && element.textContent !== value) element.textContent = value;
+  }
+
   function enhanceRenderedPage() {
     const state = maturity();
 
-    const trust = document.querySelector(".public-trust span");
-    if (trust) trust.textContent = `${pluralModules(state.published)} sur ${state.total} · données stockées uniquement dans ce navigateur · validations locales non authentifiées`;
+    setText(
+      document.querySelector(".public-trust span"),
+      `${pluralModules(state.published)} sur ${state.total} · données stockées uniquement dans ce navigateur · validations locales non authentifiées`
+    );
 
-    const heroLead = document.querySelector(".hero-home .hero-lead");
-    if (heroLead) heroLead.textContent = `Une architecture de douze mois en construction: ${pluralModules(state.published)} sont publiés; ${state.remaining} compétence${state.remaining > 1 ? "s" : ""} restent à développer au même standard avant que le parcours complet puisse être validé.`;
+    setText(
+      document.querySelector(".hero-home .hero-lead"),
+      `Une architecture de douze mois en construction: ${pluralModules(state.published)} sont publiés; ${state.remaining} compétence${state.remaining > 1 ? "s" : ""} restent à développer au même standard avant que le parcours complet puisse être validé.`
+    );
 
     const outcome = document.querySelectorAll(".outcome-strip > div");
     if (outcome.length >= 3) {
-      const strong = outcome[2].querySelector("strong");
-      const label = outcome[2].querySelector("span");
-      if (strong) strong.textContent = String(state.published);
-      if (label) label.textContent = state.published === 1 ? "module cœur complet" : "modules cœur complets";
+      setText(outcome[2].querySelector("strong"), String(state.published));
+      setText(outcome[2].querySelector("span"), state.published === 1 ? "module cœur complet" : "modules cœur complets");
     }
 
-    const footerParagraph = document.querySelector(".footer p");
-    if (footerParagraph) footerParagraph.textContent = `${pluralModules(state.published)} sur ${state.total}. Outil pédagogique indépendant, sans authentification ni certification. Les sources officielles, le mandat, les procédures du cabinet et une revue conservée hors du site restent déterminants.`;
+    setText(
+      document.querySelector(".footer p"),
+      `${pluralModules(state.published)} sur ${state.total}. Outil pédagogique indépendant, sans authentification ni certification. Les sources officielles, le mandat, les procédures du cabinet et une revue conservée hors du site restent déterminants.`
+    );
 
     const module = currentModule();
     if (module) {
@@ -64,18 +72,23 @@
       if (packageActions && module.learnerPackage && !module.learnerPackage.zip) {
         const zipButton = packageActions.querySelector("a.btn");
         if (zipButton) zipButton.remove();
-        const packCopy = document.querySelector(".course-pack > div > p:last-child");
-        if (packCopy) packCopy.textContent = "Les fichiers apprenant sont publiés séparément et restent téléchargeables individuellement. Aucun corrigé responsable n’est inclus.";
+        setText(
+          document.querySelector(".course-pack > div > p:last-child"),
+          "Les fichiers apprenant sont publiés séparément et restent téléchargeables individuellement. Aucun corrigé responsable n’est inclus."
+        );
       }
 
-      const validationHint = document.querySelector(".validation-panel button + p.fine-print");
-      if (validationHint && module.practicalReview) {
-        validationHint.textContent = `Quiz + preuves permettent la soumission. La revue pratique ${module.practicalReview.threshold}/100 sans erreur critique est ensuite obligatoire avant le jalon mensuel.`;
+      if (module.practicalReview) {
+        setText(
+          document.querySelector(".validation-panel button + p.fine-print"),
+          `Quiz + preuves permettent la soumission. La revue pratique ${module.practicalReview.threshold}/100 sans erreur critique est ensuite obligatoire avant le jalon mensuel.`
+        );
       }
     }
 
     const hash = String(location.hash || "#home").replace(/^#\/?/, "");
-    if (!hash || hash === "home") document.title = `Fiduciaire Formation · Pilote public ${state.published}/${state.total}`;
+    const title = `Fiduciaire Formation · Pilote public ${state.published}/${state.total}`;
+    if ((!hash || hash === "home") && document.title !== title) document.title = title;
   }
 
   let scheduled = false;

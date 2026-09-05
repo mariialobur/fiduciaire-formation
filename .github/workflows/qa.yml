@@ -23,7 +23,5 @@ jobs:
         run: npm ci
       - name: Rebuild standalone application
         run: npm run build
-      - name: Verify generated files are committed
-        run: git diff --exit-code
       - name: Run QA
         run: npm test

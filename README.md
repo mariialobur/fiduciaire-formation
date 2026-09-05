@@ -1,69 +1,302 @@
-# Fiduciaire Formation — parcours comptable 12 mois
+<div align="center">
 
-> Version pilote active: application publique v2.4, module TC01 v1.3.
+# Fiduciaire Formation
 
-Pilote public et utilisable hors ligne pour accompagner un·e assistant·e comptable vers l’autonomie sur des dossiers PME courants, sous revue ciblée d’une personne responsable.
+### Parcours suisse de 12 mois pour passer de l’assistance comptable à l’autonomie supervisée sur des dossiers PME courants
 
-Application publiée: <https://mariialobur.github.io/fiduciaire-formation/>
+[![Live](https://img.shields.io/badge/demo-GitHub%20Pages-0d7b75?style=flat-square)](https://mariialobur.github.io/fiduciaire-formation/)
+[![Programme](https://img.shields.io/badge/parcours-12%20mois-102f3c?style=flat-square)](./PROGRAMME_12_MOIS.md)
+[![Core](https://img.shields.io/badge/compétences%20cœur-25-d86d50?style=flat-square)](#-où-en-est-le-projet)
+[![TC01](https://img.shields.io/badge/TC01-v1.4-2e7957?style=flat-square)](#-tc01--le-module-étalon)
+[![QA](https://img.shields.io/badge/QA-GitHub%20Actions-6b7280?style=flat-square)](./.github/workflows/qa.yml)
 
-## État réel de la version
+**[Ouvrir la démo](https://mariialobur.github.io/fiduciaire-formation/)** · **[Voir le programme](./PROGRAMME_12_MOIS.md)** · **[Audit expert](./AUDIT_EXPERT_V2.4.md)**
 
-- 12 mois structurés en 4 niveaux de délégation.
-- 25 compétences cœur positionnées dans la feuille de route.
-- 1 module étalon complet: TC01 — Mandat fiduciaire, périmètre et responsabilités.
-- 24 fiches de compétences encore à développer au standard TC01 avant de pouvoir être présentées comme cours complets.
-- TC01 comprend le cours, un dossier en deux remises, des documents simulés, les outils apprenant, 16 questions, 6 preuves, une revue pratique sur 100 et 4 contrôles critiques.
-- 2 ressources TVA externes obligatoires:
-  - méthode effective: <https://mariialobur.github.io/tva-debutant/>
-  - méthode TDFN: <https://mariialobur.github.io/tva-tdfn/>
-- 12 jalons mensuels avec pratique, livrables, note de preuve, ordre obligatoire et revue déclarée du responsable. Un jalon reste techniquement non validable tant qu’un module du mois n’est encore qu’une fiche de cadrage.
-- 1 cas final de bout en bout au mois 12.
-- Progression locale, migration compatible depuis v2.3, export JSON qualifié comme sauvegarde non certifiante et restauration contrôlée d’une sauvegarde v2.4. L’import conserve le travail mais exige une nouvelle confirmation des quiz et validations.
+</div>
 
-Positionnement exact:
+> [!IMPORTANT]
+> **Édition publique de démonstration.** Le parcours compte 25 compétences cœur, mais **TC01 est actuellement le seul module publié au standard pédagogique complet**. Les 24 autres compétences restent des fiches de cadrage non validables tant qu’elles n’ont pas été développées au même niveau.
 
-> Plateforme de pilotage d’un parcours de formation de 12 mois, avec 1 module étalon intégré et 24 fiches de compétences à développer.
+Fiduciaire Formation est un prototype de parcours interne destiné à accompagner un·e assistant·e comptable dans une fiduciaire suisse. L’objectif n’est pas d’accumuler des cours, mais de développer progressivement une capacité observable à **produire, contrôler, documenter, escalader puis intégrer une revue**.
 
-## Limites assumées
+La progression est organisée sur 12 mois autour de dossiers PME courants: ouverture de mandat, comptabilité mensuelle, réconciliations, TVA, paie simple, clôture, fiscalité de base et reporting.
 
-Les 11 parcours sectoriels historiques restent dans la bibliothèque. La majorité de ces contenus sont des fiches de cadrage et non des cours complets. Ils sont clairement séparés du parcours cœur et ne comptent pas dans la progression.
+---
 
-Le statut `validé` reste une trace interne locale. L’application hors ligne ne téléverse pas les fichiers et n’authentifie pas l’identité du responsable; elle conserve des références de preuve, les scores, les contrôles critiques, la date et le feedback. Le cabinet doit conserver les fichiers réels dans son espace documentaire et contrôler les accès.
+## 🎯 Pourquoi ce projet
 
-Les fiches de cadrage sont consultables mais leur quiz, leur artefact et leur validation sont volontairement désactivés. TC01 reste utilisable comme module pilote autonome; le mois 1 ne pourra devenir un jalon validé qu’après publication de TC02, TC03 et TC04 au même standard.
+Les formations comptables classiques évaluent souvent la connaissance d’une règle ou la réussite d’un quiz. En cabinet, cela ne suffit pas.
 
-Le programme ne délivre pas de titre fédéral et ne qualifie pas automatiquement pour les dossiers complexes, le conseil fiscal spécialisé, l’audit, la consolidation, les décisions LBA ou les situations transfrontalières sensibles.
+Un collaborateur doit aussi savoir:
 
-## Lancement
+- identifier ce qui manque avant de commencer;
+- distinguer ce qui est inclus, à confirmer, hors mandat ou à escalader;
+- relier une écriture, une date ou une décision à une pièce et à une source;
+- laisser une piste de travail qu’un autre collaborateur peut reprendre;
+- reconnaître les situations où l’autonomie s’arrête;
+- intégrer les corrections du responsable sans effacer l’historique de la première analyse.
 
-Ouvrir `LANCER_ICI.html` ou `index.html` dans un navigateur récent. Aucune installation ni connexion n’est requise.
+Le parcours est donc construit comme une **progression de délégation**, pas comme une collection de chapitres.
 
-## Fichiers principaux
+## 🧭 Les 4 niveaux de délégation
 
-- `index.html` et `LANCER_ICI.html`: versions autonomes de l’interface.
-- `index-multifile.html`: version de développement multi-fichiers.
-- `data/app-data.js`: bibliothèque historique.
-- `data/roadmap-data.js`: parcours 12 mois, TC01 v1.3 et 24 fiches cœur non validables.
-- `app.js`: progression, jalons, quiz, revue et bibliothèque.
-- `style.css`: interface responsive et imprimable.
-- `build-standalone.mjs`: reconstruit les deux fichiers autonomes après une modification.
-- `ressources/tc01-apprenant-v1.3.zip`: paquet apprenant sans corrigé responsable.
-- Le paquet formateur, les corrigés et leurs générateurs sont volontairement exclus de ce dépôt public.
-- `PROGRAMME_12_MOIS.md`: référentiel pédagogique.
-- `AUDIT_EXPERT_V2.4.md`: contre-audit de la publication GitHub Pages et corrections de confiance publique.
-- `VALIDATION_V2.4.txt`: synthèse des contrôles avant publication de la version active.
-- `AUDIT_EXPERT_V2.3.md`: audit contradictoire de la version précédente.
-- `ASSEMBLY_REPORT_V2.3.md`: rapport d’assemblage de la version précédente.
-- `VALIDATION_V2.3.txt`: synthèse du gel précédent.
-- `QA_REPRODUCIBLE.md`: procédure permettant de relancer les contrôles depuis l’archive.
-- `historique/`: audits et rapports des versions antérieures, conservés uniquement pour traçabilité.
+| Période | Niveau visé | Résultat attendu |
+|---|---|---|
+| Mois 1–3 | Observation guidée → exécution avec checklist | Sécuriser le mandat, comprendre les comptes et produire un mois reprenable |
+| Mois 4–6 | Préparation pour revue | Qualifier et préparer la TVA avec sources et concordances |
+| Mois 7–9 | Préparation pour revue → autonomie sur travaux courants | Produire la paie simple et préparer les travaux de clôture |
+| Mois 10–12 | Autonomie avec revue ciblée | Clôturer, préparer fiscalité/reporting et gérer un dossier PME courant de bout en bout |
 
-## Règle de mise à jour
+Le résultat final recherché n’est pas «savoir tout faire seul». C’est pouvoir gérer un périmètre courant défini, avec des contrôles ciblés et une escalade pertinente.
 
-Toute donnée légale, taux, limite ou procédure doit être vérifiée dans la source officielle valable pour la période et relue avant utilisation en production. Une ressource externe reste indépendante de la plateforme et doit être contrôlée avant affectation.
+---
 
-## Développement sur GitHub
+## 🧩 Où en est le projet
 
-Créer une branche par modification, exécuter `npm ci`, reconstruire les fichiers autonomes avec `npm run build`, puis lancer `npm test` avant chaque pull request. Le QA inclut les liens, la sécurité de l’édition publique et les scénarios fonctionnels. Les fichiers de progression exportés par les utilisateurs, les dépendances installées et les rendus temporaires ne doivent jamais être commités.
+**État actuel:** architecture de programme complète, contenu pédagogique encore en production.
 
-Ce dépôt constitue l'édition publique destinée à la démonstration et à l'apprentissage. Comme toute application statique exécutée dans le navigateur, son code côté client ne constitue pas un dispositif d'examen sécurisé; la validation professionnelle doit rester supervisée et documentée hors du site public.
+- **12 mois** structurés;
+- **25 compétences cœur** positionnées dans la feuille de route;
+- **1 module étalon complet:** TC01 v1.4;
+- **24 fiches de cadrage** encore à développer au standard TC01;
+- **12 jalons mensuels** avec pratique, livrables, note de preuve et revue humaine;
+- **2 simulateurs TVA** externes intégrés au parcours;
+- **1 cas final** de bout en bout au mois 12;
+- progression locale dans le navigateur avec export/import JSON contrôlé;
+- GitHub Actions pour la QA, les liens et la sécurité de l’édition publique.
+
+Les mois restent volontairement **non validables** tant qu’un module prévu pour le mois n’est encore qu’une fiche de cadrage.
+
+---
+
+## 🧱 TC01 — le module étalon
+
+**Mandat fiduciaire, périmètre et responsabilités — v1.4**
+
+TC01 sert de **MASTER standard** pour les prochains modules. Il ne cherche pas à transformer un junior en responsable de mandat. Il vérifie qu’il peut préparer l’ouverture d’un dossier PME courant sans engager le cabinet sur une base mal cadrée.
+
+Le cas simulé met l’apprenant face à une demande TVA urgente avec:
+
+- extrait RC ancien puis actualisé;
+- pouvoirs et délégation limités;
+- mandat avec exclusions;
+- données personnelles et accès sensibles;
+- échéance TVA à vérifier;
+- demande de paiement hors périmètre;
+- seconde remise de documents qui modifie partiellement la décision initiale.
+
+### Ce que TC01 v1.4 change
+
+La version 1.4 applique une règle simple:
+
+> **fait → contrôle → source → décision → trace**
+
+La mémorisation d’un numéro d’article n’est plus traitée comme une compétence en soi. Le quiz mesure d’abord la capacité à identifier **le bon contrôle professionnel** et à retrouver la source utile.
+
+TC01 v1.4 comprend notamment:
+
+- un dossier métier en deux remises;
+- une logique **GO / GO sous conditions / NO-GO**;
+- 16 questions dont 4 critiques;
+- seuil de réussite: **14/16**, avec les 4 questions critiques obligatoirement correctes;
+- 6 livrables distincts;
+- une revue pratique sur **100 points**;
+- 4 contrôles critiques à zéro erreur;
+- des repères de notation communs: insuffisant / partiel / attendu / très bon;
+- une invalidation automatique de la revue lorsque le travail ou une preuve est modifié après validation.
+
+### Les 6 livrables TC01
+
+1. fiche d’ouverture;
+2. calendrier des obligations et dépendances;
+3. registre des demandes hors mandat;
+4. note GO / GO sous conditions / NO-GO;
+5. e-mail client de clarification;
+6. **journal de vérification des sources et contrôles**.
+
+Le modèle du journal est disponible ici: [`ressources/tc01-v1.4-complement/Journal_verification_TC01.csv`](./ressources/tc01-v1.4-complement/Journal_verification_TC01.csv).
+
+> [!NOTE]
+> Le ZIP apprenant historique v1.3 reste disponible pendant la transition. Le complément v1.4 ajoute le nouveau journal de vérification et documente les changements d’évaluation. Une reconstruction complète du paquet binaire pourra être faite lors du gel définitif du standard.
+
+---
+
+## 🗓 Structure des 12 mois
+
+| Mois | Thème principal | Production centrale |
+|---:|---|---|
+| 1 | Entrer dans un dossier fiduciaire | Mandat, pouvoirs, accès, KYC/escalade |
+| 2 | Comprendre les comptes avant de saisir | Double écriture, plan comptable, lecture des impacts |
+| 3 | Produire un mois comptable fiable | Achats, ventes, banque, caisse, réconciliations |
+| 4 | Qualifier la TVA | Assujettissement, lieu, exclusions/exonérations, taux |
+| 5 | Préparer un décompte effectif | TVA, impôt préalable, concordance |
+| 6 | Maîtriser la méthode TDFN | Activités, limites, concordance annuelle |
+| 7 | Produire une paie simple | Paramétrage, fiche, paiement, écritures |
+| 8 | Boucler l’année salariale | Cumuls, certificat de salaire, impôt source |
+| 9 | Préparer les écritures de clôture | Immobilisations, amortissements, cut-off |
+| 10 | Clôturer un dossier PME | Dossier de clôture prêt pour senior |
+| 11 | Préparer fiscalité et reporting | Passerelle fiscale, analyse et note client |
+| 12 | Cas final de bout en bout | Dossier PME complet + revue + version corrigée |
+
+Le référentiel détaillé se trouve dans [`PROGRAMME_12_MOIS.md`](./PROGRAMME_12_MOIS.md).
+
+---
+
+## 🧪 Validation et preuves
+
+La plateforme distingue trois choses:
+
+**Connaissance.** Quiz professionnel avec seuil standard de 80% et seuil renforcé pour les modules critiques.
+
+**Production.** Livrables réalisés sur dossier simulé ou anonymisé, avec références de preuve et note de travail.
+
+**Délégation.** Décision documentée d’un responsable sur le niveau de travail qui peut être confié au collaborateur.
+
+Une validation enregistrée dans la version publique reste une **trace locale non authentifiée**. Elle ne remplace ni une signature interne, ni un LMS sécurisé, ni une décision RH, ni une attestation professionnelle.
+
+---
+
+## 🧾 Simulateurs TVA
+
+Deux ressources externes complètent le parcours:
+
+- **méthode effective:** https://mariialobur.github.io/tva-debutant/
+- **méthode TDFN:** https://mariialobur.github.io/tva-tdfn/
+
+Elles doivent être utilisées avec les consignes du mois concerné et revalidées avant usage si les règles, taux ou interfaces officielles ont évolué.
+
+---
+
+## 🔒 Données, sécurité et limites
+
+L’application publique est statique et fonctionne entièrement dans le navigateur.
+
+- aucune création de compte;
+- aucune base de données distante;
+- aucun fichier de preuve téléversé;
+- progression stockée dans `localStorage`;
+- export JSON disponible pour sauvegarde;
+- les validations importées ne sont pas considérées comme fiables et doivent être reconfirmées;
+- aucune donnée client réelle ne doit être saisie dans l’édition publique.
+
+Le code côté client reste inspectable. Cette plateforme **n’est donc pas un dispositif d’examen sécurisé**.
+
+Le parcours ne délivre pas de titre fédéral et ne qualifie pas automatiquement pour:
+
+- conseil fiscal complexe;
+- restructurations ou planification internationale;
+- audit, consolidation ou expertise;
+- décisions LBA réservées aux personnes compétentes;
+- payroll transfrontalier sensible;
+- signature ou dépôt hors mandat ou délégation.
+
+---
+
+## 🗂 Architecture du dépôt
+
+```text
+fiduciaire-formation/
+├── index.html                  # entrée GitHub Pages
+├── index-multifile.html        # entrée multi-fichiers de développement
+├── LANCER_ICI.html             # lanceur / sortie standalone générée localement
+├── app.js                      # navigation, progression, quiz, revue, import/export
+├── style.css                   # interface responsive
+├── data/
+│   ├── app-data.js             # bibliothèque et données historiques
+│   ├── roadmap-data.js         # programme 12 mois + TC01 base + blueprints
+│   └── tc01-v1.4.js            # couche MASTER TC01 v1.4
+├── ressources/
+│   ├── tc01-apprenant-v1.3/    # paquet apprenant historique
+│   └── tc01-v1.4-complement/   # journal de vérification + transition v1.4
+├── tronc-commun/               # pages d’accès direct TC01–TC25
+├── PROGRAMME_12_MOIS.md        # référentiel pédagogique
+├── AUDIT_EXPERT_V2.4.md        # contre-audit expert
+├── build-standalone.mjs        # génération single-file
+├── qa-links.mjs                # contrôle des liens
+├── qa-public.mjs               # garde-fous édition publique
+└── qa-smoke.cjs                # scénarios fonctionnels
+```
+
+---
+
+## ⌨️ Lancer en local
+
+Aucune installation n’est nécessaire pour consulter l’interface multi-fichiers: servir le dossier avec un serveur HTTP statique suffit.
+
+Pour reconstruire et tester la version standalone:
+
+```bash
+git clone https://github.com/mariialobur/fiduciaire-formation.git
+cd fiduciaire-formation
+npm ci
+npm run build
+npm test
+```
+
+`npm run build` génère une version autonome contenant CSS, données et JavaScript dans un seul fichier HTML.
+
+---
+
+## ✅ QA
+
+Avant publication, la chaîne contrôle notamment:
+
+- les routes et références locales;
+- le rendu des 12 mois;
+- le blocage technique des 24 blueprints;
+- le quiz TC01 et ses 4 questions critiques;
+- les 6 preuves obligatoires;
+- la revue pratique et ses erreurs critiques;
+- l’invalidation après modification du travail;
+- la restauration JSON sans réinjecter une fausse validation;
+- l’absence de fichiers formateur/corrigés dans l’édition publique;
+- le contenu du ZIP apprenant public;
+- les avertissements de confiance et d’authentification.
+
+GitHub Actions exécute automatiquement la reconstruction et les tests sur les pull requests.
+
+---
+
+## 🚧 Roadmap immédiate
+
+La priorité n’est pas d’ajouter des fonctions à la plateforme. Elle est de produire le contenu métier au standard TC01 v1.4.
+
+- [x] Architecture 12 mois et 25 compétences cœur
+- [x] TC01 v1.4 — module MASTER
+- [ ] TC02 — formes juridiques et séparation des patrimoines
+- [ ] TC03 — protection des données et gestion des accès
+- [ ] TC04 — KYC et signaux d’alerte LBA
+- [ ] Rendre le mois 1 entièrement validable
+- [ ] Pilote réel learner + responsable
+- [ ] Mesurer temps réel, erreurs récurrentes et besoin d’explications orales
+- [ ] Geler le standard TC01–TC25 après retour du pilote
+
+---
+
+## 📚 Règle de mise à jour juridique
+
+Toute donnée légale, fiscale, sociale, taux, limite ou procédure doit être vérifiée dans une **source officielle valable pour la période concernée** avant utilisation réelle.
+
+Une date de revue éditoriale ne garantit pas qu’une règle reste valable au jour d’utilisation.
+
+---
+
+## 🤝 Contribuer
+
+Le projet est encore en phase de construction pédagogique. Une modification utile doit idéalement préserver trois principes:
+
+1. **réalisme cabinet** — le cas ressemble à une décision réelle de fiduciaire;
+2. **preuve observable** — la compétence produit un livrable ou une décision révisable;
+3. **limites professionnelles** — l’apprenant sait quand il doit escalader plutôt que deviner.
+
+Avant une modification importante, ouvrir une issue ou une branche dédiée, reconstruire le standalone et exécuter la QA.
+
+---
+
+<div align="center">
+
+**Fiduciaire Formation** · pilote public · Suisse
+
+De la connaissance à la délégation professionnelle documentée.
+
+</div>

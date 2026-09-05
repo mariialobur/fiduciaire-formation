@@ -2,16 +2,21 @@
 
 ## Maturité du contenu
 
-La feuille de route positionne **25 compétences cœur**. Dans la version publique 2.4, **2 modules sont désormais publiés au standard complet**:
+La feuille de route positionne **25 compétences cœur**. Dans la version publique 2.4, **3 modules sont désormais publiés au standard complet**:
 
 - **TC01 v1.4 — Mandat fiduciaire, périmètre et responsabilités**;
-- **TC02 v1.0 — Formes juridiques et séparation des patrimoines**.
+- **TC02 v1.0 — Formes juridiques et séparation des patrimoines**;
+- **TC03 v1.0 — Protection des données, accès et gestion des incidents**.
 
-Les **23 autres compétences** restent des fiches structurées à développer. Elles sont consultables pour comprendre la progression, mais l’application les rend explicitement non validables.
+Les **22 autres compétences** restent des fiches structurées à développer. Elles sont consultables pour comprendre la progression, mais l’application les rend explicitement non validables.
 
-Le mois 1 contient quatre modules. Son état éditorial actuel est donc **2/4 publiés**: TC03 et TC04 restent les deux bloqueurs avant qu’un jalon mensuel puisse être validé.
+Le mois 1 contient quatre modules. Son état éditorial actuel est **3/4 publiés**: **TC04 est désormais le seul bloqueur** avant qu’un jalon mensuel puisse être validé.
 
-TC01 v1.4 définit le standard pédagogique de référence. Son principe est: **fait → contrôle → source → décision → trace**. TC02 applique ce standard à une autre compétence et ajoute un second principe métier: **sujet → date → nature → pièce → écriture → escalade**.
+Les trois modules publiés appliquent un même principe de formation: le résultat attendu doit être observable dans un dossier de travail et ne peut pas être réduit à la réussite d’un quiz.
+
+- TC01: **fait → contrôle → source → décision → trace**;
+- TC02: **sujet → date → nature → pièce → écriture → escalade**;
+- TC03: **finalité → nécessité → destinataire → accès → canal → trace**; en cas d’incident: **contenir → préserver → alerter → documenter → escalader**.
 
 ## Résultat visé
 
@@ -60,50 +65,67 @@ Un module n’est promu de `blueprint` à module cœur/pilote/production que lor
 - une mise en pratique réaliste, avec information incomplète lorsque le métier l’exige;
 - des contrôles et seuils d’escalade;
 - des sources officielles identifiées et datées;
-- un ou plusieurs livrables réellement exploitables;
+- des livrables réellement exploitables;
 - un quiz qui teste le raisonnement professionnel, pas seulement la mémoire;
 - une note de travail et des références de preuves;
 - une grille de revue pratique lorsque la compétence l’exige;
-- une règle d’invalidation si une preuve est modifiée après revue.
+- des erreurs critiques bloquantes lorsque le risque le justifie;
+- une règle d’invalidation si une preuve ou une tentative critique change après revue.
 
 ## Critères d’un module prêt pour revue
 
 - quiz au seuil requis: 80% standard, 85% critique lorsque le module est classé critique;
 - artefact de travail suffisamment documenté;
 - contrôles et sources identifiés;
-- pièces manquantes et hypothèses visibles;
+- pièces manquantes, inconnues et hypothèses visibles;
 - aucun point matériel corrigé silencieusement;
 - revue pratique réussie lorsqu’elle est prévue.
 
 ### TC01 v1.4
 
-TC01 est un module critique et applique les critères suivants:
+TC01 est un module critique:
 
 - **14 réponses correctes sur 16**;
 - Q01, Q04, Q10 et Q15 obligatoirement correctes;
-- six références de livrables distinctes;
+- six références de livrables;
 - note de travail de 200 caractères minimum;
-- pratique évaluée à 80/100 minimum;
-- zéro erreur sur quatre contrôles critiques;
-- responsable identifié, date et feedback d’au moins 80 caractères.
+- revue pratique à 80/100 minimum;
+- zéro erreur sur quatre contrôles critiques.
 
-Les six livrables sont: fiche d’ouverture, calendrier, registre hors mandat, note de décision, e-mail client et journal de vérification.
+Livrables: fiche d’ouverture, calendrier, registre hors mandat, note de décision, e-mail client et journal de vérification.
 
 ### TC02 v1.0
 
-TC02 est un module standard avec deux questions critiques intégrées à l’évaluation:
+TC02 est un module standard avec deux questions critiques:
 
 - **10 réponses correctes sur 12**;
 - Q03 et Q08 obligatoirement correctes;
-- six références de livrables distinctes;
+- six références de livrables;
 - note de travail de 200 caractères minimum;
-- pratique évaluée à 80/100 minimum;
+- revue pratique à 80/100 minimum;
+- zéro erreur sur quatre contrôles critiques.
+
+Livrables: fiche d’identité juridique, chronologie de coupure EI → Sàrl, matrice des 12 flux, tableau de reprise actifs/passifs/contrats, note des points ouverts et journal de vérification.
+
+TC02 ne demande pas au junior de trancher seul une restructuration fiscale. Le résultat attendu est de séparer correctement les sujets et patrimoines, dater la transition, documenter les flux propriétaire/associé et escalader les conséquences spécialisées.
+
+### TC03 v1.0
+
+TC03 est un **module critique**:
+
+- **11 réponses correctes sur 12**;
+- Q03, Q07 et Q10 obligatoirement correctes;
+- six références de livrables;
+- note de travail de 200 caractères minimum;
+- revue pratique à 80/100 minimum;
 - zéro erreur sur quatre contrôles critiques;
-- responsable identifié, date et feedback d’au moins 80 caractères.
+- responsable, date et feedback documentés.
 
-Les six livrables sont: fiche d’identité juridique, chronologie de coupure EI → Sàrl, matrice des 12 flux, tableau de reprise actifs/passifs/contrats, note des points ouverts et journal de vérification.
+Livrables: inventaire des catégories de données/finalités, matrice des accès, registre des partages et canaux, checklist arrivée/changement/départ, fiche factuelle d’incident et journal de vérification.
 
-TC02 ne demande pas au junior de trancher seul une restructuration fiscale. Le résultat professionnel attendu consiste à identifier le bon sujet comptable, séparer les patrimoines, dater la transition, documenter les flux propriétaire/associé et escalader les conséquences spécialisées.
+Les quatre erreurs pratiques critiques sont: accepter un accès partagé/non nominatif comme solution normale, laisser actif un accès d’ancien collaborateur, partager des données salariales/sensibles vers un destinataire ou canal non autorisé, ou masquer/non escalader un incident.
+
+TC03 ne demande pas au junior de décider seul d’une annonce au PFPDT. Le learner doit contenir l’exposition, préserver les faits, documenter ce qui est confirmé ou inconnu et transmettre au responsable les éléments nécessaires à l’évaluation de l’art. 24 LPD.
 
 ## Critères d’un jalon mensuel
 
@@ -159,13 +181,13 @@ Cette décision est interne. Elle ne constitue pas un brevet, un certificat féd
 
 ## Ordre de production éditoriale
 
-Le développement suit désormais l’ordre du parcours et non la quantité de pages disponibles:
+Le développement suit l’ordre du parcours:
 
 1. **TC01 v1.4 — publié**;
 2. **TC02 v1.0 — publié**;
-3. **TC03 — prochain module à produire**;
-4. **TC04 — dernier bloqueur du mois 1**;
+3. **TC03 v1.0 — publié**;
+4. **TC04 — seul bloqueur restant du mois 1**;
 5. pilotage réel du mois 1 avec un apprenant et un responsable;
-6. seulement après retour du pilote, production du mois 2.
+6. après retour du pilote, production du mois 2.
 
-Cette séquence évite de construire 25 cours théoriques avant d’avoir vérifié sur le terrain que le standard fonctionne réellement.
+Cette séquence évite de produire 25 cours théoriques avant d’avoir vérifié sur le terrain que le standard de délégation fonctionne réellement.

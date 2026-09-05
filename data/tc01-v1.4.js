@@ -41,12 +41,12 @@
   module.quiz[8] = {
     q: "Un collègue a inscrit le 31 août 2026 comme échéance TVA du cas. Quel contrôle est le plus professionnel avant de reprendre cette date dans le dossier?",
     choices: [
-      "La recopier car elle figure déjà dans le calendrier",
       "Vérifier la période concernée, la règle de délai et la source officielle, puis conserver la trace du contrôle",
+      "La recopier car elle figure déjà dans le calendrier",
       "Demander uniquement au client si la date lui convient",
       "Remplacer l’échéance légale par la date interne de revue"
     ],
-    answer: 1,
+    answer: 0,
     explain: "TC01 ne demande pas de mémoriser un calcul isolé. Le réflexe est de vérifier la période, la règle applicable et la source, puis de distinguer échéance légale, engagement client et marge interne.",
     id: "Q09",
     domain: "Calendrier et source"

@@ -33,6 +33,9 @@ const html = `<!doctype html>
 </body>
 </html>`;
 
-await writeFile(join(root, "LANCER_ICI.html"), html);
+await Promise.all([
+  writeFile(join(root, "index.html"), html),
+  writeFile(join(root, "LANCER_ICI.html"), html)
+]);
 
 console.log(`Standalone généré: ${html.length} caractères · TC01 v1.4`);

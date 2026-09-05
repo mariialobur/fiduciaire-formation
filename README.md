@@ -5,40 +5,37 @@
 ### Parcours suisse de 12 mois pour passer de l’assistance comptable à l’autonomie supervisée sur des dossiers PME courants
 
 [![Live](https://img.shields.io/badge/demo-GitHub%20Pages-0d7b75?style=flat-square)](https://mariialobur.github.io/fiduciaire-formation/)
-[![Maturité](https://img.shields.io/badge/modules%20complets-3%20%2F%2025-d86d50?style=flat-square)](#-où-en-est-le-projet)
-[![TC01](https://img.shields.io/badge/TC01-v1.4-2e7957?style=flat-square)](https://mariialobur.github.io/fiduciaire-formation/#module/TC01)
-[![TC02](https://img.shields.io/badge/TC02-v1.0-2e7957?style=flat-square)](https://mariialobur.github.io/fiduciaire-formation/#module/TC02)
-[![TC03](https://img.shields.io/badge/TC03-v1.0-2e7957?style=flat-square)](https://mariialobur.github.io/fiduciaire-formation/#module/TC03)
+[![Maturité](https://img.shields.io/badge/modules%20complets-4%20%2F%2025-d86d50?style=flat-square)](#-où-en-est-le-projet)
+[![Mois 1](https://img.shields.io/badge/mois%201-4%20%2F%204-2e7957?style=flat-square)](#-premier-mois-entièrement-publié)
 [![Programme](https://img.shields.io/badge/parcours-12%20mois-102f3c?style=flat-square)](./PROGRAMME_12_MOIS.md)
 [![QA](https://img.shields.io/badge/QA-GitHub%20Actions-6b7280?style=flat-square)](./.github/workflows/qa.yml)
 
-**[Ouvrir la démo](https://mariialobur.github.io/fiduciaire-formation/)** · **[Voir le programme](./PROGRAMME_12_MOIS.md)** · **[TC01](https://mariialobur.github.io/fiduciaire-formation/#module/TC01)** · **[TC02](https://mariialobur.github.io/fiduciaire-formation/#module/TC02)** · **[TC03](https://mariialobur.github.io/fiduciaire-formation/#module/TC03)**
+**[Ouvrir la démo](https://mariialobur.github.io/fiduciaire-formation/)** · **[Voir le programme](./PROGRAMME_12_MOIS.md)** · **[TC01](https://mariialobur.github.io/fiduciaire-formation/#module/TC01)** · **[TC02](https://mariialobur.github.io/fiduciaire-formation/#module/TC02)** · **[TC03](https://mariialobur.github.io/fiduciaire-formation/#module/TC03)** · **[TC04](https://mariialobur.github.io/fiduciaire-formation/#module/TC04)**
 
 </div>
 
 > [!IMPORTANT]
-> **Édition publique de démonstration.** Le parcours contient 25 compétences cœur. **TC01 v1.4, TC02 v1.0 et TC03 v1.0 sont publiés au standard pédagogique complet.** Les 22 autres compétences restent des fiches de cadrage non validables. Le mois 1 est à **3/4**: TC04 reste le seul bloqueur éditorial.
+> **Édition publique de démonstration.** Le parcours comporte 25 compétences cœur. **TC01 à TC04 sont publiés au standard pédagogique complet: le Mois 1 est désormais entièrement produit.** Les 21 compétences suivantes restent des fiches de cadrage non validables tant qu’elles ne sont pas développées au même niveau.
 
 Fiduciaire Formation est un prototype de parcours interne destiné à accompagner un·e assistant·e comptable dans une fiduciaire suisse. L’objectif n’est pas d’accumuler des cours, mais de développer progressivement une capacité observable à **produire, contrôler, documenter, escalader puis intégrer une revue**.
 
-La progression couvre les dossiers PME courants: ouverture de mandat, forme juridique, protection des données, KYC, comptabilité mensuelle, réconciliations, TVA, paie simple, clôture, fiscalité de base et reporting.
+Le programme couvre l’ouverture d’un mandat, les formes juridiques, la protection des données, le KYC, la comptabilité mensuelle, les réconciliations, la TVA, la paie simple, la clôture, la fiscalité de base et le reporting.
 
 ---
 
 ## 🎯 Pourquoi ce projet
 
-Les formations classiques évaluent souvent la connaissance d’une règle ou la réussite d’un quiz. En cabinet, cela ne suffit pas.
-
-Un collaborateur doit aussi savoir:
+Une bonne note de quiz ne suffit pas à rendre un dossier délégable. En cabinet, un collaborateur doit aussi savoir:
 
 - identifier ce qui manque avant de commencer;
-- déterminer **qui est réellement concerné par une opération** avant de choisir un compte;
-- limiter les données et les accès au besoin réel;
-- distinguer ce qui est inclus, à confirmer, hors mandat ou à escalader;
-- relier une écriture, une date ou une décision à une pièce et à une source;
-- laisser une piste qu’un autre collaborateur peut reprendre;
+- déterminer qui est juridiquement et économiquement concerné par une opération;
+- vérifier le périmètre réel du mandat et du service demandé;
+- limiter données et accès au besoin réel;
+- relier une décision à une pièce, une source et une date;
+- distinguer fait, déclaration, hypothèse et inconnue;
 - reconnaître les situations où l’autonomie s’arrête;
-- intégrer les corrections du responsable sans effacer la première analyse.
+- intégrer une correction sans effacer l’historique de la première analyse;
+- laisser une piste qu’un autre collaborateur peut reprendre.
 
 Le parcours est donc construit comme une **progression de délégation**, pas comme une collection de chapitres.
 
@@ -46,93 +43,62 @@ Le parcours est donc construit comme une **progression de délégation**, pas co
 
 | Période | Niveau visé | Résultat attendu |
 |---|---|---|
-| Mois 1–3 | Observation guidée → exécution avec checklist | Sécuriser le dossier, comprendre le sujet comptable et produire un mois reprenable |
+| Mois 1–3 | Observation guidée → exécution avec checklist | Sécuriser le dossier, comprendre les comptes et produire un mois reprenable |
 | Mois 4–6 | Préparation pour revue | Qualifier et préparer la TVA avec sources et concordances |
 | Mois 7–9 | Préparation pour revue → autonomie sur travaux courants | Produire la paie simple et préparer les travaux de clôture |
 | Mois 10–12 | Autonomie avec revue ciblée | Clôturer, préparer fiscalité/reporting et gérer un dossier PME courant de bout en bout |
 
-Le résultat final recherché n’est pas «savoir tout faire seul». C’est pouvoir gérer un périmètre courant défini, avec des contrôles ciblés et une escalade pertinente.
+Le résultat final recherché n’est pas «savoir tout faire seul». C’est gérer un périmètre courant défini, avec des contrôles ciblés et une escalade pertinente.
 
 ---
 
 ## 🧩 Où en est le projet
 
 - **12 mois** structurés;
-- **25 compétences cœur** positionnées;
-- **3 modules complets**: TC01, TC02, TC03;
-- **22 fiches de cadrage** encore à développer;
-- **Mois 1: 3/4 modules publiés**;
+- **25 compétences cœur** planifiées;
+- **4 modules complets**: TC01, TC02, TC03, TC04;
+- **21 fiches de cadrage** encore à produire;
+- **Mois 1: 4/4 modules publiés**;
 - **12 jalons mensuels** avec pratique, livrables, note de preuve et revue humaine;
-- **2 simulateurs TVA** externes intégrés;
+- **2 simulateurs TVA** externes prévus aux mois 5 et 6;
 - **1 cas final** de bout en bout;
 - progression locale avec export/import JSON contrôlé;
-- GitHub Actions pour QA, liens et sécurité publique.
+- QA reproductible et GitHub Actions.
 
-Le compteur de maturité est calculé automatiquement à partir du statut réel des 25 compétences.
-
----
-
-## 🧱 TC01 — mandat, périmètre et responsabilités
-
-**Version 1.4 · module MASTER critique**
-
-TC01 entraîne le premier réflexe: ne pas commencer une production engageante avant d’avoir suffisamment cadré entité, mandat, pouvoirs, accès et échéances.
-
-> **fait → contrôle → source → décision → trace**
-
-Le cas Léman Atelier Sàrl est traité en deux remises. TC01 impose six livrables, 16 questions dont 4 critiques, un seuil de 14/16, une revue pratique à 80/100 et zéro erreur sur quatre contrôles critiques.
+Le compteur de maturité affiché dans l’application est calculé à partir du statut réel des 25 compétences.
 
 ---
 
-## 🧱 TC02 — formes juridiques et séparation des patrimoines
+## 🏁 Premier mois entièrement publié
 
-**Version 1.0 · module cœur**
+Le Mois 1 constitue maintenant un premier cycle cohérent:
 
-TC02 part d’une erreur classique: choisir un compte sans avoir identifié **à qui appartient l’opération**.
+| Module | Compétence observable | Standard |
+|---|---|---|
+| **TC01 v1.4** | Cadrer mandat, pouvoirs, accès et échéances avant production | `fait → contrôle → source → décision → trace` |
+| **TC02 v1.0** | Identifier le sujet comptable et séparer les patrimoines | `sujet → date → nature → pièce → écriture → escalade` |
+| **TC03 v1.0** | Limiter données/accès et gérer un incident sans masquer les faits | `finalité → nécessité → destinataire → accès → canal → trace` |
+| **TC04 v1.0** | Construire un KYC factuel, comprendre le contrôle économique et cartographier le service réel | `identité → contrôle → activité → service → date → écart → escalade` |
 
-> **sujet → date → nature → pièce → écriture → escalade**
+Le mois ne devient pas automatiquement «validé» parce que ses quatre contenus sont publiés. L’apprenant doit encore réussir chaque module, produire ses preuves, passer les revues pratiques, réaliser les travaux supervisés et obtenir la revue mensuelle.
 
-Le dossier Atelier Horizon suit le passage d’une entreprise individuelle à une Sàrl avec 12 mouvements qui traversent la date de constitution. Le learner conserve sa première analyse, reçoit ensuite une convention de reprise et d’autres pièces, puis explique chaque changement de décision.
+### TC01 — Mandat, périmètre et responsabilités
 
-TC02 impose six livrables, 12 questions dont 2 critiques, un seuil de 10/12 et une revue pratique à 80/100 avec quatre erreurs bloquantes.
+Module MASTER critique. Cas Léman Atelier Sàrl en deux remises, 16 questions dont 4 critiques, seuil 14/16, six livrables et revue pratique ≥80/100 sans erreur critique.
 
----
+### TC02 — Formes juridiques et séparation des patrimoines
 
-## 🧱 TC03 — protection des données, accès et incidents
+Cas Atelier Horizon: passage entreprise individuelle → Sàrl et 12 flux autour de la date de constitution. Le learner doit dater la coupure, qualifier les mouvements propriétaire/associé et conserver les incertitudes documentaires visibles. Quiz 12 questions, 2 critiques, seuil 10/12.
 
-**Version 1.0 · module cœur critique**
+### TC03 — Protection des données, accès et incidents
 
-TC03 transforme la LPD en réflexes de production. Le learner ne doit pas réciter une loi: il doit savoir pourquoi une donnée est nécessaire, qui peut y accéder, par quel canal et comment réagir si ce contrôle échoue.
+Cas Rivage Services SA: droits d’un ancien collaborateur, payroll, lien cloud public, données de santé, export local et mauvais destinataire. Le learner sépare fait technique, déclaration de tiers et information inconnue. Quiz 12 questions, 3 critiques, seuil 11/12.
 
-> **finalité → nécessité → destinataire → accès → canal → trace**
->
-> Incident: **contenir → préserver → alerter → documenter → escalader**
+### TC04 — KYC, ayant droit économique et périmètre LBA
 
-Le dossier Rivage Services SA présente six anomalies simultanées:
+Cas Northlake Trading Sàrl situé en octobre 2026. Le learner remonte une chaîne de contrôle, construit le profil économique, distingue tenue comptable et nouveaux services sensibles, et tient compte du changement de cadre au **1er octobre 2026** sans appliquer la règle rétroactivement.
 
-- ancien collaborateur encore actif;
-- demande d’envoi payroll vers Gmail personnel;
-- partage cloud «toute personne avec le lien»;
-- certificat médical dans un dossier comptable trop large;
-- export salarial sur laptop personnel;
-- fichier salaires/IBAN envoyé au mauvais fournisseur.
-
-Une seconde remise ajoute logs, confirmations et mesures de confinement. Le learner doit distinguer **fait technique, déclaration d’un tiers et information encore inconnue**.
-
-TC03 comprend:
-
-- inventaire données/finalités;
-- matrice des accès et moindre privilège;
-- registre des partages et canaux;
-- checklist arrivée/changement/départ;
-- fiche factuelle d’incident;
-- journal de vérification;
-- 12 questions dont 3 critiques;
-- seuil **11/12**;
-- revue pratique **80/100**;
-- 4 erreurs critiques bloquantes.
-
-La décision d’une éventuelle notification au PFPDT n’est jamais attribuée au junior: il prépare les faits et transmet au responsable compétent.
+Le module ne demande jamais au junior de décider seul d’une communication MROS ou de qualifier une infraction. Il exige une note factuelle, une analyse du service réel et une escalade au bon niveau. Quiz 12 questions, 3 critiques, seuil 11/12.
 
 ---
 
@@ -140,7 +106,7 @@ La décision d’une éventuelle notification au PFPDT n’est jamais attribuée
 
 | Mois | Axe principal | État éditorial |
 |---|---|---|
-| 1 | Mandat · formes juridiques · données · KYC | **3/4 publiés** |
+| 1 | Mandat · formes juridiques · données · KYC | **4/4 publiés** |
 | 2 | Double écriture · plan comptable · lecture des comptes | À produire |
 | 3 | Achats · ventes · banque · caisse · réconciliations | À produire |
 | 4 | Qualification TVA | À produire |
@@ -164,15 +130,15 @@ Une fiche de cadrage (`blueprint`) ne peut produire ni score ni validation.
 Un module publié combine:
 
 1. raisonnement / quiz;
-2. livrables de travail;
-3. note de dossier;
+2. livrables réels;
+3. note de travail;
 4. revue pratique;
 5. contrôles critiques;
-6. revue mensuelle du responsable.
+6. dépendance vers la revue mensuelle.
 
-Une modification d’un artefact après revue invalide la trace dépendante. Une nouvelle tentative complète du quiz peut retirer une réussite antérieure lorsqu’une question critique est manquée.
+Une modification d’un artefact après revue invalide la confiance dépendante. Une nouvelle tentative complète du quiz peut retirer une réussite antérieure si une question critique est manquée. Une nouvelle practical review déclarée «conforme» mais contenant une erreur critique invalide également la précédente revue réussie.
 
-Le but n’est pas de fabriquer un score élevé, mais de rendre le niveau de délégation **observable et révisable**.
+Le jalon mensuel ne devient validable qu’une fois tous les modules prêts, les travaux et livrables réalisés, la note mensuelle renseignée et la revue du responsable enregistrée.
 
 ---
 
@@ -211,12 +177,14 @@ fiduciaire-formation/
 │   ├── tc01-v1.4.js
 │   ├── tc02-v1.0.js
 │   ├── tc03-v1.0.js
+│   ├── tc04-v1.0.js
 │   └── runtime-enhancements.js
 ├── ressources/
 │   ├── tc01-apprenant-v1.3/
 │   ├── tc01-v1.4-complement/
 │   ├── tc02-apprenant-v1.0/
-│   └── tc03-apprenant-v1.0/
+│   ├── tc03-apprenant-v1.0/
+│   └── tc04-apprenant-v1.0/
 ├── tronc-commun/
 ├── PROGRAMME_12_MOIS.md
 ├── qa-links.mjs
@@ -225,7 +193,7 @@ fiduciaire-formation/
 └── .github/workflows/qa.yml
 ```
 
-Les pages directes des modules déjà publiés redirigent vers le SPA canonique `index.html#module/...`. Cela évite que plusieurs rendus d’un même module divergent au fil des versions.
+Les pages directes des modules publiés redirigent vers le SPA canonique `index.html#module/...`, afin qu’il n’existe qu’une seule version de l’interface par module.
 
 ---
 
@@ -244,7 +212,7 @@ npm ci
 npm run build
 ```
 
-Puis ouvrir `LANCER_ICI.html` dans un navigateur récent.
+Puis ouvrir `LANCER_ICI.html`.
 
 ### Développement multi-fichiers
 
@@ -261,20 +229,23 @@ Puis ouvrir `http://localhost:8000/index-multifile.html`.
 ```bash
 npm ci
 npm run build
-npm test
+npm run test:links
+npm run test:public
+npm run test:smoke
 ```
 
-La chaîne contrôle notamment:
+La chaîne vérifie notamment:
 
-- les liens et références locales;
-- l’absence de matériel formateur/corrigés dans l’édition publique;
-- les fichiers apprenant requis;
-- les 25 compétences et leur maturité;
-- le blocage des blueprints;
-- TC01, TC02 et TC03, y compris leurs questions critiques;
-- les preuves et revues pratiques;
-- l’invalidation après modification d’un artefact ou nouvel échec critique;
-- le blocage du mois 1 tant que TC04 n’est pas publié;
+- les références locales;
+- l’absence de corrigés ou matériel formateur dans l’édition publique;
+- les learner-packs requis;
+- la maturité réelle des 25 compétences;
+- les seuils et questions critiques de TC01–TC04;
+- les six preuves de chaque module;
+- les revues pratiques et leurs erreurs bloquantes;
+- l’invalidation d’une confiance antérieure après nouvel échec;
+- le cycle complet de validation du Mois 1;
+- l’invalidation du jalon mensuel après modification d’une preuve;
 - les erreurs JavaScript essentielles.
 
 GitHub Actions exécute la même chaîne sur les pull requests et sur `main`.
@@ -283,11 +254,11 @@ GitHub Actions exécute la même chaîne sur les pull requests et sur `main`.
 
 ## ⚖️ Sources et limites professionnelles
 
-Les contenus s’appuient sur des sources officielles suisses: Fedlex, AFC/ESTV, SECO, Zefix, PFPDT et autres autorités selon le thème.
+Les contenus utilisent des sources officielles suisses: Fedlex, AFC/ESTV, SECO/SFI, Zefix, PFPDT, FINMA, TranspaReg et autres autorités selon le thème.
 
-La date affichée correspond à une **revue éditoriale**. Pour toute décision engageante, la source applicable à la période doit être rouverte et la procédure interne du cabinet reste prioritaire.
+La date affichée correspond à une **revue éditoriale**, pas à une garantie de validité permanente. Pour toute décision engageante, la source applicable à la période doit être rouverte et la procédure interne du cabinet reste déterminante.
 
-Le parcours ne délivre pas de titre fédéral et ne qualifie pas automatiquement pour le conseil fiscal complexe, les restructurations, l’audit, la consolidation, les décisions LBA réservées aux personnes compétentes, le payroll transfrontalier complexe ou tout acte non autorisé par le mandat.
+Le parcours ne délivre pas de titre fédéral et ne qualifie pas automatiquement pour le conseil fiscal complexe, les restructurations, l’audit, la consolidation, les décisions AML/LBA réservées aux personnes compétentes, le payroll transfrontalier complexe ou tout acte non autorisé par le mandat.
 
 ---
 
@@ -296,14 +267,17 @@ Le parcours ne délivre pas de titre fédéral et ne qualifie pas automatiquemen
 - [x] **TC01 v1.4** — mandat, périmètre et responsabilités
 - [x] **TC02 v1.0** — formes juridiques et séparation des patrimoines
 - [x] **TC03 v1.0** — protection des données, accès et incidents
-- [ ] **TC04** — KYC et signaux d’alerte LBA
-- [ ] **Pilotage réel du mois 1**
-- [ ] Mois 2 — double écriture, plan comptable, lecture des comptes
+- [x] **TC04 v1.0** — KYC, ayant droit économique et périmètre LBA
+- [ ] **Pilotage réel du Mois 1** — apprenant + responsable + mesure des temps/erreurs/reprises
+- [ ] Stabiliser le standard à partir du retour du pilote
+- [ ] Produire le Mois 2 — double écriture, plan comptable et lecture des comptes
 
-L’objectif immédiat est de rendre **le mois 1 entièrement utilisable de bout en bout** avant d’accélérer sur les mois suivants.
+> La priorité n’est pas de publier 25 pages vite. Chaque module doit devenir un bloc de travail réellement délégable et vérifiable.
 
 ---
 
-## 📌 Positionnement exact
+## 📄 Statut du projet
 
-> **Plateforme publique de démonstration d’un parcours interne de formation fiduciaire suisse sur 12 mois, avec 3 modules cœur complets sur 25 et une progression professionnelle fondée sur des preuves et une revue humaine.**
+Prototype pédagogique public et évolutif. Les contenus sectoriels historiques restent une bibliothèque de cadrage tant qu’ils n’ont pas été développés selon le standard du parcours cœur.
+
+Les contributions qui modifient une règle légale, fiscale ou réglementaire doivent citer la source officielle et la date de vérification.

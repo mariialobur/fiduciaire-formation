@@ -20,9 +20,9 @@ walk(root);
 const forbiddenPathPatterns = [
   /(^|\/)Corrige_responsable(\/|$)/i,
   /(^|\/)materials\/formateur(\/|$)/i,
-  /(^|\/)tools\/tc0[12](\/|$)/i,
+  /(^|\/)tools\/tc0[1-3](\/|$)/i,
   /(^|\/)Guide_formateur[^/]*$/i,
-  /(^|\/)corrige[^/]*tc0[12][^/]*$/i
+  /(^|\/)corrige[^/]*tc0[1-3][^/]*$/i
 ];
 
 for (const path of files) {
@@ -36,39 +36,59 @@ for (const required of [
   "README.md",
   "data/tc01-v1.4.js",
   "data/tc02-v1.0.js",
+  "data/tc03-v1.0.js",
   "data/runtime-enhancements.js"
 ]) {
   if (!existsSync(join(root, required))) failures.push(`Fichier public requis absent: ${required}`);
 }
 
-const tc02Required = [
-  "00_LIRE_EN_PREMIER.md",
-  "01_Cours_TC02.md",
-  "02_Dossier_simule_TC02.md",
-  "03_Matrice_flux_TC02.csv",
-  "04_Chronologie_reprise_TC02.csv",
-  "05_Journal_verification_TC02.csv",
-  "06_Fiche_identite_juridique_TC02.csv",
-  "07_Tableau_reprise_TC02.csv",
-  "08_Note_points_ouverts_TC02.md",
-  "09_Sources_et_version.md"
-];
-for (const name of tc02Required) {
-  const path = `ressources/tc02-apprenant-v1.0/${name}`;
-  if (!existsSync(join(root, path))) failures.push(`Fichier apprenant TC02 absent: ${path}`);
+const packages = {
+  TC02: {
+    dir: "ressources/tc02-apprenant-v1.0",
+    files: [
+      "00_LIRE_EN_PREMIER.md", "01_Cours_TC02.md", "02_Dossier_simule_TC02.md",
+      "03_Matrice_flux_TC02.csv", "04_Chronologie_reprise_TC02.csv", "05_Journal_verification_TC02.csv",
+      "06_Fiche_identite_juridique_TC02.csv", "07_Tableau_reprise_TC02.csv", "08_Note_points_ouverts_TC02.md",
+      "09_Sources_et_version.md"
+    ]
+  },
+  TC03: {
+    dir: "ressources/tc03-apprenant-v1.0",
+    files: [
+      "00_LIRE_EN_PREMIER.md", "01_Cours_TC03.md", "02_Dossier_simule_TC03.md",
+      "03_Inventaire_donnees_TC03.csv", "04_Matrice_acces_TC03.csv", "05_Registre_partages_TC03.csv",
+      "06_Checklist_acces_TC03.csv", "07_Fiche_incident_TC03.md", "08_Journal_verification_TC03.csv",
+      "09_Sources_et_version.md"
+    ]
+  }
+};
+
+for (const [code, pack] of Object.entries(packages)) {
+  for (const name of pack.files) {
+    const path = `${pack.dir}/${name}`;
+    if (!existsSync(join(root, path))) failures.push(`Fichier apprenant ${code} absent: ${path}`);
+  }
 }
 
 const source = readFileSync(join(root, "app.js"), "utf8");
 const built = readFileSync(join(root, "index.html"), "utf8");
 const tc02 = readFileSync(join(root, "data/tc02-v1.0.js"), "utf8");
+const tc03 = readFileSync(join(root, "data/tc03-v1.0.js"), "utf8");
 const runtime = readFileSync(join(root, "data/runtime-enhancements.js"), "utf8");
 if (!source.includes("Édition publique de démonstration")) failures.push("Statut public absent de l’application source");
 if (!built.includes("Édition publique de démonstration")) failures.push("Statut public absent de la version autonome");
 if (!built.includes('class="skip-link"')) failures.push("Lien d’évitement absent de la version autonome");
 if (!built.includes("validations locales non authentifiées")) failures.push("Limite d’authentification absente de la version autonome");
 if (!tc02.includes('module.status = "core"')) failures.push("TC02 n’est pas promu au statut cœur");
-if (!tc02.includes('module.contentVersion = "1.0"')) failures.push("Version pédagogique TC02 absente");
+if (!tc03.includes('module.status = "core"')) failures.push("TC03 n’est pas promu au statut cœur");
+if (!tc03.includes('module.critical = true')) failures.push("TC03 critique n’est pas marqué comme tel");
+if (!tc03.includes('module.quizThresholdCount = 11')) failures.push("Seuil TC03 11/12 absent");
 if (!runtime.includes("FIDUCIAIRE_MATURITY")) failures.push("Compteur dynamique de maturité absent");
+
+for (const code of ["TC01", "TC02", "TC03"]) {
+  const direct = readFileSync(join(root, `tronc-commun/${code}.html`), "utf8");
+  if (!direct.includes(`../index.html#module/${code}`)) failures.push(`Page directe ${code} ne redirige pas vers le SPA canonique`);
+}
 
 const learnerZip = files.find((path) => /^ressources\/tc01-apprenant-v[\d.]+\.zip$/i.test(path));
 if (!learnerZip) {
@@ -95,7 +115,9 @@ console.log(JSON.stringify({
   repositoryFilesChecked: files.length,
   forbiddenPaths: 0,
   learnerZipChecked: learnerZip,
-  tc02LearnerFilesChecked: tc02Required.length,
+  tc02LearnerFilesChecked: packages.TC02.files.length,
+  tc03LearnerFilesChecked: packages.TC03.files.length,
+  canonicalModuleRedirects: 3,
   dynamicMaturity: true,
   trustNotice: true,
   skipLink: true

@@ -1,0 +1,7 @@
+ID;Date;Dossier / fichier;Données concernées;Destinataire / groupe;Canal;Type de partage;Droit;Finalité;Autorisation / base interne;Expiration;Historique contrôlé?;Risque / anomalie;Action;Statut
+P01;;Rivage/Payroll/2026;;Toute personne disposant du lien;Cloud;Lien;;;;;;;;
+P02;;Journal salaires août;;Claire D.;Gmail demandé;E-mail;;;;;;;;
+P03;;Journal salaires août;;Claire D.;Portail client;Accès nominatif;;;;;;;;
+P04;;controle_salaires_aout.xlsx;;Fournisseur externe;E-mail;Pièce jointe;;;;;;;;
+P05;;salaires-aout.csv;;Laptop personnel;Copie locale;;;;;;;;
+P06;;Certificat médical;;Équipe comptable;Dossier général;Accès dossier;;;;;;;;

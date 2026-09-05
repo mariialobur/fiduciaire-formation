@@ -1,6 +1,7 @@
 (function () {
   const DATA = window.FIDUCIAIRE_DATA;
   const ROADMAP = window.FIDUCIAIRE_ROADMAP;
+  const PROGRESS_KEY = "fiduciaire_formation_progress_v24";
   if (!DATA || !ROADMAP) return;
 
   // TC02 uses a transparent folder package rather than a binary ZIP.
@@ -37,7 +38,6 @@
     const hashMatch = String(location.hash || "").match(/^#\/?module\/([^/]+)/);
     if (hashMatch && DATA.modules[hashMatch[1]]) return DATA.modules[hashMatch[1]];
 
-    // Direct legacy pages call renderModule() without changing the hash.
     const kicker = document.querySelector(".article > .kicker")?.textContent || "";
     const domMatch = kicker.match(/\b(TC\d{2}|CAP12)\b/);
     if (domMatch && DATA.modules[domMatch[1]]) return DATA.modules[domMatch[1]];
@@ -46,6 +46,76 @@
 
   function setText(element, value) {
     if (element && element.textContent !== value) element.textContent = value;
+  }
+
+  function invalidatePersistedPracticalReview(code) {
+    try {
+      const raw = window.localStorage && localStorage.getItem(PROGRESS_KEY);
+      if (!raw) return;
+      const progress = JSON.parse(raw);
+      const module = DATA.modules[code];
+      const current = progress.modules && progress.modules[code];
+      if (!module || !current) return;
+
+      current.practicalReview = null;
+      current.validatedAt = null;
+      if (current.status === "validated") current.status = "review_ready";
+
+      if (module.month && progress.months && progress.months[module.month]) {
+        const monthProgress = progress.months[module.month];
+        if (monthProgress.validatedAt) {
+          monthProgress.validatedAt = null;
+          monthProgress.validationSnapshot = null;
+          monthProgress.reviewer = Object.assign({}, monthProgress.reviewer || {}, { decision: "" });
+          const month = ROADMAP.months.find((item) => item.month === module.month);
+          if (month) {
+            month.modules.forEach((moduleCode) => {
+              const item = progress.modules && progress.modules[moduleCode];
+              if (!item) return;
+              if (item.status === "validated") item.status = "review_ready";
+              item.validatedAt = null;
+            });
+          }
+        }
+      }
+
+      localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress, null, 2));
+    } catch (error) {
+      // The core application will still reject the invalid review; this guard only removes stale trust.
+    }
+  }
+
+  function installPracticalReviewTrustGuard() {
+    if (!window.FiduApp || typeof window.FiduApp.savePracticalReview !== "function" || window.FiduApp.__practicalReviewTrustGuard) return;
+    const original = window.FiduApp.savePracticalReview;
+
+    window.FiduApp.savePracticalReview = function guardedSavePracticalReview(code) {
+      const module = DATA.modules[code];
+      if (module && module.practicalReview && document.getElementById("practicalDecision")?.value === "passed") {
+        let score = 0;
+        let completeScores = true;
+        for (const item of module.practicalReview.scoreItems || []) {
+          const rawValue = document.getElementById(`score-${item.id}`)?.value;
+          const value = rawValue === "" || rawValue == null ? NaN : Number(rawValue);
+          if (!Number.isFinite(value) || value < 0 || value > item.max) {
+            completeScores = false;
+            break;
+          }
+          score += value;
+        }
+
+        const criticalFailure = (module.practicalReview.criticalChecks || []).some(
+          (item) => document.getElementById(`critical-${item.id}`)?.value === "yes"
+        );
+
+        if (completeScores && (score < module.practicalReview.threshold || criticalFailure)) {
+          invalidatePersistedPracticalReview(code);
+        }
+      }
+      return original(code);
+    };
+
+    window.FiduApp.__practicalReviewTrustGuard = true;
   }
 
   function enhanceRenderedPage() {
@@ -106,6 +176,8 @@
       enhanceRenderedPage();
     });
   }
+
+  installPracticalReviewTrustGuard();
 
   const app = document.getElementById("app");
   if (app && window.MutationObserver) {

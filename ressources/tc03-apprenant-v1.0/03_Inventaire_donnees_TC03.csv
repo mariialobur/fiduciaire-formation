@@ -1,0 +1,13 @@
+ID;Catégorie de données;Exemple dans le cas;Personnes concernées;Finalité;Nécessaire?;Sensibilité / risque;Dossier autorisé;Durée / règle de conservation;Propriétaire du traitement;Point ouvert
+D01;Identité salarié;Nom prénom;;;;;;;
+D02;Coordonnées privées;Adresse;;;;;;;
+D03;Données bancaires;IBAN;;;;;;;
+D04;Rémunération;Brut net retenues;;;;;;;
+D05;Allocations / situation familiale;Allocations;;;;;;;
+D06;Absence;Oui/non;;;;;;;
+D07;Données de santé;Certificat médical;;;;;;;
+D08;Identité utilisateur;Compte applicatif;;;;;;;
+D09;Journaux techniques;Connexions / accès;;;;;;;
+D10;Données comptables;Factures / écritures;;;;;;;
+D11;Partages externes;Liens / destinataires;;;;;;;
+D12;Exports de travail;CSV / XLSX;;;;;;;

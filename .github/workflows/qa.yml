@@ -23,5 +23,9 @@ jobs:
         run: npm ci
       - name: Rebuild standalone application
         run: npm run build
-      - name: Run QA
-        run: npm test
+      - name: Check local links
+        run: npm run test:links
+      - name: Check public package safety
+        run: npm run test:public
+      - name: Run browser smoke tests
+        run: npm run test:smoke

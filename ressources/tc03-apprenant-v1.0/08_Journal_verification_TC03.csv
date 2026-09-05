@@ -1,0 +1,16 @@
+ID;Date/heure;Contrôle;Source / système;Période;Fait observé;Action;Résultat;Point inconnu;Escalade / responsable;Statut
+V01;;Compte Thomas actif;Gestion utilisateurs;;;;;;;
+V02;;Connexion 02.09;Logs authentification;;;;;;;
+V03;;Sessions / tokens Thomas;IT / sécurité;;;;;;;
+V04;;Partages cloud Thomas;Cloud admin;;;;;;;
+V05;;Lien public Payroll;Paramètres partage;;;;;;;
+V06;;Historique 27 ouvertures;Logs cloud;;;;;;;
+V07;;Canal autorisé Claire;Procédure / mandat;;;;;;;
+V08;;Certificat médical;Dossier + droits;;;;;;;
+V09;;Export laptop personnel;Déclaration + procédure IT;;;;;;;
+V10;;Envoi fournisseur 08:05;E-mail envoyé;;;;;;;
+V11;;Déclaration fournisseur 08:17 / 09:10;E-mails reçus;;;;;;;
+V12;;Contenu fichier A06;Fichier / inventaire;;;;;;;
+V13;;Qualification violation;LPD art. 24 / procédure;;;;;;;
+V14;;Décision notification;Responsable compétent;;;;;;;
+V15;;Actions préventives;Revue contrôle interne;;;;;;;

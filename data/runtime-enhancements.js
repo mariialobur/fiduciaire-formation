@@ -34,8 +34,14 @@
   }
 
   function currentModule() {
-    const match = String(location.hash || "").match(/^#\/?module\/([^/]+)/);
-    return match ? DATA.modules[match[1]] : null;
+    const hashMatch = String(location.hash || "").match(/^#\/?module\/([^/]+)/);
+    if (hashMatch && DATA.modules[hashMatch[1]]) return DATA.modules[hashMatch[1]];
+
+    // Direct legacy pages call renderModule() without changing the hash.
+    const kicker = document.querySelector(".article > .kicker")?.textContent || "";
+    const domMatch = kicker.match(/\b(TC\d{2}|CAP12)\b/);
+    if (domMatch && DATA.modules[domMatch[1]]) return DATA.modules[domMatch[1]];
+    return null;
   }
 
   function setText(element, value) {
@@ -88,7 +94,7 @@
 
     const hash = String(location.hash || "#home").replace(/^#\/?/, "");
     const title = `Fiduciaire Formation · Pilote public ${state.published}/${state.total}`;
-    if ((!hash || hash === "home") && document.title !== title) document.title = title;
+    if ((!hash || hash === "home") && !currentModule() && document.title !== title) document.title = title;
   }
 
   let scheduled = false;

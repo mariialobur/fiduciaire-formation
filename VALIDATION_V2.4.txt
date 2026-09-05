@@ -1,0 +1,35 @@
+VALIDATION AVANT PUBLICATION — FIDUCIAIRE FORMATION v2.4
+Date: 2026-09-05
+
+Périmètre:
+- application autonome et multi-fichiers;
+- dépôt public GitHub Pages;
+- paquet apprenant TC01 v1.3;
+- migration locale v2.3 vers v2.4;
+- transparence, accessibilité et sécurité de publication.
+
+Résultats automatisés:
+- 190 pages HTML contrôlées;
+- 750 références locales contrôlées;
+- 0 référence manquante;
+- 0 chemin formateur/corrigé publié;
+- ZIP apprenant lisible et sans guide/corrigé privé;
+- 12 mois et 25 compétences cœur;
+- 1 module cœur publié, 24 fiches non validables;
+- TC01: 16 questions, 4 critiques, seuil 14/16, réponses A/B/C/D = 4/4/4/4;
+- 6 preuves obligatoires;
+- blocage sur erreur critique, retrait après nouvel échec et invalidation après modification: conformes;
+- import JSON: validations forgées réinitialisées;
+- erreurs JavaScript applicatives dans le scénario simulé: 0;
+- vulnérabilités npm signalées: 0.
+
+Limites maintenues:
+- aucune authentification d’identité;
+- aucune attestation sécurisée;
+- réponses du quiz inspectables dans le code client;
+- 24 modules cœur encore à développer;
+- sources juridiques à vérifier avant tout usage réel.
+
+Décision:
+v2.4 est prête pour pull request et publication comme pilote public de démonstration.
+Elle n’est pas qualifiée comme programme complet ni comme système de certification.

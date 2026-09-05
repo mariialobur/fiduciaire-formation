@@ -897,7 +897,7 @@
   });
 
   DATA.modules.CAP12 = buildModule("CAP12", moduleSpecs.CAP12);
-  DATA.settings.programVersion = "2.3-12mois-tc01";
+  DATA.settings.programVersion = "2.4-public-pilot-tc01";
   DATA.settings.standardPassScore = 80;
   DATA.settings.criticalPassScore = 85;
   DATA.settings.artifactMinimumCharacters = 120;
@@ -1167,8 +1167,8 @@
   ];
 
   window.FIDUCIAIRE_ROADMAP = {
-    version: "2.3",
-    updatedAt: "2026-08-06",
+    version: "2.4",
+    updatedAt: "2026-09-05",
     title: "Parcours 12 mois · assistant·e comptable vers comptable",
     target: "Autonomie sur dossiers PME courants, sous revue ciblée",
     coreModules: months.flatMap((month) => month.modules),

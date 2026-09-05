@@ -1,8 +1,10 @@
 # Fiduciaire Formation — parcours comptable 12 mois
 
-> Version pilote active: application v2.3, module TC01 v1.3.
+> Version pilote active: application publique v2.4, module TC01 v1.3.
 
-Plateforme interne et hors ligne pour accompagner un·e assistant·e comptable vers l’autonomie sur des dossiers PME courants, sous revue ciblée d’une personne responsable.
+Pilote public et utilisable hors ligne pour accompagner un·e assistant·e comptable vers l’autonomie sur des dossiers PME courants, sous revue ciblée d’une personne responsable.
+
+Application publiée: <https://mariialobur.github.io/fiduciaire-formation/>
 
 ## État réel de la version
 
@@ -16,7 +18,7 @@ Plateforme interne et hors ligne pour accompagner un·e assistant·e comptable v
   - méthode TDFN: <https://mariialobur.github.io/tva-tdfn/>
 - 12 jalons mensuels avec pratique, livrables, note de preuve, ordre obligatoire et revue déclarée du responsable. Un jalon reste techniquement non validable tant qu’un module du mois n’est encore qu’une fiche de cadrage.
 - 1 cas final de bout en bout au mois 12.
-- Progression locale, migration prudente des versions antérieures, export JSON et restauration contrôlée d’une sauvegarde v2.3. L’import conserve le travail mais exige une nouvelle confirmation des quiz et validations.
+- Progression locale, migration compatible depuis v2.3, export JSON qualifié comme sauvegarde non certifiante et restauration contrôlée d’une sauvegarde v2.4. L’import conserve le travail mais exige une nouvelle confirmation des quiz et validations.
 
 Positionnement exact:
 
@@ -48,9 +50,11 @@ Ouvrir `LANCER_ICI.html` ou `index.html` dans un navigateur récent. Aucune inst
 - `ressources/tc01-apprenant-v1.3.zip`: paquet apprenant sans corrigé responsable.
 - Le paquet formateur, les corrigés et leurs générateurs sont volontairement exclus de ce dépôt public.
 - `PROGRAMME_12_MOIS.md`: référentiel pédagogique.
-- `AUDIT_EXPERT_V2.3.md`: audit contradictoire, risques v2.2 et corrections v2.3.
-- `ASSEMBLY_REPORT_V2.3.md`: modifications et résultats de QA de la version active.
-- `VALIDATION_V2.3.txt`: synthèse courte des contrôles de livraison.
+- `AUDIT_EXPERT_V2.4.md`: contre-audit de la publication GitHub Pages et corrections de confiance publique.
+- `VALIDATION_V2.4.txt`: synthèse des contrôles avant publication de la version active.
+- `AUDIT_EXPERT_V2.3.md`: audit contradictoire de la version précédente.
+- `ASSEMBLY_REPORT_V2.3.md`: rapport d’assemblage de la version précédente.
+- `VALIDATION_V2.3.txt`: synthèse du gel précédent.
 - `QA_REPRODUCIBLE.md`: procédure permettant de relancer les contrôles depuis l’archive.
 - `historique/`: audits et rapports des versions antérieures, conservés uniquement pour traçabilité.
 
@@ -60,6 +64,6 @@ Toute donnée légale, taux, limite ou procédure doit être vérifiée dans la 
 
 ## Développement sur GitHub
 
-Créer une branche par modification, reconstruire les fichiers autonomes avec `npm run build`, puis exécuter `npm test` avant chaque pull request. Les fichiers de progression exportés par les utilisateurs, les dépendances installées et les rendus temporaires ne doivent jamais être commités.
+Créer une branche par modification, exécuter `npm ci`, reconstruire les fichiers autonomes avec `npm run build`, puis lancer `npm test` avant chaque pull request. Le QA inclut les liens, la sécurité de l’édition publique et les scénarios fonctionnels. Les fichiers de progression exportés par les utilisateurs, les dépendances installées et les rendus temporaires ne doivent jamais être commités.
 
 Ce dépôt constitue l'édition publique destinée à la démonstration et à l'apprentissage. Comme toute application statique exécutée dans le navigateur, son code côté client ne constitue pas un dispositif d'examen sécurisé; la validation professionnelle doit rester supervisée et documentée hors du site public.

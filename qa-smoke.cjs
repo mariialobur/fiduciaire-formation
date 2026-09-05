@@ -24,7 +24,7 @@ const { window } = dom;
 const document = window.document;
 const KEY = "fiduciaire_formation_progress_v24";
 const PUBLISHED = new Set(["core", "production", "pilot"]);
-const feedback = "Revue QA documentée: finalité, sujet, période, pièces, droits, contrôles, risques et escalades ont été revus; le dossier est traçable et reprenable par un autre collaborateur.";
+const feedback = "Revue QA documentée: faits, pièces, sources, contrôles, risques, inconnues, limites de délégation et escalades ont été revus; le dossier est traçable et reprenable par un autre collaborateur.";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -41,7 +41,9 @@ function navigate(hash) {
 }
 
 function storedProgress() {
-  return JSON.parse(window.localStorage.getItem(KEY));
+  const raw = window.localStorage.getItem(KEY);
+  assert(raw, "Progression locale absente");
+  return JSON.parse(raw);
 }
 
 function answerQuiz(module, answerForIndex = (question) => question.answer) {
@@ -63,10 +65,14 @@ function fillEvidence(module, version = "v1") {
 
 function fillPractical(module) {
   module.practicalReview.scoreItems.forEach((item) => {
-    document.getElementById(`score-${item.id}`).value = String(item.max);
+    const input = document.getElementById(`score-${item.id}`);
+    assert(input, `${module.code}: score pratique absent ${item.id}`);
+    input.value = String(item.max);
   });
   module.practicalReview.criticalChecks.forEach((item) => {
-    document.getElementById(`critical-${item.id}`).value = "no";
+    const select = document.getElementById(`critical-${item.id}`);
+    assert(select, `${module.code}: contrôle critique absent ${item.id}`);
+    select.value = "no";
   });
   document.getElementById("practicalReviewer").value = "QA-RESP";
   document.getElementById("practicalDate").value = "2026-09-05";
@@ -74,7 +80,7 @@ function fillPractical(module) {
   document.getElementById("practicalFeedback").value = feedback;
 }
 
-function completeModule(code) {
+function completeModule(code, evidenceVersion = "v1") {
   navigate(`#module/${code}`);
   const module = window.FIDUCIAIRE_DATA.modules[code];
   answerQuiz(module);
@@ -82,8 +88,8 @@ function completeModule(code) {
   let stored = storedProgress();
   assert(stored.modules[code].quizPassed === true, `${code}: quiz correct non validé`);
 
-  document.getElementById("artifactNotes").value = `Conclusion QA ${code}. Les faits, la période, les pièces, contrôles, sources, risques, inconnues et escalades ont été documentés de manière reproductible. Les décisions dépassant le périmètre du module restent explicitement soumises à la personne responsable.`;
-  fillEvidence(module);
+  document.getElementById("artifactNotes").value = `Conclusion QA ${code}. Les faits, la période, les pièces, contrôles, sources, risques, inconnues et escalades ont été documentés de manière reproductible. Les décisions dépassant le périmètre du module restent explicitement soumises à la personne responsable et aucune donnée réelle n’est utilisée.`;
+  fillEvidence(module, evidenceVersion);
   window.FiduApp.submitModule(code);
   stored = storedProgress();
   assert(stored.modules[code].status === "review_ready", `${code}: ne passe pas prêt pour revue`);
@@ -105,102 +111,120 @@ assert(window.FIDUCIAIRE_ROADMAP.coreModules.length === 25, "Le parcours ne cont
 const coreModules = window.FIDUCIAIRE_ROADMAP.coreModules.map((code) => window.FIDUCIAIRE_DATA.modules[code]);
 const publishedCore = coreModules.filter((module) => PUBLISHED.has(module.status));
 const blueprints = coreModules.filter((module) => module.status === "blueprint");
-assert(publishedCore.length === 3, "Le pilote doit contenir exactement TC01–TC03 publiés à ce stade");
-assert(blueprints.length === 22, "Le pilote doit contenir 22 blueprints à ce stade");
-assert(document.querySelector(".public-trust")?.textContent.includes("3 modules complets sur 25"), "Compteur public 3/25 incorrect");
-assert(document.querySelector(".hero-lead")?.textContent.includes("22 compétences"), "Texte de maturité de l’accueil incorrect");
+assert(publishedCore.length === 4, "Le pilote doit contenir exactement TC01–TC04 publiés à ce stade");
+assert(blueprints.length === 21, "Le pilote doit contenir 21 blueprints à ce stade");
+assert(document.querySelector(".public-trust")?.textContent.includes("4 modules complets sur 25"), "Compteur public 4/25 incorrect");
+assert(document.querySelector(".hero-lead")?.textContent.includes("21 compétences"), "Texte de maturité de l’accueil incorrect");
 
-// TC04 remains the only Month 1 blueprint blocker.
-navigate("#module/TC04");
-assert(document.querySelector(".blueprint-assessment"), "TC04 n’affiche pas son blocage de maturité");
-assert(!document.querySelector("#quizForm"), "TC04 blueprint expose un quiz actif");
-assert(!document.querySelector("#artifactNotes"), "TC04 blueprint expose un artefact validable");
-
-// Published module invariants.
 const tc01 = window.FIDUCIAIRE_DATA.modules.TC01;
 const tc02 = window.FIDUCIAIRE_DATA.modules.TC02;
 const tc03 = window.FIDUCIAIRE_DATA.modules.TC03;
+const tc04 = window.FIDUCIAIRE_DATA.modules.TC04;
+
+// Published module invariants.
 assert(tc01.contentVersion === "1.4" && tc01.quiz.length === 16 && tc01.quizThresholdCount === 14, "Invariant TC01 cassé");
 assert(tc01.quiz.filter((q) => q.critical).length === 4 && tc01.evidenceItems.length === 6, "Contrôles TC01 cassés");
 assert(tc02.contentVersion === "1.0" && tc02.quiz.length === 12 && tc02.quizThresholdCount === 10, "Invariant TC02 cassé");
 assert(tc02.quiz.filter((q) => q.critical).length === 2 && tc02.evidenceItems.length === 6, "Contrôles TC02 cassés");
-assert(tc03.contentVersion === "1.0" && tc03.status === "core" && tc03.critical === true, "TC03 v1.0 critique absent");
-assert(tc03.quiz.length === 12 && tc03.quizThresholdCount === 11, "Seuil TC03 incorrect");
-assert(tc03.quiz.filter((q) => q.critical).length === 3, "TC03 doit contenir 3 questions critiques");
-assert(tc03.evidenceItems.length === 6, "TC03 doit contenir 6 preuves");
-assert(tc03.practicalReview.scoreItems.reduce((sum, item) => sum + item.max, 0) === 100, "Grille TC03 ne totalise pas 100");
-assert(tc03.practicalReview.criticalChecks.length === 4, "TC03 doit contenir 4 erreurs critiques pratiques");
-assert(tc03.sourceRefs.length === 6, "TC03 doit contenir 6 sources principales");
-tc03.sourceRefs.forEach((key) => assert(window.FIDUCIAIRE_DATA.sourcesRegistry.sources[key], `Source TC03 absente: ${key}`));
+assert(tc03.contentVersion === "1.0" && tc03.critical === true && tc03.quizThresholdCount === 11, "Invariant TC03 cassé");
+assert(tc03.quiz.filter((q) => q.critical).length === 3 && tc03.evidenceItems.length === 6, "Contrôles TC03 cassés");
+assert(tc04.contentVersion === "1.0" && tc04.status === "core" && tc04.critical === true, "TC04 v1.0 critique absent");
+assert(tc04.quiz.length === 12 && tc04.quizThresholdCount === 11, "Seuil TC04 incorrect");
+assert(tc04.quiz.filter((q) => q.critical).length === 3, "TC04 doit contenir 3 questions critiques");
+assert(tc04.evidenceItems.length === 6, "TC04 doit contenir 6 preuves");
+assert(tc04.practicalReview.scoreItems.reduce((sum, item) => sum + item.max, 0) === 100, "Grille TC04 ne totalise pas 100");
+assert(tc04.practicalReview.criticalChecks.length === 4, "TC04 doit contenir 4 erreurs critiques pratiques");
+assert(tc04.sourceRefs.length === 7, "TC04 doit contenir 7 sources principales");
+tc04.sourceRefs.forEach((key) => assert(window.FIDUCIAIRE_DATA.sourcesRegistry.sources[key], `Source TC04 absente: ${key}`));
+assert(tc04.sections.some((section) => String(section.bodyHtml || "").includes("1er octobre 2026")), "TC04 ne matérialise pas le changement de régime au 01.10.2026");
 
-// Learner package is transparent, file-by-file, no fake ZIP.
-navigate("#module/TC03");
-assert(document.querySelectorAll(".course-pack-actions > a").length === 10, "Paquet TC03 n’expose pas 10 fichiers");
-assert(!document.querySelector(".course-pack-actions > a.btn"), "TC03 affiche un faux bouton ZIP");
-assert(document.querySelector(".validation-panel button + .fine-print")?.textContent.includes("revue pratique 80/100"), "Aide de validation TC03 incorrecte");
+// Learner package is transparent and file-by-file.
+navigate("#module/TC04");
+assert(document.querySelectorAll(".course-pack-actions > a").length === 10, "Paquet TC04 n’expose pas 10 fichiers");
+assert(!document.querySelector(".course-pack-actions > a.btn"), "TC04 affiche un faux bouton ZIP");
+assert(document.querySelector(".validation-panel button + .fine-print")?.textContent.includes("revue pratique 80/100"), "Aide de validation TC04 incorrecte");
 
-// Incomplete TC03 quiz must not reveal solutions.
+// Incomplete TC04 quiz must not reveal solutions.
 document.querySelector('input[name="q0"][value="1"]').checked = true;
-window.FiduApp.gradeQuiz("TC03");
-assert(document.getElementById("explain-0").textContent === "", "TC03 révèle une solution avant remise complète");
+window.FiduApp.gradeQuiz("TC04");
+assert(document.getElementById("explain-0").textContent === "", "TC04 révèle une solution avant remise complète");
 
-// Critical miss: 11/12 is numerically enough but Q03 critical must block.
-navigate("#module/TC03");
-answerQuiz(tc03, (question, index) => index === 2 ? (question.answer + 1) % question.choices.length : question.answer);
-window.FiduApp.gradeQuiz("TC03");
+// Critical date miss: numerical 11/12 is insufficient if Q03 is wrong.
+navigate("#module/TC04");
+answerQuiz(tc04, (question, index) => index === 2 ? (question.answer + 1) % question.choices.length : question.answer);
+window.FiduApp.gradeQuiz("TC04");
 let stored = storedProgress();
-assert(stored.modules.TC03.lastQuizAttempt.correct === 11, "Scénario critique TC03 ne produit pas 11/12");
-assert(stored.modules.TC03.quizPassed === false, "TC03 accepte 11/12 avec Q03 critique fausse");
-assert(stored.modules.TC03.lastQuizAttempt.criticalMissed.includes("Q03"), "TC03 n’identifie pas Q03 critique");
+assert(stored.modules.TC04.lastQuizAttempt.correct === 11, "Scénario critique TC04 ne produit pas 11/12");
+assert(stored.modules.TC04.quizPassed === false, "TC04 accepte 11/12 avec Q03 critique fausse");
+assert(stored.modules.TC04.lastQuizAttempt.criticalMissed.includes("Q03"), "TC04 n’identifie pas Q03 critique");
 
-// Non-critical miss: 11/12 with all critical answers correct must pass.
-navigate("#module/TC03");
-const firstNonCritical = tc03.quiz.findIndex((q) => !q.critical);
-answerQuiz(tc03, (question, index) => index === firstNonCritical ? (question.answer + 1) % question.choices.length : question.answer);
-window.FiduApp.gradeQuiz("TC03");
+// One non-critical miss is acceptable at 11/12 if all critical answers are correct.
+navigate("#module/TC04");
+const tc04NonCritical = tc04.quiz.findIndex((q) => !q.critical);
+answerQuiz(tc04, (question, index) => index === tc04NonCritical ? (question.answer + 1) % question.choices.length : question.answer);
+window.FiduApp.gradeQuiz("TC04");
 stored = storedProgress();
-assert(stored.modules.TC03.lastQuizAttempt.correct === 11, "Seuil TC03 ne produit pas 11/12");
-assert(stored.modules.TC03.quizPassed === true, "TC03 refuse 11/12 avec critiques correctes");
+assert(stored.modules.TC04.lastQuizAttempt.correct === 11, "Seuil TC04 ne produit pas 11/12");
+assert(stored.modules.TC04.quizPassed === true, "TC04 refuse 11/12 avec critiques correctes");
 
-// Complete all three published modules and practical reviews.
+// Complete the four published modules and their practical reviews.
 completeModule("TC01");
 completeModule("TC02");
 completeModule("TC03");
+completeModule("TC04");
 
-// One practical critical error must block TC03 even at 100 points.
-navigate("#module/TC03");
-fillPractical(tc03);
-document.getElementById("critical-incident_hidden").value = "yes";
-window.FiduApp.savePracticalReview("TC03");
+// A second practical review with a critical error must invalidate stale trust.
+navigate("#module/TC04");
+fillPractical(tc04);
+document.getElementById("critical-service_accepted").value = "yes";
+window.FiduApp.savePracticalReview("TC04");
 stored = storedProgress();
-assert(!stored.modules.TC03.practicalReview, "TC03 accepte une erreur pratique critique");
-document.getElementById("critical-incident_hidden").value = "no";
-window.FiduApp.savePracticalReview("TC03");
-stored = storedProgress();
-assert(stored.modules.TC03.practicalReview?.passed === true, "TC03 ne revalide pas après correction critique");
+assert(!stored.modules.TC04.practicalReview, "TC04 conserve une ancienne revue malgré une nouvelle erreur critique");
+assert(stored.modules.TC04.status === "review_ready", "TC04 ne reste pas prêt à revoir après échec pratique critique");
 
-// Editing evidence after review invalidates the dependent review.
-navigate("#module/TC03");
-document.getElementById("artifactNotes").value += " Modification post-revue.";
-window.FiduApp.saveArtifact("TC03");
+// Re-review correctly after the failed attempt.
+navigate("#module/TC04");
+fillPractical(tc04);
+window.FiduApp.savePracticalReview("TC04");
 stored = storedProgress();
-assert(stored.modules.TC03.status === "quiz_passed", "TC03 ne revient pas à l’étape artefact après modification");
-assert(!stored.modules.TC03.practicalReview, "TC03 conserve une revue après modification de preuve");
+assert(stored.modules.TC04.practicalReview?.passed === true, "TC04 ne revalide pas après correction de la revue pratique");
 
-// A new failed critical quiz attempt also removes prior trust.
-navigate("#module/TC03");
-answerQuiz(tc03, (question, index) => index === 6 ? (question.answer + 1) % question.choices.length : question.answer);
-window.FiduApp.gradeQuiz("TC03");
-stored = storedProgress();
-assert(stored.modules.TC03.quizPassed === false, "TC03 conserve la réussite après nouvelle erreur critique Q07");
-assert(stored.modules.TC03.status === "in_progress", "TC03 ne revient pas en cours après échec critique");
-
-// Month 1 must now be blocked only by TC04.
+// Month 1 is now content-complete and must no longer show a development blocker.
 navigate("#month/1");
-const warning = document.querySelector(".development-warning")?.textContent || "";
-assert(warning.includes("TC04"), "Mois 1 n’identifie pas TC04 comme bloqueur");
-assert(!warning.includes("TC02") && !warning.includes("TC03"), "Mois 1 marque encore TC02/TC03 comme blueprints");
-assert(document.querySelector('button[onclick="FiduApp.saveMonthReview(1)"]')?.disabled, "Revue mois 1 active avant TC04");
+assert(!document.querySelector(".development-warning"), "Mois 1 reste bloqué alors que TC01–TC04 sont publiés");
+assert(!document.querySelector('button[onclick="FiduApp.saveMonthReview(1)"]')?.disabled, "Bouton de revue du mois 1 reste désactivé après publication TC04");
+
+const month1 = window.FIDUCIAIRE_ROADMAP.months.find((month) => month.month === 1);
+assert(month1 && month1.modules.length === 4, "Mois 1 doit contenir quatre modules");
+month1.practice.forEach((_, index) => window.FiduApp.toggleMonthTask(1, "practice", index, true));
+month1.deliverables.forEach((_, index) => window.FiduApp.toggleMonthTask(1, "deliverables", index, true));
+
+navigate("#month/1");
+const monthEvidence = "Pilotage QA du Mois 1: ouverture du dossier, séparation juridique et patrimoniale, droits d’accès, KYC, chaîne de contrôle, services demandés, pièces manquantes, erreurs corrigées et limites de délégation ont été documentés sur un cas simulé puis revus.";
+document.getElementById("monthEvidence").value = monthEvidence;
+window.FiduApp.saveMonthEvidence(1);
+
+navigate("#month/1");
+document.getElementById("reviewerName").value = "QA-RESP";
+document.getElementById("reviewerDate").value = "2026-09-05";
+document.getElementById("reviewerDecision").value = "validated";
+document.getElementById("reviewerFeedback").value = feedback;
+window.FiduApp.saveMonthReview(1);
+stored = storedProgress();
+assert(stored.months[1]?.validatedAt === "2026-09-05", "Jalon Mois 1 complet n’est pas validé");
+assert(month1.modules.every((code) => stored.modules[code]?.status === "validated"), "Les quatre modules du Mois 1 ne passent pas validés avec le jalon");
+assert(stored.months[1]?.validationSnapshot, "Snapshot de validation du Mois 1 absent");
+
+// Any material evidence change after monthly validation must invalidate the month.
+navigate("#module/TC04");
+document.getElementById("artifactNotes").value += " Modification post-validation mensuelle.";
+window.FiduApp.saveArtifact("TC04");
+stored = storedProgress();
+assert(!stored.months[1]?.validatedAt, "Mois 1 reste validé après modification d’une preuve TC04");
+assert(!stored.months[1]?.validationSnapshot, "Snapshot Mois 1 subsiste après modification d’une preuve");
+assert(stored.modules.TC04.status === "quiz_passed", "TC04 ne revient pas à l’étape artefact après modification post-validation");
+assert(!stored.modules.TC04.practicalReview, "Revue pratique TC04 subsiste après modification de preuve");
+assert(["review_ready", "quiz_passed"].includes(stored.modules.TC01.status), "Dépendances du Mois 1 non réinitialisées correctement");
 
 // Library and core utilities remain intact.
 navigate("#library");
@@ -214,11 +238,12 @@ assert(errors.length === 0, `Erreurs navigateur: ${errors.join(" | ")}`);
 console.log(JSON.stringify({
   smoke: true,
   coreModules: 25,
-  publishedCore: 3,
-  blueprints: 22,
+  publishedCore: 4,
+  blueprints: 21,
+  month1: { content: "4/4", validationLifecycle: true, invalidationAfterEvidenceChange: true },
   tc01: { version: tc01.contentVersion, quiz: 16, critical: 4, evidence: 6 },
   tc02: { version: tc02.contentVersion, quiz: 12, critical: 2, evidence: 6 },
-  tc03: { version: tc03.contentVersion, quiz: 12, critical: 3, evidence: 6, practicalMax: 100 },
-  month1BlockedBy: ["TC04"],
+  tc03: { version: tc03.contentVersion, quiz: 12, critical: 3, evidence: 6 },
+  tc04: { version: tc04.contentVersion, quiz: 12, critical: 3, evidence: 6, practicalMax: 100 },
   browserErrors: errors.length
 }, null, 2));

@@ -1,0 +1,16 @@
+ID;Date du contrôle;Objet du contrôle;Source / pièce;Période couverte;Résultat factuel;Conséquence dans le dossier;Point à escalader;Responsable;Statut
+V01;;Existence et date de la Sàrl;Extrait RC / Zefix;;;;;;
+V02;;Titulaire CH-EI-01;Confirmation bancaire;;;;;;
+V03;;Titulaire CH-SARL-01;Confirmation bancaire;;;;;;
+V04;;Périmètre convention de reprise;Convention signée;;;;;;
+V05;;Créances antérieures reprises ou non;Convention + auxiliaire clients;;;;;;
+V06;;Dettes antérieures reprises ou non;Convention + auxiliaire fournisseurs;;;;;;
+V07;;Ordinateur M02;Facture + paiement + reprise;;;;;;
+V08;;Restaurant M05;Justificatif + explication cliente;;;;;;
+V09;;Salaire M06;Payroll validé;;;;;;
+V10;;Frais M07;Règlement de frais + justificatifs;;;;;;
+V11;;Financement M08;Banque + document à obtenir;;;;;;
+V12;;Facture M09;Contrat + facture corrigée;;;;;;
+V13;;Abonnement M10;Contrat + confirmation transfert;;;;;;
+V14;;Note de crédit M11;Facture d’origine + banque;;;;;;
+V15;;Distribution M12;Décision / PV / comptes approuvés;;;;;;

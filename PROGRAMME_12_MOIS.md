@@ -2,7 +2,9 @@
 
 ## Maturité du contenu
 
-La feuille de route positionne 25 compétences cœur. Dans la version publique 2.4, TC01 v1.3 est le seul module livré au standard complet: cours, dossier simulé, outils, quiz professionnel, preuves distinctes et revue pratique. Les 24 autres éléments restent des fiches structurées à développer; l’application les rend explicitement non validables.
+La feuille de route positionne 25 compétences cœur. Dans la version publique 2.4, TC01 v1.4 est le seul module livré au standard complet: cours, dossier simulé, outils, quiz professionnel, preuves distinctes et revue pratique. Les 24 autres éléments restent des fiches structurées à développer; l’application les rend explicitement non validables.
+
+TC01 v1.4 devient le module étalon pour la production des modules suivants. Son principe pédagogique est: **fait → contrôle → source → décision → trace**. L’évaluation privilégie la capacité à identifier le bon contrôle professionnel et à retrouver la source utile plutôt que la mémorisation isolée d’un numéro d’article.
 
 ## Résultat visé
 
@@ -52,11 +54,13 @@ TC01 est un module critique et applique le seuil de programme correspondant:
 
 - 14 réponses correctes sur 16 (87,5%, donc au-dessus du minimum critique de 85%);
 - Q01, Q04, Q10 et Q15 obligatoirement correctes;
-- six références de livrables distinctes;
+- six références de livrables distinctes: fiche d’ouverture, calendrier, registre hors mandat, note de décision, e-mail client et journal de vérification;
 - note de travail de 200 caractères minimum;
 - pratique évaluée à 80/100 minimum;
 - zéro erreur sur quatre contrôles critiques;
 - responsable identifié, date et feedback d’au moins 80 caractères.
+
+La revue pratique TC01 utilise quatre repères qualitatifs communs pour réduire les écarts entre évaluateurs: **insuffisant, partiel, attendu, très bon**. Ces repères guident la notation des critères sans remplacer les points maximum de la grille ni les contrôles critiques.
 
 ## Critères d’un jalon mensuel
 

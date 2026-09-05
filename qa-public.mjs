@@ -20,9 +20,9 @@ walk(root);
 const forbiddenPathPatterns = [
   /(^|\/)Corrige_responsable(\/|$)/i,
   /(^|\/)materials\/formateur(\/|$)/i,
-  /(^|\/)tools\/tc0[1-3](\/|$)/i,
+  /(^|\/)tools\/tc0[1-4](\/|$)/i,
   /(^|\/)Guide_formateur[^/]*$/i,
-  /(^|\/)corrige[^/]*tc0[1-3][^/]*$/i
+  /(^|\/)corrige[^/]*tc0[1-4][^/]*$/i
 ];
 
 for (const path of files) {
@@ -37,6 +37,7 @@ for (const required of [
   "data/tc01-v1.4.js",
   "data/tc02-v1.0.js",
   "data/tc03-v1.0.js",
+  "data/tc04-v1.0.js",
   "data/runtime-enhancements.js"
 ]) {
   if (!existsSync(join(root, required))) failures.push(`Fichier public requis absent: ${required}`);
@@ -60,6 +61,15 @@ const packages = {
       "06_Checklist_acces_TC03.csv", "07_Fiche_incident_TC03.md", "08_Journal_verification_TC03.csv",
       "09_Sources_et_version.md"
     ]
+  },
+  TC04: {
+    dir: "ressources/tc04-apprenant-v1.0",
+    files: [
+      "00_LIRE_EN_PREMIER.md", "01_Cours_TC04.md", "02_Dossier_simule_TC04.md",
+      "03_Fiche_identite_TC04.csv", "04_Controle_UBO_TC04.csv", "05_Profil_economique_TC04.csv",
+      "06_Matrice_services_LBA_TC04.csv", "07_Note_escalade_TC04.md", "08_Journal_verification_TC04.csv",
+      "09_Sources_et_version.md"
+    ]
   }
 };
 
@@ -74,6 +84,7 @@ const source = readFileSync(join(root, "app.js"), "utf8");
 const built = readFileSync(join(root, "index.html"), "utf8");
 const tc02 = readFileSync(join(root, "data/tc02-v1.0.js"), "utf8");
 const tc03 = readFileSync(join(root, "data/tc03-v1.0.js"), "utf8");
+const tc04 = readFileSync(join(root, "data/tc04-v1.0.js"), "utf8");
 const runtime = readFileSync(join(root, "data/runtime-enhancements.js"), "utf8");
 if (!source.includes("Édition publique de démonstration")) failures.push("Statut public absent de l’application source");
 if (!built.includes("Édition publique de démonstration")) failures.push("Statut public absent de la version autonome");
@@ -81,11 +92,15 @@ if (!built.includes('class="skip-link"')) failures.push("Lien d’évitement abs
 if (!built.includes("validations locales non authentifiées")) failures.push("Limite d’authentification absente de la version autonome");
 if (!tc02.includes('module.status = "core"')) failures.push("TC02 n’est pas promu au statut cœur");
 if (!tc03.includes('module.status = "core"')) failures.push("TC03 n’est pas promu au statut cœur");
+if (!tc04.includes('module.status = "core"')) failures.push("TC04 n’est pas promu au statut cœur");
 if (!tc03.includes('module.critical = true')) failures.push("TC03 critique n’est pas marqué comme tel");
-if (!tc03.includes('module.quizThresholdCount = 11')) failures.push("Seuil TC03 11/12 absent");
+if (!tc04.includes('module.critical = true')) failures.push("TC04 critique n’est pas marqué comme tel");
+if (!tc04.includes('module.quizThresholdCount = 11')) failures.push("Seuil TC04 11/12 absent");
+if (!tc04.includes("1er octobre 2026")) failures.push("Date de bascule TC04 absente du module");
 if (!runtime.includes("FIDUCIAIRE_MATURITY")) failures.push("Compteur dynamique de maturité absent");
+if (!runtime.includes("invalidatePersistedPracticalReview")) failures.push("Garde anti-revue pratique obsolète absente");
 
-for (const code of ["TC01", "TC02", "TC03"]) {
+for (const code of ["TC01", "TC02", "TC03", "TC04"]) {
   const direct = readFileSync(join(root, `tronc-commun/${code}.html`), "utf8");
   if (!direct.includes(`../index.html#module/${code}`)) failures.push(`Page directe ${code} ne redirige pas vers le SPA canonique`);
 }
@@ -117,8 +132,10 @@ console.log(JSON.stringify({
   learnerZipChecked: learnerZip,
   tc02LearnerFilesChecked: packages.TC02.files.length,
   tc03LearnerFilesChecked: packages.TC03.files.length,
-  canonicalModuleRedirects: 3,
+  tc04LearnerFilesChecked: packages.TC04.files.length,
+  canonicalModuleRedirects: 4,
   dynamicMaturity: true,
+  stalePracticalReviewGuard: true,
   trustNotice: true,
   skipLink: true
 }, null, 2));

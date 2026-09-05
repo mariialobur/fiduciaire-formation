@@ -1,11 +1,11 @@
 {
   "name": "fiduciaire-formation-12-mois",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "private": true,
   "description": "QA reproductible de la plateforme hors ligne Fiduciaire Formation",
   "scripts": {
     "build": "node build-standalone.mjs",
-    "test": "node qa-links.mjs && node qa-smoke.cjs",
+    "test": "node qa-links.mjs && node qa-public.mjs && node qa-smoke.cjs",
     "test:links": "node qa-links.mjs",
     "test:smoke": "node qa-smoke.cjs"
   },

@@ -1,4 +1,4 @@
-# QA reproductible — v2.3
+# QA reproductible — v2.4
 
 Les contrôles peuvent être relancés depuis une copie propre de l’archive.
 
@@ -14,6 +14,6 @@ npm ci
 npm test
 ```
 
-`qa-links.mjs` contrôle les fichiers HTML et leurs références locales. `qa-smoke.cjs` exécute les scénarios fonctionnels dans un DOM simulé: maturité des modules, seuil TC01 14/16, questions critiques, six preuves, blocages de revue, annulation après modification et restauration JSON stricte.
+`qa-links.mjs` contrôle les fichiers HTML et leurs références locales. `qa-public.mjs` refuse les chemins formateur/corrigé, inspecte le ZIP apprenant et vérifie les avertissements de confiance. `qa-smoke.cjs` exécute les scénarios fonctionnels dans un DOM simulé: navigation accessible, maturité des modules, seuil TC01 14/16, questions critiques, six preuves, blocages de revue, annulation après modification et restauration JSON stricte.
 
 Le dossier `node_modules` n’est pas livré dans l’archive. La version exacte de `jsdom` est verrouillée par `package-lock.json` afin que l’installation soit reproductible.

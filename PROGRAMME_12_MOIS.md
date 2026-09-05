@@ -2,7 +2,7 @@
 
 ## Maturité du contenu
 
-La feuille de route positionne 25 compétences cœur. Dans la version 2.3, TC01 v1.3 est le seul module livré au standard complet: cours, dossier simulé, outils, quiz professionnel, preuves distinctes et revue pratique. Les 24 autres éléments restent des fiches structurées à développer; l’application les rend explicitement non validables.
+La feuille de route positionne 25 compétences cœur. Dans la version publique 2.4, TC01 v1.3 est le seul module livré au standard complet: cours, dossier simulé, outils, quiz professionnel, preuves distinctes et revue pratique. Les 24 autres éléments restent des fiches structurées à développer; l’application les rend explicitement non validables.
 
 ## Résultat visé
 
@@ -73,7 +73,7 @@ Les jalons sont validés dans l’ordre. Une modification d’une tâche, d’un
 
 ## Sauvegarde du suivi
 
-Le navigateur reste le stockage opérationnel hors ligne. L’apprenant doit exporter périodiquement la progression en JSON et peut réimporter un export de la même version 2.3. Par sécurité, l’import restaure le travail (profil, notes, références de preuves et check-lists) mais ne restaure jamais automatiquement un quiz réussi, une revue pratique ou un jalon mensuel validé: ces validations doivent être reconfirmées dans l’application. Cette règle évite qu’un JSON éditable serve à réinjecter un statut `validated`.
+Le navigateur reste le stockage opérationnel hors ligne. L’apprenant doit exporter périodiquement la progression en JSON et peut réimporter un export de la même version 2.4. Par sécurité, l’import restaure le travail (profil, notes, références de preuves et check-lists) mais ne restaure jamais automatiquement un quiz réussi, une revue pratique ou un jalon mensuel validé: ces validations doivent être reconfirmées dans l’application. Cette règle évite qu’un JSON éditable serve à réinjecter un statut `validated`. Sur la page publique, toute identité de responsable reste non authentifiée; la preuve de revue doit être conservée dans le système interne du cabinet.
 
 ## Utilisation des simulateurs TVA
 

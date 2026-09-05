@@ -1,7 +1,8 @@
 (function () {
   const DATA = window.FIDUCIAIRE_DATA;
   const ROADMAP = window.FIDUCIAIRE_ROADMAP;
-  const KEY = "fiduciaire_formation_progress_v23";
+  const KEY = "fiduciaire_formation_progress_v24";
+  const PREVIOUS_COMPATIBLE_KEY = "fiduciaire_formation_progress_v23";
   const PREVIOUS_KEY = "fiduciaire_formation_progress_v22";
   const LEGACY_KEY = "fiduciaire_formation_progress_v21";
   const OLDER_KEY = "fiduciaire_formation_progress_v20";
@@ -42,6 +43,18 @@
   }
 
   function migrateProgress(progress) {
+    const compatibleRaw = storageGet(PREVIOUS_COMPATIBLE_KEY);
+    if (compatibleRaw) {
+      try {
+        const compatible = JSON.parse(compatibleRaw);
+        compatible.version = ROADMAP.version;
+        compatible.migratedFrom = "2.3";
+        compatible.migrationNote = "Progression conservée: la version 2.4 améliore la confiance et l’accessibilité sans modifier les critères TC01 v1.3.";
+        storageSet(KEY, JSON.stringify(compatible));
+        return compatible;
+      } catch (error) { /* fall through to older migrations */ }
+    }
+
     const modernSources = [[PREVIOUS_KEY, "2.2"], [LEGACY_KEY, "2.1"], [OLDER_KEY, "2.0"]];
     for (const [sourceKey, sourceVersion] of modernSources) {
       const modernRaw = storageGet(sourceKey);
@@ -180,7 +193,7 @@
       in_progress: "En cours",
       quiz_passed: "Quiz réussi",
       review_ready: "Prêt pour revue",
-      validated: "Validé par le responsable"
+      validated: "Revue locale enregistrée"
     })[status || "not_started"] || status;
   }
 
@@ -308,22 +321,38 @@
     return { ready, total: codes.length, percent: Math.round((ready / codes.length) * 100) };
   }
 
+  function activeNavigation() {
+    const hash = (location.hash || "#home").replace(/^#\/?/, "");
+    const [view = "home", id] = hash.split("/");
+    if (["library", "track"].includes(view)) return "library";
+    if (view === "module" && DATA.modules[id] && DATA.modules[id].track !== "tronc-commun") return "library";
+    if (["month", "module"].includes(view)) return "month";
+    return "home";
+  }
+
+  function navClass(name) { return activeNavigation() === name ? " nav-link-current" : ""; }
+  function navCurrent(name) { return activeNavigation() === name ? ' aria-current="page"' : ""; }
+
   function header(context) {
     const current = currentMonth();
-    return `<header class="topbar">
+    return `<a class="skip-link" href="#main-content" onclick="event.preventDefault(); document.getElementById('main-content')?.focus(); document.getElementById('main-content')?.scrollIntoView()">Aller au contenu principal</a>
+    <header class="topbar">
       <a class="brand" href="#home" aria-label="Accueil Fiduciaire Universelle">
         <span class="logo-stamp" aria-hidden="true">FU</span>
         <span class="brand-text"><strong>Fiduciaire Universelle</strong><span>${escapeHtml(context || "Parcours 12 mois")}</span></span>
       </a>
       <nav class="nav-actions" aria-label="Navigation principale">
-        <a class="nav-link" href="#home">Parcours</a>
-        <a class="nav-link nav-link-current" href="#month/${current.month}">Mois actuel</a>
-        <a class="nav-link" href="#library">Bibliothèque</a>
+        <a class="nav-link${navClass("home")}"${navCurrent("home")} href="#home">Parcours</a>
+        <a class="nav-link${navClass("month")}"${navCurrent("month")} href="#month/${current.month}">Mois actuel</a>
+        <a class="nav-link${navClass("library")}"${navCurrent("library")} href="#library">Bibliothèque</a>
         <button class="nav-link" type="button" onclick="document.getElementById('progressImport').click()">Importer</button>
         <input id="progressImport" class="visually-hidden" type="file" accept="application/json,.json" onchange="FiduApp.importProgress(this.files[0]); this.value=''">
         <button class="nav-link" type="button" onclick="FiduApp.exportProgress()">Exporter</button>
       </nav>
-    </header>`;
+    </header>
+    <aside class="public-trust" role="note" aria-label="Statut de cette édition">
+      <div class="container"><strong>Édition publique de démonstration</strong><span>1 module complet sur 25 · données stockées uniquement dans ce navigateur · validations locales non authentifiées</span></div>
+    </aside>`;
   }
 
   function progressBar(percent, label) {
@@ -340,13 +369,13 @@
     const contentPercent = currentReadiness.totalModules ? Math.round((currentReadiness.publishedModules / currentReadiness.totalModules) * 100) : 0;
     const done = monthsValidated();
     const learner = getProgress().learner;
-    document.getElementById("app").innerHTML = header() + `<main>
+    document.getElementById("app").innerHTML = header() + `<main id="main-content" tabindex="-1">
       <section class="hero hero-home">
         <div class="container hero-grid">
           <div>
-            <p class="kicker kicker-light">Programme interne suisse · version ${ROADMAP.version}</p>
+            <p class="kicker kicker-light">Pilote pédagogique suisse · version ${ROADMAP.version}</p>
             <h1>De l’assistance comptable à l’autonomie sur les dossiers PME courants.</h1>
-            <p class="hero-lead">Douze mois de pratique supervisée, un premier module étalon complet, 24 compétences cœur à développer au même standard et une validation documentée du responsable.</p>
+            <p class="hero-lead">Une architecture de douze mois en construction: TC01 est le seul module complet; 24 compétences restent à développer au même standard avant que le parcours puisse être validé.</p>
             <div class="hero-actions">
               <a class="btn btn-accent" href="#month/${current.month}">Continuer au mois ${current.month}</a>
               <a class="btn btn-ghost-light" href="#profile">Régler mon parcours</a>
@@ -380,7 +409,7 @@
       </section>
 
       <section class="container section-block profile-card" id="profile">
-        <div><p class="kicker">Paramètres</p><h2>Mon parcours</h2><p>La date de début calcule les périodes mensuelles. Les données restent dans ce navigateur et peuvent être exportées.</p></div>
+        <div><p class="kicker">Paramètres</p><h2>Mon parcours</h2><p>La date de début calcule les périodes mensuelles. Les données restent dans ce navigateur: aucun fichier de preuve n’est téléversé.</p><div class="local-data-actions"><button class="btn btn-secondary" type="button" onclick="FiduApp.exportProgress()">Exporter une sauvegarde</button><button class="btn btn-danger-quiet" type="button" onclick="FiduApp.resetProgress()">Effacer mes données locales</button></div><p class="fine-print">N’inscrivez aucune donnée client réelle. Une sauvegarde JSON est modifiable et ne constitue jamais un certificat.</p></div>
         <form class="profile-form" onsubmit="FiduApp.saveProfile(event)">
           <label>Nom ou identifiant<input id="profileName" value="${escapeHtml(learner.name)}" placeholder="Ex. ML-01"></label>
           <label>Rôle actuel<input id="profileRole" value="${escapeHtml(learner.role)}"></label>
@@ -404,7 +433,7 @@
 
   function renderMonthCard(month) {
     const readiness = monthReadiness(month);
-    const state = readiness.validated ? "Validé" : (readiness.developmentBlocked ? "En construction" : (month.month === currentMonth().month ? "En cours" : "À planifier"));
+    const state = readiness.validated ? "Revue locale" : (readiness.developmentBlocked ? "En construction" : (month.month === currentMonth().month ? "En cours" : "À planifier"));
     const contentPercent = readiness.totalModules ? Math.round((readiness.publishedModules / readiness.totalModules) * 100) : 0;
     return `<article class="month-card ${phaseClass(month)} ${readiness.validated ? "is-validated" : ""} ${readiness.developmentBlocked ? "is-development-blocked" : ""}">
       <div class="month-marker"><span>${String(month.month).padStart(2, "0")}</span></div>
@@ -428,7 +457,7 @@
     const monthScore = readiness.developmentBlocked
       ? `<strong>${readiness.publishedModules}/${readiness.totalModules}</strong><span>modules livrés</span>`
       : `<strong>${readiness.percent}%</strong><span>prêt pour revue</span>`;
-    document.getElementById("app").innerHTML = header(`Mois ${month.month}`) + `<main>
+    document.getElementById("app").innerHTML = header(`Mois ${month.month}`) + `<main id="main-content" tabindex="-1">
       <section class="month-hero ${phaseClass(month)}">
         <div class="container">
           <div class="month-hero-nav"><a href="#home">← Feuille de route</a><span>${monthDates(month.month)}</span></div>
@@ -449,6 +478,7 @@
         <aside class="month-aside">
           <section class="panel review-panel">
             <p class="kicker">Jalon mensuel</p><h2>Revue du responsable</h2>
+            <p class="reviewer-trust"><strong>Saisie locale non authentifiée.</strong> La preuve opposable doit être conservée dans le système interne du cabinet.</p>
             <div class="readiness-list">
               <span class="${!readiness.developmentBlocked && month.modules.every(isModuleReady) ? "ok" : ""}">Modules prêts <strong>${month.modules.filter(isModuleReady).length}/${month.modules.length}</strong></span>
               ${readiness.developmentBlocked ? `<span class="development-row">Contenu publié <strong>${readiness.publishedModules}/${readiness.totalModules}</strong></span>` : ""}
@@ -460,11 +490,11 @@
             <p class="gate-copy"><strong>Critère:</strong> ${month.gate}</p>
             <label>Responsable<input id="reviewerName" value="${escapeHtml(progress.reviewer.name)}" placeholder="Nom ou initiales"></label>
             <label>Date<input id="reviewerDate" type="date" value="${escapeHtml(progress.reviewer.date)}"></label>
-            <label>Décision<select id="reviewerDecision"><option value="">Choisir</option><option value="validated" ${progress.reviewer.decision === "validated" ? "selected" : ""}>Jalon validé</option><option value="extension" ${progress.reviewer.decision === "extension" ? "selected" : ""}>Prolongation ciblée</option></select></label>
+            <label>Décision<select id="reviewerDecision"><option value="">Choisir</option><option value="validated" ${progress.reviewer.decision === "validated" ? "selected" : ""}>Jalon validé — trace locale</option><option value="extension" ${progress.reviewer.decision === "extension" ? "selected" : ""}>Prolongation ciblée</option></select></label>
             <label>Retour du responsable<textarea id="reviewerFeedback" rows="5" placeholder="Forces, erreurs à corriger, limites de délégation…">${escapeHtml(progress.reviewer.feedback)}</textarea></label>
             <button class="btn btn-primary btn-block" type="button" onclick="FiduApp.saveMonthReview(${month.month})" ${readiness.developmentBlocked ? "disabled aria-disabled=\"true\"" : ""}>Enregistrer la revue</button>
             ${readiness.developmentBlocked ? `<p class="fine-print"><strong>Validation bloquée:</strong> tous les modules du mois doivent être publiés au standard pédagogique avant la revue mensuelle.</p>` : ""}
-            ${progress.validatedAt ? `<div class="validation-stamp"><strong>Jalon validé</strong><span>${escapeHtml(progress.validatedAt)} · trace interne locale</span></div>` : `<p class="fine-print">La validation est une trace interne déclarative. Elle ne remplace ni un diplôme ni une autorisation professionnelle. Toute modification d’une preuve invalide le jalon.</p>`}
+            ${progress.validatedAt ? `<div class="validation-stamp"><strong>Revue locale enregistrée</strong><span>${escapeHtml(progress.validatedAt)} · identité non authentifiée</span></div>` : `<p class="fine-print">La validation est une trace locale déclarative. Elle ne remplace ni une preuve signée, ni un diplôme, ni une autorisation professionnelle. Toute modification d’une preuve invalide le jalon.</p>`}
           </section>
           <nav class="month-pager" aria-label="Navigation entre mois">${previous ? `<a href="#month/${previous}">← Mois ${previous}</a>` : "<span></span>"}${next ? `<a href="#month/${next}">Mois ${next} →</a>` : `<a href="#home">Accueil →</a>`}</nav>
         </aside>
@@ -518,7 +548,7 @@
     const validationAside = published
       ? `<section class="panel validation-panel"><p class="kicker">État du module</p><h2>${statusLabel(refreshed.status)}</h2>${renderModuleStatus(module, refreshed)}<button class="btn btn-primary btn-block" type="button" onclick="FiduApp.submitModule('${code}')">Soumettre pour revue</button><p class="fine-print">Quiz + preuves permettent la soumission. Pour TC01, la revue pratique 80/100 sans erreur critique est ensuite obligatoire avant le jalon mensuel.</p></section>`
       : `<section class="panel validation-panel blueprint-panel"><p class="kicker">Maturité du contenu</p><h2>Fiche de cadrage</h2><p>Non validable tant que le paquet pédagogique complet n’est pas publié et contrôlé.</p></section>`;
-    document.getElementById("app").innerHTML = header(module.code) + `<main class="container module-layout">
+    document.getElementById("app").innerHTML = header(module.code) + `<main id="main-content" tabindex="-1" class="container module-layout">
       <article class="article panel">
         <div class="module-breadcrumb"><a href="${returnLink}">← Retour</a><span>${contentLabel(module)}</span></div>
         ${!published ? `<div class="content-warning"><strong>Fiche de cadrage — non validable</strong><p>Ce contenu reste consultable pour préparer le programme, mais il ne compte pas dans la progression et ne doit pas être présenté comme un module pédagogique complet.</p></div>` : ""}
@@ -569,12 +599,12 @@
     const scores = review.scores || {};
     const checks = review.criticalChecks || {};
     const passed = practicalReviewPassed(module, progress);
-    return `<section id="practicalReview" class="practical-review"><p class="kicker">Réservé au responsable</p><h2>Évaluation pratique spécifique</h2><p>Seuil: <strong>${module.practicalReview.threshold}/100</strong>. Les quatre contrôles critiques doivent être conformes. La moindre modification d’une preuve annule cette revue.</p>
+    return `<section id="practicalReview" class="practical-review"><p class="kicker">Réservé au responsable</p><h2>Évaluation pratique spécifique</h2><p class="reviewer-trust"><strong>Saisie locale non authentifiée.</strong> Reporter la décision et l’identité du responsable dans le dossier de formation interne.</p><p>Seuil: <strong>${module.practicalReview.threshold}/100</strong>. Les quatre contrôles critiques doivent être conformes. La moindre modification d’une preuve annule cette revue.</p>
       <div class="review-score-grid">${module.practicalReview.scoreItems.map((item) => `<label>${escapeHtml(item.label)}<span>Maximum ${item.max}</span><input id="score-${item.id}" type="number" min="0" max="${item.max}" step="1" value="${scores[item.id] ?? ""}"></label>`).join("")}</div>
       <div class="critical-review"><strong>Contrôles critiques — répondre Oui si l’erreur apparaît</strong>${module.practicalReview.criticalChecks.map((item) => `<label>${escapeHtml(item.label)}<select id="critical-${item.id}"><option value="">Choisir</option><option value="no" ${checks[item.id] === false ? "selected" : ""}>Non — aucune erreur</option><option value="yes" ${checks[item.id] === true ? "selected" : ""}>Oui — erreur critique</option></select></label>`).join("")}</div>
-      <div class="review-meta-grid"><label>Responsable<input id="practicalReviewer" value="${escapeHtml(review.reviewer || "")}" placeholder="Nom ou identifiant"></label><label>Date<input id="practicalDate" type="date" value="${escapeHtml(review.date || today())}"></label><label>Décision<select id="practicalDecision"><option value="">Choisir</option><option value="passed" ${review.decision === "passed" ? "selected" : ""}>Pratique validée</option><option value="extension" ${review.decision === "extension" ? "selected" : ""}>À reprendre</option></select></label></div>
+      <div class="review-meta-grid"><label>Responsable<input id="practicalReviewer" value="${escapeHtml(review.reviewer || "")}" placeholder="Nom ou identifiant"></label><label>Date<input id="practicalDate" type="date" value="${escapeHtml(review.date || today())}"></label><label>Décision<select id="practicalDecision"><option value="">Choisir</option><option value="passed" ${review.decision === "passed" ? "selected" : ""}>Conforme — trace locale</option><option value="extension" ${review.decision === "extension" ? "selected" : ""}>À reprendre</option></select></label></div>
       <label>Feedback du responsable (${module.practicalReview.feedbackMinimumCharacters} caractères minimum)<textarea id="practicalFeedback" rows="6" placeholder="Forces, écarts observés, corrections demandées et limite de délégation…">${escapeHtml(review.feedback || "")}</textarea></label>
-      <div class="inline-actions"><button class="btn btn-primary" type="button" onclick="FiduApp.savePracticalReview('${module.code}')">Enregistrer l’évaluation</button>${passed ? `<span class="review-pass">Pratique validée · ${review.score}/100</span>` : review.decision ? `<span class="review-pending">Revue non validante · ${review.score || 0}/100</span>` : ""}</div>
+      <div class="inline-actions"><button class="btn btn-primary" type="button" onclick="FiduApp.savePracticalReview('${module.code}')">Enregistrer l’évaluation locale</button>${passed ? `<span class="review-pass">Revue locale conforme · ${review.score}/100</span>` : review.decision ? `<span class="review-pending">Revue non validante · ${review.score || 0}/100</span>` : ""}</div>
     </section>`;
   }
 
@@ -589,14 +619,14 @@
     const artifactMinimum = requiredArtifactLength(module);
     const refs = evidenceRefs(module, progress);
     const refsDone = refs.filter((value) => value.length >= 3).length;
-    return `<div class="readiness-list"><span class="${quizPassed(module, progress) ? "ok" : ""}">Quiz <strong>${progress.quizBestCorrect || Math.round(((progress.quizBest || 0) * (module.quiz || []).length) / 100)}/${(module.quiz || []).length} · seuil ${thresholdCount}</strong></span><span class="${noteLength >= artifactMinimum ? "ok" : ""}">Note <strong>${noteLength}/${artifactMinimum}</strong></span>${module.evidenceItems ? `<span class="${evidenceComplete(module, progress) ? "ok" : ""}">Livrables <strong>${refsDone}/${module.evidenceItems.length}</strong></span>` : ""}${module.practicalReview ? `<span class="${practicalReviewPassed(module, progress) ? "ok" : ""}">Pratique <strong>${progress.practicalReview?.score || 0}/${module.practicalReview.threshold}</strong></span>` : ""}</div>`;
+    return `<div class="readiness-list"><span class="${quizPassed(module, progress) ? "ok" : ""}">Quiz <strong>${progress.quizBestCorrect || Math.round(((progress.quizBest || 0) * (module.quiz || []).length) / 100)}/${(module.quiz || []).length} · seuil ${thresholdCount}</strong></span><span class="${noteLength >= artifactMinimum ? "ok" : ""}">Note <strong>${noteLength}/${artifactMinimum}</strong></span>${module.evidenceItems ? `<span class="${evidenceComplete(module, progress) ? "ok" : ""}">Livrables <strong>${refsDone}/${module.evidenceItems.length}</strong></span>` : ""}${module.practicalReview ? `<span class="${practicalReviewPassed(module, progress) ? "ok" : ""}">Pratique <strong>${progress.practicalReview?.score || 0}/100 · seuil ${module.practicalReview.threshold}</strong></span>` : ""}</div>`;
   }
 
   function renderSources(module) {
     const registry = DATA.sourcesRegistry && DATA.sourcesRegistry.sources ? DATA.sourcesRegistry.sources : {};
     const refs = module.sourceRefs || [];
     if (!refs.length) return `<p class="fine-print">Aucune source rattachée: le contenu ne peut pas être validé comme module de production.</p>`;
-    return `<div class="source-list">${refs.map((key) => {
+    return `<p class="source-caution">La date affichée atteste une revue éditoriale, pas la validité juridique au jour d’usage. Ouvrir la source officielle avant tout dossier réel.</p><div class="source-list">${refs.map((key) => {
       const source = registry[key];
       if (!source) return `<span class="source-item source-missing">Source manquante: ${key}</span>`;
       const pending = String(source.lastChecked || "").startsWith("Vérification juridique");
@@ -608,7 +638,7 @@
     const trackIds = Object.keys(DATA.tracks).filter((id) => id !== "tronc-commun");
     const sectorModules = Object.values(DATA.modules).filter((module) => module.track !== "tronc-commun");
     const blueprints = sectorModules.filter((module) => module.status === "blueprint").length;
-    document.getElementById("app").innerHTML = header("Bibliothèque") + `<main class="container">
+    document.getElementById("app").innerHTML = header("Bibliothèque") + `<main id="main-content" tabindex="-1" class="container">
       <section class="library-hero"><p class="kicker kicker-light">Approfondissement facultatif</p><h1>Bibliothèque sectorielle</h1><p>${sectorModules.length} contenus sont conservés pour orienter la spécialisation. ${blueprints} sont encore des fiches de cadrage: utiles pour cartographier un sujet, insuffisantes pour certifier une compétence.</p></section>
       <section class="content-warning library-warning"><strong>Règle de qualité</strong><p>Seuls les modules explicitement marqués «module approfondi» ou validés par le cabinet peuvent être affectés à un apprenant. Les fiches de cadrage ne comptent pas dans la progression 12 mois.</p></section>
       <div class="track-grid">${trackIds.map((id) => renderTrackCard(id)).join("")}</div>
@@ -628,11 +658,11 @@
     if (!track || id === "tronc-commun") { renderLibrary(); return; }
     const modules = Object.values(DATA.modules).filter((module) => module.track === id);
     const axes = track.axes && track.axes.length ? track.axes : [{ id: "all", title: "Contenus", modules: modules.map((module) => module.code) }];
-    document.getElementById("app").innerHTML = header(track.title) + `<main class="container"><div class="track-head" style="--track-color:${track.color}"><a href="#library">← Bibliothèque</a><p class="kicker">${track.priority} · approfondissement facultatif</p><h1>${track.title}</h1><p>${track.subtitle}</p></div><div class="track-axes">${axes.map((axis) => `<section><p class="kicker">${axis.id}</p><h2>${axis.title}</h2><div class="modules-grid">${axis.modules.map((code) => renderModuleCard(code, false)).join("")}</div></section>`).join("")}</div></main>${footer()}`;
+    document.getElementById("app").innerHTML = header(track.title) + `<main id="main-content" tabindex="-1" class="container"><div class="track-head" style="--track-color:${track.color}"><a href="#library">← Bibliothèque</a><p class="kicker">${track.priority} · approfondissement facultatif</p><h1>${track.title}</h1><p>${track.subtitle}</p></div><div class="track-axes">${axes.map((axis) => `<section><p class="kicker">${axis.id}</p><h2>${axis.title}</h2><div class="modules-grid">${axis.modules.map((code) => renderModuleCard(code, false)).join("")}</div></section>`).join("")}</div></main>${footer()}`;
   }
 
   function footer() {
-    return `<footer class="footer"><div class="container"><div><strong>Fiduciaire Universelle</strong><span>Parcours interne · mise à jour ${ROADMAP.updatedAt}</span></div><p>Outil pédagogique indépendant. Les sources officielles, le mandat, les procédures du cabinet et la revue d’une personne compétente restent déterminants.</p></div></footer>`;
+    return `<footer class="footer"><div class="container"><div><strong>Fiduciaire Universelle</strong><span>Édition publique pilote · mise à jour ${ROADMAP.updatedAt}</span></div><p>1 module complet sur 25. Outil pédagogique indépendant, sans authentification ni certification. Les sources officielles, le mandat, les procédures du cabinet et une revue conservée hors du site restent déterminants.</p></div></footer>`;
   }
 
   function saveProfile(event) {
@@ -728,7 +758,7 @@
     progress.months[number] = current;
     saveProgress(progress);
     renderMonth(number);
-    showToast(current.validatedAt ? "Jalon mensuel validé." : "Revue enregistrée avec prolongation ciblée.");
+    showToast(current.validatedAt ? "Revue mensuelle locale enregistrée." : "Revue enregistrée avec prolongation ciblée.");
   }
 
   function collectEvidenceRefs(module) {
@@ -910,13 +940,15 @@
     if (module.month) invalidateMonth(module.month, progress);
     saveProgress(progress);
     renderModule(code);
-    showToast(passed ? `Pratique validée: ${score}/100.` : "Revue enregistrée avec reprise ciblée.");
+    showToast(passed ? `Revue pratique locale conforme: ${score}/100.` : "Revue enregistrée avec reprise ciblée.");
   }
 
   function exportProgress() {
     const payload = {
       exportedAt: new Date().toISOString(),
-      program: { version: ROADMAP.version, updatedAt: ROADMAP.updatedAt, title: ROADMAP.title },
+      schemaVersion: 1,
+      program: { version: ROADMAP.version, updatedAt: ROADMAP.updatedAt, title: ROADMAP.title, edition: "public-demo" },
+      trust: { level: "local-unauthenticated", certificate: false },
       progress: getProgress()
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
@@ -964,7 +996,7 @@
         validatedAt: null,
         importedAt: today(),
         importReviewRequired: true,
-        migrationNote: "Travail restauré depuis une sauvegarde v2.3; quiz et validations doivent être reconfirmés dans l’application."
+        migrationNote: `Travail restauré depuis une sauvegarde v${ROADMAP.version}; quiz et validations doivent être reconfirmés dans l’application.`
       };
     });
 
@@ -1011,7 +1043,7 @@
           showToast("Sauvegarde invalide: structure de progression incomplète.", true);
           return;
         }
-        if (!confirm("Restaurer cette sauvegarde v2.3? Les travaux seront conservés, mais les quiz et validations devront être reconfirmés.")) return;
+        if (!confirm(`Restaurer cette sauvegarde v${ROADMAP.version}? Les travaux seront conservés, mais les quiz et validations devront être reconfirmés.`)) return;
         const safeProgress = sanitizeImportedProgress(imported);
         storageSet(KEY, JSON.stringify(safeProgress, null, 2));
         location.hash = "#home";
@@ -1026,10 +1058,11 @@
   }
 
   function resetProgress() {
-    if (confirm("Effacer toute la progression locale de la version 2.3?")) {
+    if (confirm(`Effacer toute la progression locale de la version ${ROADMAP.version}? Cette action est irréversible sans sauvegarde exportée.`)) {
       storageRemove(KEY);
       location.hash = "#home";
       renderHome();
+      showToast("Données locales effacées.");
     }
   }
 
@@ -1050,6 +1083,14 @@
   }
 
   function routeToHome() { location.hash = "#home"; renderHome(); }
+  function pageTitle(view, id) {
+    if (view === "month") return `Mois ${id} · Fiduciaire Formation`;
+    if (view === "module" && DATA.modules[id]) return `${id} · ${DATA.modules[id].title}`;
+    if (view === "library") return "Bibliothèque · Fiduciaire Formation";
+    if (view === "track" && DATA.tracks[id]) return `${DATA.tracks[id].title} · Fiduciaire Formation`;
+    return "Fiduciaire Formation · Pilote public 1/25";
+  }
+
   function route() {
     const hash = (location.hash || "#home").replace(/^#\/?/, "");
     const [view, id] = hash.split("/");
@@ -1060,7 +1101,12 @@
     else if (view === "track") renderTrack(id);
     else if (view === "profile") { renderHome(); setTimeout(() => document.getElementById("profile")?.scrollIntoView(), 0); }
     else renderHome();
-    window.scrollTo({ top: 0, behavior: "auto" });
+    document.title = pageTitle(view, id);
+    const main = document.getElementById("main-content");
+    if (view !== "profile") {
+      if (main) main.focus({ preventScroll: true });
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
   }
 
   window.addEventListener("hashchange", route);

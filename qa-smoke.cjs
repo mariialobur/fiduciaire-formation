@@ -23,7 +23,7 @@ const dom = new JSDOM(html, {
 
 const { window } = dom;
 const document = window.document;
-const KEY = "fiduciaire_formation_progress_v23";
+const KEY = "fiduciaire_formation_progress_v24";
 const assert = (condition, message) => {
   if (!condition) throw new Error(message);
 };
@@ -34,8 +34,12 @@ const navigate = (hash) => {
 const feedback = "Revue documentée: les pouvoirs, le périmètre, le calendrier, les preuves et les seuils d’escalade ont été contrôlés; les corrections demandées sont tracées.";
 
 assert(document.querySelector("h1").textContent.includes("autonomie"), "Accueil non rendu");
+assert(document.querySelector(".public-trust").textContent.includes("1 module complet sur 25"), "Statut du pilote public absent");
+assert(document.querySelector(".skip-link").getAttribute("href") === "#main-content", "Lien d’évitement incorrect");
+assert(document.querySelector(".skip-link").getAttribute("onclick").includes("preventDefault"), "Le lien d’évitement entre en conflit avec le routeur");
+assert(document.querySelector('a[aria-current="page"]').textContent === "Parcours", "Navigation active incorrecte sur l’accueil");
 assert(document.querySelectorAll(".month-card").length === 12, "La feuille de route ne contient pas 12 mois");
-assert(window.FIDUCIAIRE_ROADMAP.version === "2.3", "Version 2.3 absente");
+assert(window.FIDUCIAIRE_ROADMAP.version === "2.4", "Version 2.4 absente");
 assert(window.FIDUCIAIRE_ROADMAP.coreModules.length === 25, "Le parcours ne contient pas 25 compétences cœur");
 const roadmapModules = window.FIDUCIAIRE_ROADMAP.coreModules.map((code) => window.FIDUCIAIRE_DATA.modules[code]);
 assert(roadmapModules.filter((module) => module.status === "core").length === 1, "TC01 doit être le seul module cœur publié");
@@ -47,6 +51,9 @@ assert(!document.querySelector("#quizForm"), "Un quiz est encore actif sur une f
 assert(!document.querySelector("#artifactNotes"), "Un artefact est encore validable sur une fiche de cadrage");
 
 navigate("#module/TC01");
+assert(document.title.startsWith("TC01"), "Le titre de page TC01 n’est pas contextualisé");
+assert(document.querySelector('a[aria-current="page"]').textContent === "Mois actuel", "Navigation active incorrecte dans TC01");
+assert(document.querySelector("#main-content") === document.activeElement, "Le focus n’est pas déplacé vers le contenu après navigation");
 const tc01 = window.FIDUCIAIRE_DATA.modules.TC01;
 assert(tc01.quiz.length === 16, "TC01 ne contient pas 16 questions");
 assert(tc01.quiz.filter((question) => question.critical).length === 4, "TC01 ne contient pas 4 questions critiques");
@@ -198,8 +205,12 @@ assert(stored.modules.TC01.status === "quiz_passed", "TC01 ne revient pas à l�
 assert(!stored.modules.TC01.practicalReview, "La revue pratique subsiste après modification de preuve");
 
 navigate("#library");
+assert(document.querySelector('a[aria-current="page"]').textContent === "Bibliothèque", "Navigation active incorrecte dans la bibliothèque");
 assert(document.querySelectorAll(".track-card").length === 11, "La bibliothèque ne contient pas 11 secteurs");
 assert(document.querySelector(".library-warning"), "Avertissement qualité bibliothèque absent");
+const sectorModule = Object.values(window.FIDUCIAIRE_DATA.modules).find((module) => module.track !== "tronc-commun");
+navigate(`#module/${sectorModule.code}`);
+assert(document.querySelector('a[aria-current="page"]').textContent === "Bibliothèque", "Un module sectoriel active le mauvais menu");
 assert(errors.length === 0, `Erreurs navigateur: ${errors.join(" | ")}`);
 
 assert(typeof window.FiduApp.importProgress === "function", "La restauration JSON n’est pas exposée");
@@ -223,7 +234,7 @@ window.localStorage.removeItem(KEY);
 window.FiduApp.importProgress(new window.File([exportedPayload], "progression.json", { type: "application/json" }));
 setTimeout(() => {
   const restored = JSON.parse(window.localStorage.getItem(KEY));
-  assert(restored && restored.version === "2.3", `La sauvegarde v2.3 n’a pas été restaurée (${document.getElementById("appToast")?.textContent || "aucun message"})`);
+  assert(restored && restored.version === "2.4", `La sauvegarde v2.4 n’a pas été restaurée (${document.getElementById("appToast")?.textContent || "aucun message"})`);
   assert(restored.modules.TC01.status === "in_progress", "Un statut module forgé a survécu à l’import");
   assert(restored.modules.TC01.quizPassed === false, "Un quizPassed forgé a survécu à l’import");
   assert(restored.modules.TC01.practicalReview === null, "Une revue pratique forgée a survécu à l’import");
@@ -231,6 +242,22 @@ setTimeout(() => {
   assert(!restored.months[1].validatedAt, "Une validation mensuelle forgée a survécu à l’import");
   assert(restored.months[1].reviewer.decision === "", "Une décision mensuelle forgée a survécu à l’import");
   assert(restored.modules.TC01.artifactNote.length > 0, "Le travail apprenant n’a pas été restauré");
+
+  const previousKey = "fiduciaire_formation_progress_v23";
+  window.localStorage.removeItem(KEY);
+  window.localStorage.setItem(previousKey, JSON.stringify({
+    version: "2.3",
+    learner: { name: "ML-01", role: "Assistant·e comptable", startedAt: "2026-08-01", hoursPerWeek: 6 },
+    modules: { TC01: { status: "review_ready", quizPassed: true, artifactNote: "Travail v2.3 conservé." } },
+    months: {},
+    lastVisited: { type: "module", code: "TC01" }
+  }));
+  window.FiduApp.renderHome();
+  const migrated = JSON.parse(window.localStorage.getItem(KEY));
+  assert(migrated.version === "2.4", "La progression locale v2.3 n’a pas migré vers v2.4");
+  assert(migrated.modules.TC01.status === "review_ready", "La migration compatible v2.3 a perdu le statut de travail");
+  assert(migrated.migratedFrom === "2.3", "La provenance de migration v2.3 n’est pas tracée");
+
   console.log(JSON.stringify({
     version: window.FIDUCIAIRE_ROADMAP.version,
     homeMonths: 12,
@@ -247,6 +274,7 @@ setTimeout(() => {
     postReviewInvalidation: true,
     jsonRestore: true,
     strictJsonValidationReset: true,
+    compatibleMigrationFrom23: true,
     sectorTracks: 11,
     browserErrors: errors.length
   }, null, 2));

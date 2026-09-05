@@ -1,16 +1,17 @@
 # TC01 — Mandat fiduciaire, périmètre et responsabilités
 
-Version 1.3 du 6 août 2026. Ce paquet remplace la version 1.0 comme modèle pédagogique, sans écraser l'ancien dossier.
+Version 1.3 du 6 août 2026. Édition apprenant publique: aucun corrigé ni guide réservé au responsable n’est inclus.
 
 ## Ordre conseillé
 
-1. Le formateur lit `Corrige_responsable/05_Guide_formateur_TC01.docx`.
-2. L'apprenant lit `01_Cours_TC01.docx` et `02_Dossier_apprenant_TC01.docx`.
-3. Le formateur remet uniquement `Dossier_simule/01_Remise_initiale`.
-4. L'apprenant complète une première analyse dans `04_Outils_TC01_apprenant.xlsx`.
-5. Après la demande de pièces, le formateur remet `Dossier_simule/02_Remise_apres_relance`.
-6. L'apprenant conserve la piste des changements, finalise ses livrables et complète `03_Feuille_reponses_quiz_TC01.docx`.
-7. La revue utilise les deux fichiers du dossier `Corrige_responsable`.
+1. L'apprenant lit `01_Cours_TC01.docx` et `02_Dossier_apprenant_TC01.docx`.
+2. En formation supervisée, le responsable remet d’abord uniquement `Dossier_simule/01_Remise_initiale` et conserve la seconde remise hors de portée.
+3. L'apprenant complète une première analyse dans `04_Outils_TC01_apprenant.xlsx` et formule sa demande de pièces.
+4. Le responsable remet ensuite `Dossier_simule/02_Remise_apres_relance`.
+5. L'apprenant conserve la piste des changements, finalise ses livrables et complète `03_Feuille_reponses_quiz_TC01.docx`.
+6. Le responsable effectue la revue avec son guide et son corrigé privés, distribués séparément du présent paquet public.
+
+Sans responsable disposant du paquet privé, ce dossier peut servir à l’entraînement, mais pas à une validation professionnelle.
 
 ## Validation
 
@@ -19,7 +20,8 @@ Version 1.3 du 6 août 2026. Ce paquet remplace la version 1.0 comme modèle pé
 - huit critères tous renseignés;
 - quatre contrôles critiques tous répondus `Non`;
 - nom du responsable, date et feedback global obligatoires;
-- le statut `VALIDÉ` est calculé, jamais prérempli.
+- le statut `VALIDÉ` du classeur est calculé, jamais prérempli;
+- la décision finale est conservée dans le dossier interne du cabinet, pas certifiée par la page publique.
 
 ## Avertissement
 

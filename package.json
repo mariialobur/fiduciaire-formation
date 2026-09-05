@@ -7,6 +7,7 @@
     "build": "node build-standalone.mjs",
     "test": "node qa-links.mjs && node qa-public.mjs && node qa-smoke.cjs",
     "test:links": "node qa-links.mjs",
+    "test:public": "node qa-public.mjs",
     "test:smoke": "node qa-smoke.cjs"
   },
   "devDependencies": {

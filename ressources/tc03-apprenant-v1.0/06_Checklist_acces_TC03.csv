@@ -1,0 +1,16 @@
+Événement;Contrôle;Système / ressource;Responsable;Date prévue;Date réalisée;Preuve / référence;Résultat;Exception;Action restante
+Arrivée;Rôle et portefeuille définis;;;;;;;;
+Arrivée;Compte nominatif créé;;;;;;;;
+Arrivée;MFA / authentification configurée;;;;;;;;
+Arrivée;Droits minimum attribués;;;;;;;;
+Arrivée;Règles de partage connues;;;;;;;;
+Changement;Anciens dossiers retirés;;;;;;;;
+Changement;Nouveaux droits approuvés;;;;;;;;
+Changement;Groupes et délégations revus;;;;;;;;
+Départ;Compte applicatif désactivé;;;;;;;;
+Départ;Sessions actives révoquées;;;;;;;;
+Départ;Messagerie / cloud traités;;;;;;;;
+Départ;VPN / accès distant supprimés;;;;;;;;
+Départ;Partages externes revus;;;;;;;;
+Départ;Tokens / clés / appareils traités;;;;;;;;
+Départ;Contrôle final des accès secondaires;;;;;;;;

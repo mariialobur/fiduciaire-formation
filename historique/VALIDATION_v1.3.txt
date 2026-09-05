@@ -1,0 +1,2 @@
+HISTORIQUE — validation technique de la version 1.3 uniquement.
+Pour la version active, utiliser qa-smoke.cjs et qa-links.mjs.

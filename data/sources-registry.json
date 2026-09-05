@@ -1,0 +1,498 @@
+{
+  "version": "2.3",
+  "lastGlobalReview": "2026-08-06",
+  "sources": {
+    "TC01_CO_MANDATE": {
+      "sourceName": "Code des obligations (CO; RS 220) — mandat, organes et comptabilité",
+      "url": "https://www.fedlex.admin.ch/eli/cc/27/317_321_377/fr",
+      "lastChecked": "2026-08-06",
+      "usedIn": ["TC01"],
+      "reviewFrequency": "before-use",
+      "articles": "394, 397, 398, 400, 716a al. 1 ch. 3, 810 al. 2 ch. 3, 957, 957a, 958f"
+    },
+    "TC01_OLICO": {
+      "sourceName": "Olico (RS 221.431) — tenue et conservation des livres de comptes",
+      "url": "https://www.fedlex.admin.ch/eli/cc/2002/216/fr",
+      "lastChecked": "2026-08-06",
+      "usedIn": ["TC01"],
+      "reviewFrequency": "before-use",
+      "articles": "2 à 10"
+    },
+    "TC01_LPD": {
+      "sourceName": "Loi fédérale sur la protection des données (LPD; RS 235.1)",
+      "url": "https://www.fedlex.admin.ch/eli/cc/2022/491/fr",
+      "lastChecked": "2026-08-06",
+      "usedIn": ["TC01"],
+      "reviewFrequency": "before-use",
+      "articles": "6 à 9 et 24"
+    },
+    "TC01_PFPDT_CLOUD": {
+      "sourceName": "PFPDT — traitement de données dans un nuage informatique",
+      "url": "https://www.edoeb.admin.ch/fr/traitement-de-donnees-dans-un-nuage-informatique",
+      "lastChecked": "2026-08-06",
+      "usedIn": ["TC01"],
+      "reviewFrequency": "before-use"
+    },
+    "TC01_LTVA": {
+      "sourceName": "Loi fédérale régissant la TVA (LTVA; RS 641.20)",
+      "url": "https://www.fedlex.admin.ch/eli/cc/2009/615/fr",
+      "lastChecked": "2026-08-06",
+      "usedIn": ["TC01"],
+      "reviewFrequency": "before-use",
+      "articles": "71 al. 1 et 86 al. 1"
+    },
+    "TC01_AFC_PAY_TVA": {
+      "sourceName": "AFC — payer la TVA: remise, paiement et délais",
+      "url": "https://www.estv.admin.ch/fr/payer-la-tva",
+      "lastChecked": "2026-08-06",
+      "usedIn": ["TC01"],
+      "reviewFrequency": "before-use"
+    },
+    "TC01_PA": {
+      "sourceName": "Loi fédérale sur la procédure administrative (PA; RS 172.021)",
+      "url": "https://www.fedlex.admin.ch/eli/cc/1969/737_757_755/fr",
+      "lastChecked": "2026-08-06",
+      "usedIn": ["TC01"],
+      "reviewFrequency": "before-use",
+      "articles": "20 al. 3"
+    },
+    "TC01_LBA": {
+      "sourceName": "Loi sur le blanchiment d’argent (LBA; RS 955.0)",
+      "url": "https://www.fedlex.admin.ch/eli/cc/1998/892_892_892/fr",
+      "lastChecked": "2026-08-06",
+      "usedIn": ["TC01"],
+      "reviewFrequency": "before-use",
+      "articles": "art. 2 al. 3 let. b; qualification à confirmer selon l’activité concrète"
+    },
+    "TC01_OBA": {
+      "sourceName": "Ordonnance sur le blanchiment d’argent (OBA; RS 955.01)",
+      "url": "https://www.fedlex.admin.ch/eli/cc/2015/791/fr",
+      "lastChecked": "2026-08-06",
+      "usedIn": ["TC01"],
+      "reviewFrequency": "before-use",
+      "articles": "art. 4 et 7; trafic des paiements et critères généraux de professionnalité"
+    },
+    "TC01_FINMA_PAYMENTS": {
+      "sourceName": "FINMA — FinTech: services fiduciaires et trafic des paiements",
+      "url": "https://www.finma.ch/fr/autorisation/fintech/",
+      "lastChecked": "2026-08-06",
+      "usedIn": ["TC01"],
+      "reviewFrequency": "before-use",
+      "articles": "orientation actuelle FINMA; Circulaire 2011/1 référencée par la FINMA"
+    },
+    "TC01_ZEFIX": {
+      "sourceName": "Zefix — Index central des raisons de commerce",
+      "url": "https://www.zefix.admin.ch",
+      "lastChecked": "2026-08-06",
+      "usedIn": ["TC01"],
+      "reviewFrequency": "per-file"
+    },
+    "TC01_IDE": {
+      "sourceName": "Registre IDE — Office fédéral de la statistique",
+      "url": "https://www.uid.admin.ch",
+      "lastChecked": "2026-08-06",
+      "usedIn": ["TC01"],
+      "reviewFrequency": "per-file"
+    },
+    "TVA_RATES": {
+      "sourceName": "AFC / ESTV — Taux TVA applicables en Suisse",
+      "url": "https://www.estv.admin.ch/fr/taux-de-la-tva-suisse",
+      "lastChecked": "2026-06-19",
+      "usedIn": [
+        "AR06",
+        "AS07",
+        "CE06",
+        "CE07",
+        "CE08",
+        "CE09",
+        "CO03",
+        "CO04",
+        "CO06",
+        "EE06",
+        "EE08",
+        "FI04",
+        "HR05",
+        "HR06",
+        "HR07",
+        "HR08",
+        "IM04",
+        "IM05",
+        "IM06",
+        "IM07",
+        "IM16",
+        "IT07",
+        "IT08",
+        "IT09",
+        "PL04",
+        "PL05",
+        "PL06",
+        "PL07",
+        "TC10",
+        "TC11",
+        "TC12",
+        "TC13",
+        "TC14",
+        "TR06",
+        "TR07"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "TVA_ASSUJETTISSEMENT": {
+      "sourceName": "AFC / ESTV — Assujettissement à la TVA",
+      "url": "https://www.estv.admin.ch/fr/assujettissement-a-la-tva",
+      "lastChecked": "2026-06-19",
+      "usedIn": [
+        "AR06",
+        "AS07",
+        "CE06",
+        "CE07",
+        "CE08",
+        "CE09",
+        "CO03",
+        "CO04",
+        "CO06",
+        "EE06",
+        "EE08",
+        "FI04",
+        "HR05",
+        "HR06",
+        "HR07",
+        "HR08",
+        "IM04",
+        "IM05",
+        "IM06",
+        "IM07",
+        "IM16",
+        "IT07",
+        "IT08",
+        "IT09",
+        "PL04",
+        "PL05",
+        "PL06",
+        "PL07",
+        "TC10",
+        "TC11",
+        "TC12",
+        "TC13",
+        "TC14",
+        "TR06",
+        "TR07"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "TDFN": {
+      "sourceName": "AFC / ESTV — Taux de la dette fiscale nette et taux forfaitaires",
+      "url": "https://www.estv.admin.ch/fr/tva-taux-de-la-dette-fiscale-nette-et-taux-forfaitaires",
+      "lastChecked": "2026-06-19",
+      "usedIn": [
+        "HR06",
+        "TC10",
+        "TC14"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "SOCIAL_CHARGES_2026": {
+      "sourceName": "AVS/AI — Tableau synoptique des taux de cotisations et des primes applicables, état au 1.1.2026",
+      "url": "https://www.ahv-iv.ch/Portals/0/adam/AHV-IV/Ypzfdm2t_km4jeHFYxWRdA/Document/Tableau%20synoptique%2020-1.pdf",
+      "lastChecked": "2026-06-18",
+      "usedIn": [
+        "AR08",
+        "AS08",
+        "CO12",
+        "FI04",
+        "HR09",
+        "HR10",
+        "HR16",
+        "IT11",
+        "PL09",
+        "PL11",
+        "TC15",
+        "TC16",
+        "TC17",
+        "TR05",
+        "TR09"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "CONSTRUCTION_SOLIDARITE": {
+      "sourceName": "SECO — Responsabilité solidaire",
+      "url": "https://www.seco.admin.ch/fr/responsabilite-solidaire",
+      "lastChecked": "2026-06-18",
+      "usedIn": [
+        "CO02",
+        "CO04",
+        "CO06",
+        "CO07",
+        "CO08",
+        "CO09",
+        "CO12",
+        "CO16",
+        "PL12"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "DETACHEMENT": {
+      "sourceName": "SECO — Détachement: coûts et sanctions",
+      "url": "https://www.seco.admin.ch/fr/detachement-couts-et-sanctions",
+      "lastChecked": "2026-06-18",
+      "usedIn": [
+        "CO02",
+        "CO04",
+        "CO06",
+        "CO07",
+        "CO08",
+        "CO09",
+        "CO12",
+        "CO16",
+        "PL12"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "TVA_RADIATION": {
+      "sourceName": "AFC / ESTV — Radiation de la TVA: cessation de l’assujettissement obligatoire",
+      "url": "https://www.estv.admin.ch/fr/radiation-de-la-tva",
+      "lastChecked": "2026-06-19",
+      "usedIn": [
+        "TC10"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "AVS_MEMENTOS": {
+      "sourceName": "Centre d’information AVS/AI — Mémentos cotisations AVS/AI/APG/AC",
+      "url": "https://www.ahv-iv.ch/fr/M%C3%A9mentos/Cotisations-AVS-AI-APG-AC",
+      "lastChecked": "2026-06-20",
+      "usedIn": [
+        "AR08",
+        "AS08",
+        "CO12",
+        "FI04",
+        "HR09",
+        "HR10",
+        "HR16",
+        "IT11",
+        "PL09",
+        "PL11",
+        "TC15",
+        "TC16",
+        "TC17",
+        "TR05",
+        "TR09"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "CO_ACCOUNTING": {
+      "sourceName": "Code des obligations suisse — comptabilité commerciale et présentation des comptes",
+      "url": "https://www.fedlex.admin.ch/eli/cc/27/317_321_377/fr",
+      "lastChecked": "à vérifier avant production",
+      "usedIn": [
+        "AR01",
+        "AR08",
+        "AR09",
+        "AR10",
+        "AR11",
+        "AS01",
+        "AS02",
+        "AS03",
+        "AS04",
+        "AS07",
+        "AS08",
+        "AS11",
+        "AS12",
+        "CE04",
+        "CO07",
+        "CO09",
+        "CO12",
+        "CO17",
+        "CO18",
+        "EE07",
+        "FI04",
+        "FI09",
+        "HR09",
+        "HR10",
+        "HR16",
+        "IT01",
+        "IT03",
+        "IT05",
+        "IT07",
+        "IT14",
+        "PL04",
+        "PL09",
+        "PL11",
+        "TC01",
+        "TC07",
+        "TC16",
+        "TC17",
+        "TC18",
+        "TC20",
+        "TC22",
+        "TR09",
+        "TR12"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "LIFD": {
+      "sourceName": "Loi fédérale sur l’impôt fédéral direct (LIFD)",
+      "url": "https://www.fedlex.admin.ch/eli/cc/1991/1184_1184_1184/fr",
+      "lastChecked": "à vérifier avant production",
+      "usedIn": [
+        "AS09",
+        "CE07",
+        "CO05",
+        "CO17",
+        "EE08",
+        "FI04",
+        "HR10",
+        "IM06",
+        "IM13",
+        "IT03",
+        "PL07",
+        "PL09",
+        "TC12",
+        "TC17",
+        "TC22"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "ACI_VD": {
+      "sourceName": "Administration cantonale des impôts Vaud — informations fiscales",
+      "url": "https://www.vd.ch/themes/etat-droit-finances/impots",
+      "lastChecked": "à vérifier avant production",
+      "usedIn": [
+        "AS09",
+        "CE07",
+        "CO05",
+        "CO17",
+        "EE08",
+        "FI04",
+        "HR10",
+        "IM06",
+        "IM13",
+        "IT03",
+        "PL07",
+        "PL09",
+        "TC12",
+        "TC17",
+        "TC22"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "NLPD": {
+      "sourceName": "PFPDT — Nouvelle loi fédérale sur la protection des données",
+      "url": "https://www.edoeb.admin.ch/edoeb/fr/home/datenschutz/grundlagen/ndsg.html",
+      "lastChecked": "à vérifier avant production",
+      "usedIn": [
+        "FI09",
+        "TC03"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "LBA": {
+      "sourceName": "Loi fédérale concernant la lutte contre le blanchiment d’argent et le financement du terrorisme (LBA)",
+      "url": "https://www.fedlex.admin.ch/eli/cc/1998/892_892_892/fr",
+      "lastChecked": "à vérifier avant production",
+      "usedIn": [
+        "FI09",
+        "PL01",
+        "PL12",
+        "TC04"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "ZEFIX_RC": {
+      "sourceName": "Zefix — Index central des raisons de commerce",
+      "url": "https://www.zefix.admin.ch/fr/search/entity/welcome",
+      "lastChecked": "à vérifier avant production",
+      "usedIn": [
+        "AR01",
+        "AR08",
+        "AR09",
+        "AR10",
+        "AR11",
+        "AS01",
+        "AS02",
+        "AS03",
+        "AS04",
+        "AS07",
+        "AS08",
+        "AS11",
+        "AS12",
+        "CE04",
+        "CO07",
+        "CO09",
+        "CO12",
+        "CO17",
+        "CO18",
+        "EE07",
+        "FI04",
+        "FI09",
+        "HR09",
+        "HR10",
+        "HR16",
+        "IT01",
+        "IT03",
+        "IT05",
+        "IT07",
+        "IT14",
+        "PL04",
+        "PL09",
+        "PL11",
+        "TC01",
+        "TC07",
+        "TC16",
+        "TC17",
+        "TC18",
+        "TC20",
+        "TC22",
+        "TR09",
+        "TR12"
+      ],
+      "reviewFrequency": "semiannual"
+    },
+    "OFDF_DOUANE": {
+      "sourceName": "Office fédéral de la douane et de la sécurité des frontières — informations entreprises",
+      "url": "https://www.bazg.admin.ch/fr/importation-en-suisse-infos-pour-entreprises",
+      "lastChecked": "à vérifier avant production",
+      "usedIn": [
+        "CE07",
+        "CE08",
+        "CE14",
+        "TR07"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "CCNT_HOTELLERIE": {
+      "sourceName": "CCNT hôtellerie-restauration suisse — convention collective nationale de travail",
+      "url": "https://l-gav.ch/fr",
+      "lastChecked": "à vérifier avant production",
+      "usedIn": [
+        "HR01",
+        "HR03",
+        "HR05",
+        "HR06",
+        "HR09",
+        "HR14",
+        "HR16"
+      ],
+      "reviewFrequency": "annual"
+    },
+    "PORTAIL_AFC_TVA": {
+      "sourceName": "AFC — Portail et décompte TVA en ligne",
+      "url": "https://www.estv.admin.ch/fr/decompter-la-tva",
+      "lastChecked": "2026-06-20",
+      "usedIn": [],
+      "reviewFrequency": "annual"
+    }
+  },
+  "qualityPolicy": {
+    "rule": "Chaque module critique doit citer une source officielle ou une note interne validée.",
+    "reviewBeforePublication": "Aucune donnée de taux, seuil ou procédure ne doit être publiée sans relecture fiscale à la date de production.",
+    "sourceTypes": [
+      "AFC/ESTV",
+      "AVS/AI",
+      "SECO",
+      "admin.ch / Fedlex",
+      "autorités cantonales",
+      "CCT/CCNT officielles"
+    ]
+  }
+}

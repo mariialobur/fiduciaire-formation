@@ -1,0 +1,16 @@
+VERSION ACTIVE: 2.1 — 2026-08-05
+
+QA technique:
+- JavaScript: OK
+- sources-registry.json: OK
+- HTML: 190 fichiers
+- références locales: 750, manquantes: 0
+- TC01: 16 questions, 4 critiques, réponses A/B/C/D = 4/4/4/4
+- preuve TC01: 6 livrables obligatoires
+- blocage erreur critique quiz: OK
+- blocage erreur critique pratique: OK
+- invalidation après modification: OK
+- erreurs navigateur au smoke-test: 0
+
+Positionnement pédagogique:
+1 module étalon complet (TC01) + 24 fiches de compétences à développer.

@@ -1,0 +1,686 @@
+{
+  "tronc-commun": {
+    "id": "tronc-commun",
+    "title": "Tronc commun fiduciaire",
+    "subtitle": "Fondamentaux obligatoires pour tous les dossiers clients",
+    "color": "#4A4A3F",
+    "modulesCount": 24,
+    "priority": "Obligatoire",
+    "path": "tronc-commun/index.html",
+    "statusPolicy": "Débloque les tracks après examen TC",
+    "axes": [
+      {
+        "id": "TC-A",
+        "title": "Cabinet, mandat, responsabilité",
+        "modules": [
+          "TC01",
+          "TC02",
+          "TC03",
+          "TC04"
+        ]
+      },
+      {
+        "id": "TC-B",
+        "title": "Comptabilité générale",
+        "modules": [
+          "TC05",
+          "TC06",
+          "TC07",
+          "TC08",
+          "TC09"
+        ]
+      },
+      {
+        "id": "TC-C",
+        "title": "TVA fondamentale",
+        "modules": [
+          "TC10",
+          "TC11",
+          "TC12",
+          "TC13",
+          "TC14"
+        ]
+      },
+      {
+        "id": "TC-D",
+        "title": "Salaires",
+        "modules": [
+          "TC15",
+          "TC16",
+          "TC17"
+        ]
+      },
+      {
+        "id": "TC-E",
+        "title": "Immobilisations, clôture, fiscalité",
+        "modules": [
+          "TC18",
+          "TC19",
+          "TC20",
+          "TC21",
+          "TC22",
+          "TC23"
+        ]
+      },
+      {
+        "id": "TC-F",
+        "title": "Analyse, reporting, qualité",
+        "modules": [
+          "TC24"
+        ]
+      }
+    ]
+  },
+  "construction": {
+    "id": "construction",
+    "title": "Construction & second œuvre",
+    "subtitle": "Chantiers, WIP, sous-traitance, responsabilité solidaire",
+    "color": "#6B6048",
+    "modulesCount": 18,
+    "priority": "P1",
+    "path": "construction/index.html",
+    "statusPolicy": "Track sectoriel critique",
+    "axes": [
+      {
+        "id": "CO-A",
+        "title": "Secteur et plan comptable",
+        "modules": [
+          "CO01",
+          "CO02"
+        ]
+      },
+      {
+        "id": "CO-B",
+        "title": "TVA et sous-traitance",
+        "modules": [
+          "CO03",
+          "CO04",
+          "CO05",
+          "CO06",
+          "CO07",
+          "CO08"
+        ]
+      },
+      {
+        "id": "CO-C",
+        "title": "Chantiers et WIP",
+        "modules": [
+          "CO09",
+          "CO10",
+          "CO11"
+        ]
+      },
+      {
+        "id": "CO-D",
+        "title": "Salaires, garanties, litiges",
+        "modules": [
+          "CO12",
+          "CO13",
+          "CO14",
+          "CO15"
+        ]
+      },
+      {
+        "id": "CO-E",
+        "title": "Clôture et cas final",
+        "modules": [
+          "CO16",
+          "CO17",
+          "CO18"
+        ]
+      }
+    ]
+  },
+  "hotellerie": {
+    "id": "hotellerie",
+    "title": "Hôtellerie & restauration",
+    "subtitle": "TVA multi-taux, caisse, saisonniers, CCNT",
+    "color": "#6B3A3A",
+    "modulesCount": 16,
+    "priority": "P1",
+    "path": "hotellerie/index.html",
+    "statusPolicy": "À produire",
+    "axes": [
+      {
+        "id": "HR-A",
+        "title": "Exploitation, caisse, POS",
+        "modules": [
+          "HR01",
+          "HR02",
+          "HR03",
+          "HR04"
+        ]
+      },
+      {
+        "id": "HR-B",
+        "title": "TVA multi-taux et ventes",
+        "modules": [
+          "HR05",
+          "HR06",
+          "HR07",
+          "HR08"
+        ]
+      },
+      {
+        "id": "HR-C",
+        "title": "Salaires, CCNT, saisonniers",
+        "modules": [
+          "HR09",
+          "HR10",
+          "HR11"
+        ]
+      },
+      {
+        "id": "HR-D",
+        "title": "Stocks, food cost, contrôle de gestion",
+        "modules": [
+          "HR12",
+          "HR13"
+        ]
+      },
+      {
+        "id": "HR-E",
+        "title": "Clôture et cas final",
+        "modules": [
+          "HR14",
+          "HR15",
+          "HR16"
+        ]
+      }
+    ]
+  },
+  "commerce": {
+    "id": "commerce",
+    "title": "Commerce & e-commerce",
+    "subtitle": "Stocks, plateformes, import/export, paiements",
+    "color": "#3B5068",
+    "modulesCount": 14,
+    "priority": "P1",
+    "path": "commerce/index.html",
+    "statusPolicy": "À produire",
+    "axes": [
+      {
+        "id": "CE-A",
+        "title": "Commerce physique et e-commerce",
+        "modules": [
+          "CE01",
+          "CE02",
+          "CE03"
+        ]
+      },
+      {
+        "id": "CE-B",
+        "title": "Stocks, marges, inventaire",
+        "modules": [
+          "CE04",
+          "CE05"
+        ]
+      },
+      {
+        "id": "CE-C",
+        "title": "TVA, import, export, plateformes",
+        "modules": [
+          "CE06",
+          "CE07",
+          "CE08",
+          "CE09"
+        ]
+      },
+      {
+        "id": "CE-D",
+        "title": "Paiements, marketplaces, fraude",
+        "modules": [
+          "CE10",
+          "CE11"
+        ]
+      },
+      {
+        "id": "CE-E",
+        "title": "Reporting et cas final",
+        "modules": [
+          "CE12",
+          "CE13",
+          "CE14"
+        ]
+      }
+    ]
+  },
+  "immobilier": {
+    "id": "immobilier",
+    "title": "Immobilier",
+    "subtitle": "Option TVA, charges locatives, immeubles de rendement",
+    "color": "#5C5040",
+    "modulesCount": 16,
+    "priority": "P1",
+    "path": "immobilier/index.html",
+    "statusPolicy": "À produire",
+    "axes": [
+      {
+        "id": "IM-A",
+        "title": "Actifs immobiliers et mandats",
+        "modules": [
+          "IM01",
+          "IM02",
+          "IM03"
+        ]
+      },
+      {
+        "id": "IM-B",
+        "title": "TVA immobilière et option",
+        "modules": [
+          "IM04",
+          "IM05",
+          "IM06",
+          "IM07"
+        ]
+      },
+      {
+        "id": "IM-C",
+        "title": "Charges locatives, gérance, PPE",
+        "modules": [
+          "IM08",
+          "IM09",
+          "IM10"
+        ]
+      },
+      {
+        "id": "IM-D",
+        "title": "Financement, amortissements, fiscalité",
+        "modules": [
+          "IM11",
+          "IM12",
+          "IM13"
+        ]
+      },
+      {
+        "id": "IM-E",
+        "title": "Clôture et cas final",
+        "modules": [
+          "IM14",
+          "IM15",
+          "IM16"
+        ]
+      }
+    ]
+  },
+  "liberal": {
+    "id": "liberal",
+    "title": "Professions libérales & santé",
+    "subtitle": "Médecins, thérapeutes, avocats, consultants, honoraires, exclusions TVA, frais mixtes",
+    "color": "#5C3D52",
+    "modulesCount": 14,
+    "priority": "P2",
+    "path": "liberal/index.html",
+    "statusPolicy": "À produire",
+    "axes": [
+      {
+        "id": "PL-A",
+        "title": "Mandat, honoraires, secret professionnel",
+        "modules": [
+          "PL01",
+          "PL02",
+          "PL03"
+        ]
+      },
+      {
+        "id": "PL-B",
+        "title": "TVA: santé, formation, juridique, conseil",
+        "modules": [
+          "PL04",
+          "PL05",
+          "PL06",
+          "PL07"
+        ]
+      },
+      {
+        "id": "PL-C",
+        "title": "Frais mixtes et indépendants",
+        "modules": [
+          "PL08",
+          "PL09",
+          "PL10"
+        ]
+      },
+      {
+        "id": "PL-D",
+        "title": "Salaires, associés, sous-traitance",
+        "modules": [
+          "PL11",
+          "PL12"
+        ]
+      },
+      {
+        "id": "PL-E",
+        "title": "Clôture et cas final",
+        "modules": [
+          "PL13",
+          "PL14"
+        ]
+      }
+    ]
+  },
+  "it-startup": {
+    "id": "it-startup",
+    "title": "IT, agences digitales & startups",
+    "subtitle": "SaaS, abonnements, IP, revenus internationaux",
+    "color": "#3A4E5C",
+    "modulesCount": 14,
+    "priority": "P2",
+    "path": "it-startup/index.html",
+    "statusPolicy": "À produire",
+    "axes": [
+      {
+        "id": "IT-A",
+        "title": "Business model et revenus digitaux",
+        "modules": [
+          "IT01",
+          "IT02",
+          "IT03"
+        ]
+      },
+      {
+        "id": "IT-B",
+        "title": "R&D, activation, immatériels",
+        "modules": [
+          "IT04",
+          "IT05",
+          "IT06"
+        ]
+      },
+      {
+        "id": "IT-C",
+        "title": "TVA internationale et abonnements",
+        "modules": [
+          "IT07",
+          "IT08",
+          "IT09"
+        ]
+      },
+      {
+        "id": "IT-D",
+        "title": "Financement, stock-options, croissance",
+        "modules": [
+          "IT10",
+          "IT11",
+          "IT12"
+        ]
+      },
+      {
+        "id": "IT-E",
+        "title": "Clôture et cas final",
+        "modules": [
+          "IT13",
+          "IT14"
+        ]
+      }
+    ]
+  },
+  "associations": {
+    "id": "associations",
+    "title": "Associations & fondations",
+    "subtitle": "Cotisations, dons, subventions, bénévolat",
+    "color": "#4C3D5C",
+    "modulesCount": 12,
+    "priority": "P2",
+    "path": "associations/index.html",
+    "statusPolicy": "À produire",
+    "axes": [
+      {
+        "id": "AS-A",
+        "title": "Gouvernance et but non lucratif",
+        "modules": [
+          "AS01",
+          "AS02",
+          "AS03"
+        ]
+      },
+      {
+        "id": "AS-B",
+        "title": "Cotisations, dons, subventions, sponsoring",
+        "modules": [
+          "AS04",
+          "AS05",
+          "AS06"
+        ]
+      },
+      {
+        "id": "AS-C",
+        "title": "TVA, salaires, bénévolat",
+        "modules": [
+          "AS07",
+          "AS08",
+          "AS09"
+        ]
+      },
+      {
+        "id": "AS-D",
+        "title": "Contrôle interne et rapports",
+        "modules": [
+          "AS10",
+          "AS11"
+        ]
+      },
+      {
+        "id": "AS-E",
+        "title": "Cas final association",
+        "modules": [
+          "AS12"
+        ]
+      }
+    ]
+  },
+  "transport": {
+    "id": "transport",
+    "title": "Transport & logistique",
+    "subtitle": "Véhicules, carburant, chauffeurs, kilomètres",
+    "color": "#484848",
+    "modulesCount": 12,
+    "priority": "P3",
+    "path": "transport/index.html",
+    "statusPolicy": "À produire",
+    "axes": [
+      {
+        "id": "TR-A",
+        "title": "Modèles transport et logistique",
+        "modules": [
+          "TR01",
+          "TR02"
+        ]
+      },
+      {
+        "id": "TR-B",
+        "title": "Véhicules, leasing, carburant, entretien",
+        "modules": [
+          "TR03",
+          "TR04",
+          "TR05"
+        ]
+      },
+      {
+        "id": "TR-C",
+        "title": "TVA internationale et douane",
+        "modules": [
+          "TR06",
+          "TR07",
+          "TR08"
+        ]
+      },
+      {
+        "id": "TR-D",
+        "title": "Salaires, chauffeurs, assurances",
+        "modules": [
+          "TR09",
+          "TR10"
+        ]
+      },
+      {
+        "id": "TR-E",
+        "title": "Clôture et cas final",
+        "modules": [
+          "TR11",
+          "TR12"
+        ]
+      }
+    ]
+  },
+  "energie": {
+    "id": "energie",
+    "title": "Énergie & environnement",
+    "subtitle": "Installations solaires, subventions, garanties",
+    "color": "#7A6030",
+    "modulesCount": 12,
+    "priority": "P3",
+    "path": "energie/index.html",
+    "statusPolicy": "À produire",
+    "axes": [
+      {
+        "id": "EE-A",
+        "title": "Modèles énergie et environnement",
+        "modules": [
+          "EE01",
+          "EE02"
+        ]
+      },
+      {
+        "id": "EE-B",
+        "title": "Subventions, certificats, projets",
+        "modules": [
+          "EE03",
+          "EE04",
+          "EE05"
+        ]
+      },
+      {
+        "id": "EE-C",
+        "title": "TVA, investissements, immobilisations",
+        "modules": [
+          "EE06",
+          "EE07",
+          "EE08"
+        ]
+      },
+      {
+        "id": "EE-D",
+        "title": "Contrats longs et risques",
+        "modules": [
+          "EE09",
+          "EE10"
+        ]
+      },
+      {
+        "id": "EE-E",
+        "title": "Clôture et cas final",
+        "modules": [
+          "EE11",
+          "EE12"
+        ]
+      }
+    ]
+  },
+  "artisanat": {
+    "id": "artisanat",
+    "title": "Artisanat & métiers de bouche",
+    "subtitle": "Espèces, stocks périssables, pertes, petits chiffres",
+    "color": "#6B4C38",
+    "modulesCount": 12,
+    "priority": "P3",
+    "path": "artisanat/index.html",
+    "statusPolicy": "À produire",
+    "axes": [
+      {
+        "id": "AR-A",
+        "title": "Atelier, production, caisse",
+        "modules": [
+          "AR01",
+          "AR02"
+        ]
+      },
+      {
+        "id": "AR-B",
+        "title": "Stocks, matières, marge",
+        "modules": [
+          "AR03",
+          "AR04",
+          "AR05"
+        ]
+      },
+      {
+        "id": "AR-C",
+        "title": "TVA, ventes, prestations mixtes",
+        "modules": [
+          "AR06",
+          "AR07"
+        ]
+      },
+      {
+        "id": "AR-D",
+        "title": "Salaires, apprentis, assurances",
+        "modules": [
+          "AR08",
+          "AR09"
+        ]
+      },
+      {
+        "id": "AR-E",
+        "title": "Clôture et cas final",
+        "modules": [
+          "AR10",
+          "AR11",
+          "AR12"
+        ]
+      }
+    ]
+  },
+  "fiduciaire": {
+    "id": "fiduciaire",
+    "title": "Gestion interne du cabinet fiduciaire",
+    "subtitle": "Production, qualité, pricing, onboarding, revue, risques et amélioration continue",
+    "color": "#6B5430",
+    "modulesCount": 10,
+    "priority": "P4",
+    "path": "fiduciaire/index.html",
+    "statusPolicy": "À produire",
+    "axes": [
+      {
+        "id": "FI-A",
+        "title": "Organisation de production",
+        "modules": [
+          "FI01",
+          "FI02"
+        ]
+      },
+      {
+        "id": "FI-B",
+        "title": "Qualité, revue, délais",
+        "modules": [
+          "FI03",
+          "FI04",
+          "FI05"
+        ]
+      },
+      {
+        "id": "FI-C",
+        "title": "Pricing, relation client, rentabilité",
+        "modules": [
+          "FI06",
+          "FI07"
+        ]
+      },
+      {
+        "id": "FI-D",
+        "title": "Risques, sources, veille",
+        "modules": [
+          "FI08",
+          "FI09"
+        ]
+      },
+      {
+        "id": "FI-E",
+        "title": "Cas final cabinet",
+        "modules": [
+          "FI10"
+        ]
+      }
+    ]
+  }
+}

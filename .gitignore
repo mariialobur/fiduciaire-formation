@@ -1,0 +1,21 @@
+node_modules/
+.qa/
+coverage/
+dist/
+
+# Local learner progress and exports
+*progress*.json
+*progression*.json
+*backup*.json
+*sauvegarde*.json
+
+# Operating-system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Temporary office files
+~$*.docx
+~$*.xlsx
+*.tmp

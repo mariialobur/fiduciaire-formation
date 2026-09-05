@@ -1,0 +1,56 @@
+VALIDATION DE GEL — FIDUCIAIRE FORMATION v2.3
+Date: 2026-08-06
+
+APPLICATION
+- Version: 2.3
+- 12 mois affichés
+- 25 compétences cœur au plan
+- 1 module cœur publié (TC01)
+- 24 blueprints bloqués pour validation
+- 190 fichiers HTML contrôlés
+- 750 références locales contrôlées
+- 0 référence locale manquante
+- 0 erreur JavaScript dans le smoke-test
+
+TC01 v1.3
+- 16 questions
+- Réponses correctes distribuées A/B/C/D = 4/4/4/4
+- Questions critiques: Q01, Q04, Q10, Q15
+- Seuil: 14/16 (87,5 %) + 4/4 critiques
+- 6 preuves/livrables obligatoires dans l'application
+- 8 critères de revue = 100 points
+- 4 erreurs critiques bloquantes
+
+TESTS NÉGATIFS
+- 15/16 avec Q01 fausse: ÉCHEC
+- 13/16 avec toutes les critiques correctes: ÉCHEC
+- 14/16 avec toutes les critiques correctes: RÉUSSITE
+- nouvelle tentative critique échouée après réussite: réussite antérieure révoquée
+- erreur critique dans la revue pratique: validation bloquée
+- modification d'un artefact après revue: validation antérieure révoquée
+- module blueprint: validation mensuelle bloquée
+- JSON falsifié avec statuts/validatedAt/revue: validations importées rejetées
+- travail apprenant présent dans le JSON: restauré
+
+WORD / PDF / EXCEL
+- 5 documents Word rendus après la dernière modification
+- 24 pages Word rendues et inspectées visuellement
+- audit accessibilité Word: 0 high / 0 medium / 0 low sur les 5 documents
+- 8 PDF simulés conservés dans le dossier pédagogique
+- 4 classeurs Excel couvrant 16 feuilles rendues et inspectées visuellement
+- recherche d'erreurs de formule: 0 occurrence #REF!, #DIV/0!, #VALUE!, #NAME?, #N/A
+- aucune occurrence active v1.2 / ancien seuil 13/16 dans le TC01 v1.3 final
+
+REPRODUCTIBILITÉ
+- package.json présent
+- package-lock.json présent
+- jsdom 26.1.0 verrouillé
+- installation propre: npm ci OK
+- suite propre: npm test OK
+- qa-links.mjs OK
+- qa-smoke.cjs OK
+- strictJsonValidationReset: true
+
+CONCLUSION
+TC01 v1.3 et l'architecture v2.3 sont prêts pour un pilote interne supervisé.
+La formation de 12 mois complète n'est pas terminée: TC02 à TC25 restent des blueprints.

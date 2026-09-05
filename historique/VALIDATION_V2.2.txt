@@ -1,0 +1,30 @@
+VERSION ACTIVE: 2.2 — 2026-08-06
+
+QA application:
+- JavaScript: syntaxe OK
+- HTML: 190 fichiers
+- références locales contrôlées: 750; manquantes: 0
+- feuille de route: 12 mois, 25 compétences
+- maturité: 1 module cœur publié (TC01), 24 blueprints non validables
+- TC01: 16 questions, 4 critiques, réponses A/B/C/D = 4/4/4/4
+- preuves TC01: 6 références obligatoires
+- grille pratique: 8 critères = 100 points; seuil 80; 4 erreurs critiques
+- blocage d’une erreur critique pratique: OK
+- dernière tentative critique du quiz retire l’ancienne réussite: OK
+- faux statuts TC02–TC04 ne permettent pas de valider le mois 1: OK
+- modification d’une preuve retire la revue pratique dépendante: OK
+- export/import JSON v2.2: OK
+- erreurs JavaScript au smoke-test: 0
+
+QA TC01 v1.2:
+- manifest: 23/23 fichiers attendus; aucun fichier supplémentaire
+- Word: 5 documents rendus et inspectés; audit a11y high/medium/low = 0/0/0
+- feuille de réponses: 1 page imprimable
+- PDF simulés: 8/8 rendus; 1 page chacun
+- Excel: 4 classeurs; 16 feuilles rendues et inspectées
+- erreurs de formule détectées: 0
+- calendrier: date de référence fixe 09.07.2026, sans TODAY()
+- grille responsable: aucun score prérempli; feedback global >= 80 caractères
+- archive TC01: test ZIP OK
+
+Sources TC01 revues au 06.08.2026. Toute donnée légale ou procédure doit être revérifiée pour la période et le dossier réels avant usage professionnel.

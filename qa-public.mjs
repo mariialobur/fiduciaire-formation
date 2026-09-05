@@ -34,6 +34,7 @@ for (const required of [
   "index.html",
   "index-multifile.html",
   "README.md",
+  "PILOTE_MOIS_1.md",
   "data/tc01-v1.4.js",
   "data/tc02-v1.0.js",
   "data/tc03-v1.0.js",
@@ -70,13 +71,21 @@ const packages = {
       "06_Matrice_services_LBA_TC04.csv", "07_Note_escalade_TC04.md", "08_Journal_verification_TC04.csv",
       "09_Sources_et_version.md"
     ]
+  },
+  M01_PILOT: {
+    dir: "ressources/pilote-m1",
+    files: [
+      "Fiche_observation_pilote.csv",
+      "Checklist_responsable_pilote.md",
+      "DEBRIEF_MOIS_1.md"
+    ]
   }
 };
 
 for (const [code, pack] of Object.entries(packages)) {
   for (const name of pack.files) {
     const path = `${pack.dir}/${name}`;
-    if (!existsSync(join(root, path))) failures.push(`Fichier apprenant ${code} absent: ${path}`);
+    if (!existsSync(join(root, path))) failures.push(`Fichier apprenant/pilote ${code} absent: ${path}`);
   }
 }
 
@@ -86,6 +95,7 @@ const tc02 = readFileSync(join(root, "data/tc02-v1.0.js"), "utf8");
 const tc03 = readFileSync(join(root, "data/tc03-v1.0.js"), "utf8");
 const tc04 = readFileSync(join(root, "data/tc04-v1.0.js"), "utf8");
 const runtime = readFileSync(join(root, "data/runtime-enhancements.js"), "utf8");
+const pilot = readFileSync(join(root, "PILOTE_MOIS_1.md"), "utf8");
 if (!source.includes("Édition publique de démonstration")) failures.push("Statut public absent de l’application source");
 if (!built.includes("Édition publique de démonstration")) failures.push("Statut public absent de la version autonome");
 if (!built.includes('class="skip-link"')) failures.push("Lien d’évitement absent de la version autonome");
@@ -99,6 +109,8 @@ if (!tc04.includes('module.quizThresholdCount = 11')) failures.push("Seuil TC04 
 if (!tc04.includes("1er octobre 2026")) failures.push("Date de bascule TC04 absente du module");
 if (!runtime.includes("FIDUCIAIRE_MATURITY")) failures.push("Compteur dynamique de maturité absent");
 if (!runtime.includes("invalidatePersistedPracticalReview")) failures.push("Garde anti-revue pratique obsolète absente");
+if (!pilot.includes("Le pilote n’évalue pas seulement l’apprenant")) failures.push("Principe d’audit pédagogique du pilote M1 absent");
+if (!pilot.includes("Niveaux d’intervention du responsable")) failures.push("Échelle d’intervention du responsable absente du pilote M1");
 
 for (const code of ["TC01", "TC02", "TC03", "TC04"]) {
   const direct = readFileSync(join(root, `tronc-commun/${code}.html`), "utf8");
@@ -133,9 +145,11 @@ console.log(JSON.stringify({
   tc02LearnerFilesChecked: packages.TC02.files.length,
   tc03LearnerFilesChecked: packages.TC03.files.length,
   tc04LearnerFilesChecked: packages.TC04.files.length,
+  month1PilotFilesChecked: packages.M01_PILOT.files.length + 1,
   canonicalModuleRedirects: 4,
   dynamicMaturity: true,
   stalePracticalReviewGuard: true,
+  pilotObservationProtocol: true,
   trustNotice: true,
   skipLink: true
 }, null, 2));

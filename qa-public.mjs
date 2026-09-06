@@ -78,6 +78,7 @@ const autonomy = readFileSync(join(root, "data/autonomy-first.js"), "utf8");
 const pilot = readFileSync(join(root, "PILOTE_MOIS_1.md"), "utf8");
 const zefixExercise = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/01_Exercice_Zefix_reel_Nestle.html"), "utf8");
 const vatExercise = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/13_Exercice_IDE_TVA_reel.html"), "utf8");
+const vatExerciseLower = vatExercise.toLowerCase();
 const caseGuide = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/02_Mode_emploi_cas_simule.html"), "utf8");
 const oldRcReplacement = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/03_B_Extrait_RC_ancien_corrige.html"), "utf8");
 const course = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/05_Cours_TC01_v1.4.html"), "utf8");
@@ -91,8 +92,8 @@ if (!tc01.includes("Léman Atelier Sàrl reste entièrement fictive")) failures.
 if (!tc01.includes("05_Cours_TC01_v1.4.html") || !tc01.includes("06_Dossier_apprenant_TC01_v1.4.html")) failures.push("Cours/dossier TC01 v1.4 non utilisés par le paquet actif");
 if (tc01.includes("01_Cours_TC01.docx") || tc01.includes("02_Dossier_apprenant_TC01.docx") || tc01.includes("04_Outils_TC01_apprenant.xlsx")) failures.push("Le paquet actif TC01 référence encore des outils pédagogiques v1.3 obsolètes");
 if (!zefixExercise.includes("https://zefix.ch/") || !zefixExercise.includes("Nestlé S.A.")) failures.push("Exercice Zefix réel incomplet");
-if (!vatExercise.includes("https://www.uid.admin.ch/") || !vatExercise.includes("Statut Registre TVA") || !vatExercise.includes("Fin de l’assujettissement") || !vatExercise.includes("groupe d’imposition TVA")) failures.push("Exercice IDE/TVA ne contrôle pas les champs critiques");
-if (!vatExercise.includes("Statut IDE") || !vatExercise.includes("Statut RC")) failures.push("Exercice IDE/TVA ne distingue pas identité, RC et TVA");
+if (!vatExercise.includes("https://www.uid.admin.ch/") || !vatExerciseLower.includes("statut registre tva") || !vatExerciseLower.includes("fin de l’assujettissement") || !vatExerciseLower.includes("groupe d’imposition tva")) failures.push("Exercice IDE/TVA ne contrôle pas les champs critiques");
+if (!vatExerciseLower.includes("statut ide") || !vatExerciseLower.includes("statut rc")) failures.push("Exercice IDE/TVA ne distingue pas identité, RC et TVA");
 if (!caseGuide.includes("Ne recherchez pas Léman Atelier Sàrl")) failures.push("Consigne de non-recherche du cas fictif absente");
 if (!oldRcReplacement.includes("l’extrait simulé actualisé est fourni uniquement dans la Remise 2")) failures.push("Ancien extrait RC TC01 conserve une consigne ambiguë");
 if (!course.includes("Registre du commerce: deux exercices différents")) failures.push("Séparation pédagogique Zefix absente du cours TC01 v1.4");

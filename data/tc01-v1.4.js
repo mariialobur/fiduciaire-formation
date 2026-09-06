@@ -7,7 +7,39 @@
   const module = DATA.modules.TC01;
 
   module.contentVersion = "1.4";
-  module.pedagogicalStatus = "Paquet pédagogique v1.4 · module étalon pour le pilote interne · approche action d’abord, source ensuite";
+  module.pedagogicalStatus = "Paquet pédagogique v1.4 · module étalon · exercice Zefix réel séparé du cas fictif · approche action d’abord, source ensuite";
+
+  // Le paquet actif TC01 v1.4 ne renvoie plus vers l'ancien ZIP v1.3.
+  // Les documents binaires historiques restent accessibles individuellement lorsqu'ils sont encore utiles,
+  // mais les consignes corrigées et l'exercice Zefix réel sont versionnés ici.
+  module.learnerPackage = {
+    files: [
+      { label: "Lire en premier — TC01 v1.4", path: "ressources/tc01-apprenant-v1.4/00_LIRE_EN_PREMIER.txt" },
+      { label: "Exercice réel Zefix — Nestlé S.A.", path: "ressources/tc01-apprenant-v1.4/01_Exercice_Zefix_reel_Nestle.html" },
+      { label: "Fiche à compléter — Zefix réel", path: "ressources/tc01-apprenant-v1.4/04_Fiche_Zefix_reel_Nestle.csv" },
+      { label: "Mode d’emploi du cas simulé", path: "ressources/tc01-apprenant-v1.4/02_Mode_emploi_cas_simule.html" },
+      { label: "B — Extrait RC ancien corrigé v1.4", path: "ressources/tc01-apprenant-v1.4/03_B_Extrait_RC_ancien_corrige.html" },
+      { label: "Cours TC01 historique", path: "ressources/tc01-apprenant-v1.3/01_Cours_TC01.docx" },
+      { label: "Dossier apprenant historique", path: "ressources/tc01-apprenant-v1.3/02_Dossier_apprenant_TC01.docx" },
+      { label: "Outils TC01 apprenant", path: "ressources/tc01-apprenant-v1.3/04_Outils_TC01_apprenant.xlsx" },
+      { label: "A — Fiche client simulée", path: "ressources/tc01-apprenant-v1.3/Dossier_simule/01_Remise_initiale/A_Fiche_client.pdf" },
+      { label: "C — Mandat signé simulé", path: "ressources/tc01-apprenant-v1.3/Dossier_simule/01_Remise_initiale/C_Mandat_signe.pdf" },
+      { label: "D — E-mail de Marc simulé", path: "ressources/tc01-apprenant-v1.3/Dossier_simule/01_Remise_initiale/D_Email_Marc.pdf" },
+      { label: "E — Inventaire des pièces", path: "ressources/tc01-apprenant-v1.3/Dossier_simule/01_Remise_initiale/E_Inventaire_pieces.xlsx" },
+      { label: "F — Extrait RC actuel simulé", path: "ressources/tc01-apprenant-v1.3/Dossier_simule/02_Remise_apres_relance/F_Extrait_RC_actuel.pdf" },
+      { label: "G — Extrait IDE / TVA simulé", path: "ressources/tc01-apprenant-v1.3/Dossier_simule/02_Remise_apres_relance/G_Extrait_IDE_TVA.pdf" },
+      { label: "H — Délégation interne simulée", path: "ressources/tc01-apprenant-v1.3/Dossier_simule/02_Remise_apres_relance/H_Delegation_interne.pdf" },
+      { label: "I — Simulation ePortal TVA", path: "ressources/tc01-apprenant-v1.3/Dossier_simule/02_Remise_apres_relance/I_Simulation_ePortal_TVA.pdf" },
+      { label: "J — Calendrier source", path: "ressources/tc01-apprenant-v1.3/Dossier_simule/02_Remise_apres_relance/J_Calendrier_source.xlsx" },
+      { label: "Journal de vérification v1.4", path: "ressources/tc01-v1.4-complement/Journal_verification_TC01_v1.4.csv" }
+    ]
+  };
+
+  module.sections.splice(1, 0, {
+    title: "Zefix: apprendre sur une entreprise réelle, décider sur le cas simulé",
+    type: "decision",
+    bodyHtml: `<p>TC01 sépare désormais explicitement deux exercices. Pour apprendre l’outil public <strong>Zefix</strong>, l’apprenant effectue une vraie recherche sur <strong>Nestlé S.A.</strong> et relève les informations visibles le jour de la consultation. Pour le dossier métier, <strong>Léman Atelier Sàrl reste entièrement fictive</strong>: elle ne doit jamais être recherchée dans Zefix, IDE ou ePortal réel.</p><div class="callout"><strong>Pourquoi cette séparation?</strong><p>Un exercice de registre doit apprendre à naviguer dans un vrai outil et à reconnaître une entité juridique réelle. Un cas pédagogique doit au contraire rester stable et contrôlé. Mélanger les deux produit de fausses contradictions avec des entreprises réellement inscrites.</p></div><p><a href="ressources/tc01-apprenant-v1.4/01_Exercice_Zefix_reel_Nestle.html" target="_blank" rel="noopener noreferrer">Ouvrir l’exercice réel Zefix — Nestlé S.A. →</a></p>`
+  });
 
   // Le quiz doit mesurer la décision professionnelle, pas la mémorisation d'un numéro d'article.
   module.quiz[1] = {
@@ -61,7 +93,7 @@
     { id: "verification_log", label: "Journal de vérification des sources et contrôles" }
   ];
 
-  module.artifactHtml = `<div class="artifact-template"><strong>Six livrables obligatoires</strong><p>Fiche d’ouverture · calendrier · registre hors mandat · note de décision · e-mail client · journal de vérification.</p><p class="small">Le journal de vérification remplace la feuille de réponses au quiz. Il indique au minimum: contrôle effectué, source consultée, date, résultat et point à escalader. Les fichiers restent dans le dossier de preuve du cabinet; l’application conserve uniquement des références anonymisées.</p></div>`;
+  module.artifactHtml = `<div class="artifact-template"><strong>Six livrables obligatoires</strong><p>Fiche d’ouverture · calendrier · registre hors mandat · note de décision · e-mail client · journal de vérification.</p><p class="small">Le journal de vérification remplace la feuille de réponses au quiz. Il indique au minimum: contrôle effectué, source consultée, date, résultat et point à escalader. L’exercice réel Zefix sur Nestlé S.A. peut être consigné comme exercice outil, mais ses données ne doivent jamais être utilisées comme preuve du cas Léman Atelier Sàrl.</p></div>`;
 
   module.reviewRubric = [
     "Entité, pouvoirs, mandat et délégation recoupés avec source et date",
@@ -99,6 +131,9 @@
   const frequentErrors = module.sections.find((section) => section.title === "Erreurs fréquentes");
   if (frequentErrors && !String(frequentErrors.bodyHtml).includes("numéro d’article")) {
     frequentErrors.bodyHtml += `<div class="callout"><strong>À éviter en formation</strong><p>Réciter un numéro d’article sans savoir quel contrôle effectuer n’est pas une compétence. Une réponse professionnelle doit relier fait, action, source et décision.</p></div>`;
+  }
+  if (frequentErrors && !String(frequentErrors.bodyHtml).includes("société fictive")) {
+    frequentErrors.bodyHtml += `<div class="callout"><strong>Registre réel ≠ cas fictif</strong><p>Ne jamais forcer une société fictive dans un registre réel. Utiliser un exercice outil séparé sur une entité réelle connue, puis revenir aux extraits simulés du cas pédagogique.</p></div>`;
   }
 
   module.sections.push({

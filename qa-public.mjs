@@ -93,7 +93,7 @@ const vatExercise = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/13_E
 const vatExerciseLower = vatExercise.toLowerCase();
 
 if (!source.includes("Édition publique de démonstration")) failures.push("Statut public absent de l’application source");
-if (!built.includes("2.5-autonomy-first") || !built.includes("FIDUCIAIRE_BEGINNER_UX") || !built.includes("tc01_mission")) failures.push("Couches autonomie/beginner/mission absentes de la version autonome");
+if (!built.includes("2.5-autonomy-first") || !built.includes("FIDUCIAIRE_BEGINNER_UX") || !built.includes("1.6-mission")) failures.push("Couches autonomie/beginner/mission absentes de la version autonome");
 if (!built.includes("favicon.svg")) failures.push("Favicon absent de la version autonome");
 if (!built.includes('class="skip-link"')) failures.push("Lien d’évitement absent de la version autonome");
 if (!tc01.includes("Nestlé S.A.")) failures.push("Exercice Zefix réel TC01 absent de la base");

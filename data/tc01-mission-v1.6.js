@@ -5,6 +5,7 @@
   const missionPath='ressources/tc01-apprenant-v1.6/00_Mission_TC01_v1.6.html';
   const coursePath='ressources/tc01-apprenant-v1.5/01_Cours_TC01_v1.5.html';
 
+  module.contentVersion='1.6';
   module.lessonRevision='1.6-mission';
   module.pedagogicalStatus='TC01 · Mission guidée · RC/IDE approfondis au bon moment · autonomie-first';
   module.duration='35–45 min mission + pratique réelle + autocontrôle';
@@ -62,6 +63,8 @@
   module.artifactHtml=`<div class="artifact-template"><strong>2 résultats utiles</strong><p>1. Une note de dossier structurée issue de la Mission. 2. Un e-mail client clair. Les contrôles RC, IDE/TVA, mandat et échéances sont intégrés dans la note au lieu d’être recopiés dans plusieurs formulaires.</p></div>`;
 
   module.quizThresholdCount=7;
+  module.quizThreshold=87.5;
+  module.criticalQuestionIds=['Q01','Q03','Q05'];
   module.quiz=[
     {id:'Q01',critical:true,domain:'Premier réflexe',q:'Une demande TVA urgente arrive avec une demande de paie supplémentaire. Quelle est la meilleure première action?',choices:['Commencer la TVA pour gagner du temps','Confirmer toutes les demandes au client','Vérifier l’entité, le mandat et les pouvoirs avant de promettre ou transmettre','Tout envoyer immédiatement au responsable'],answer:2,explain:'Le bon réflexe est de faire d’abord les contrôles accessibles. L’autonomie ne signifie ni agir sans cadre ni escalader chaque dossier.'},
     {id:'Q02',domain:'RC / Zefix',q:'Pourquoi une marque ou une adresse e-mail ne suffit-elle pas pour identifier le dossier?',choices:['Parce que seule l’adresse postale compte','Parce qu’il faut identifier l’entité juridique exacte dans une source appropriée','Parce que les marques sont interdites en comptabilité','Parce que Zefix remplace le mandat'],answer:1,explain:'Une marque peut correspondre à plusieurs entités. Le travail comptable et les pouvoirs doivent être rattachés à l’entité juridique exacte.'},

@@ -1,13 +1,24 @@
 TC01 — NOTE DE DÉCISION
 
+À QUOI ÇA SERT ?
+Cette note résume votre raisonnement en une page. Elle permet à un collègue de comprendre rapidement:
+- ce qui est confirmé;
+- ce qui manque;
+- ce qui est inclus ou hors mandat;
+- si le dossier peut avancer maintenant.
+
+Ce n’est PAS un avis juridique et ce n’est PAS une formalité à remplir pour faire joli. Le but est d’éviter qu’une autre personne doive relire tous les e-mails et toutes les pièces pour comprendre où en est le dossier.
+
 Dossier / référence anonymisée:
 Date:
 Version: 1 / 2
 
 1. FAITS CONFIRMÉS
+Qu’est-ce que les pièces permettent d’affirmer sans supposition ?
 - 
 
 2. PIÈCES / CONTRÔLES MANQUANTS
+Qu’est-ce qui manque encore pour décider ou agir correctement ?
 - 
 
 3. PÉRIMÈTRE DU MANDAT
@@ -17,24 +28,26 @@ Inclus:
 - 
 Hors mandat:
 - 
-À escalader:
+À escalader uniquement si nécessaire:
 - 
 
 4. RISQUES / DÉPENDANCES
+Qu’est-ce qui peut bloquer, retarder ou changer la décision ?
 - 
 
 5. DÉCISION PROPOSÉE
-[ ] GO
-[ ] GO SOUS CONDITIONS
-[ ] NO-GO
+[ ] GO — le travail peut avancer dans le périmètre défini
+[ ] GO SOUS CONDITIONS — certaines actions sont possibles, mais des conditions restent ouvertes
+[ ] NO-GO — ne pas commencer l’action concernée tant qu’un blocage essentiel n’est pas résolu
 
-Motif:
+Motif en 2–5 phrases:
 
 6. ACTIONS SUIVANTES
 - Action:
-  Responsable:
+  Qui doit agir / quelle fonction:
   Échéance:
-  Preuve attendue:
+  Résultat attendu:
 
-7. POINTS À SOUMETTRE AU RESPONSABLE
+7. POINTS QUI NÉCESSITENT UN AVIS CIBLÉ, S’IL Y EN A
+Ne remplir cette partie que si une règle reste incertaine, si les pièces se contredisent ou si la décision dépasse votre délégation.
 - 

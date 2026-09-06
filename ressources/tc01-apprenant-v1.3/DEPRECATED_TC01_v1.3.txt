@@ -1,0 +1,13 @@
+ARCHIVE — TC01 v1.3
+
+Ce dossier est conservé uniquement pour historique et pour certaines pièces binaires simulées encore référencées par TC01 v1.4.
+
+NE PAS utiliser ce dossier comme paquet apprenant autonome.
+NE PAS utiliser l’ancien B_Extrait_RC_ancien.pdf pour la consigne Zefix.
+NE PAS rechercher Léman Atelier Sàrl dans un registre réel.
+
+Le parcours actif est TC01 v1.4:
+- exercice Zefix réel sur Nestlé S.A.;
+- cas Léman Atelier Sàrl entièrement simulé;
+- ancien extrait RC corrigé en HTML;
+- cours, dossier et outils v1.4 dans ../tc01-apprenant-v1.4/.

@@ -2,10 +2,10 @@ TC01 v1.4 — MODE D’EMPLOI APPRENANT
 
 Ce module utilise deux environnements distincts. Ne les mélangez jamais.
 
-1. EXERCICE RÉEL ZEFIX
-Utilisez le registre public Zefix pour apprendre l’outil sur une entreprise réelle et connue: Nestlé S.A.
-Cet exercice sert uniquement à apprendre où trouver la raison sociale exacte, la forme juridique, le siège, le statut, l’IDE/UID et les informations de signature disponibles au moment de la consultation.
-Les données doivent être relevées depuis Zefix le jour de l’exercice; elles ne sont pas figées dans le cours.
+1. EXERCICE RÉEL ZEFIX / IDE-TVA
+Utilisez les registres publics sur une entreprise réelle et connue: Nestlé S.A.
+Le but est d’apprendre où trouver la raison sociale exacte, la forme juridique, le siège, le statut, l’IDE/UID, les informations de signature et le statut TVA réellement affichés le jour de la consultation.
+Les valeurs ne sont pas figées dans le cours.
 
 2. CAS SIMULÉ LÉMAN ATELIER SÀRL
 Léman Atelier Sàrl, Nadia Favre, Marc Dubois, les numéros, extraits, accès et documents associés sont fictifs.
@@ -13,13 +13,23 @@ Ne recherchez jamais Léman Atelier Sàrl dans Zefix, IDE ou un autre registre r
 Pour le cas simulé, utilisez uniquement les documents fournis dans les deux remises.
 
 ORDRE DE TRAVAIL
-A. Faites d’abord l’exercice Zefix réel sur Nestlé S.A. afin de comprendre l’interface et les champs d’un contrôle RC.
-B. Passez ensuite au dossier simulé TC01.
-C. Remise 1: analysez les documents disponibles et conservez votre première version.
-D. Remise 2: utilisez l’extrait RC simulé actuel, l’extrait IDE/TVA simulé, la délégation et la simulation ePortal; documentez ce qui change.
-E. Enregistrez vos contrôles dans le journal de vérification.
+A. Faites l’exercice Zefix réel sur Nestlé S.A.
+B. Faites l’exercice IDE / TVA réel et vérifiez notamment le début/la fin d’assujettissement.
+C. Passez au dossier simulé TC01.
+D. Remise 1: analysez les documents disponibles et conservez votre première version.
+E. Remise 2: utilisez l’extrait RC simulé actuel, l’extrait IDE/TVA simulé, la délégation et la simulation ePortal; documentez ce qui change.
+F. Complétez les 5 livrables utiles et faites votre autocontrôle.
+
+PAS DE DOUBLE SAISIE
+Il n’y a plus de journal de vérification séparé. Lorsque vous contrôlez une source, inscrivez la source, la date et la conclusion directement dans le document où cette vérification est utile.
+
+SI UN TERME OU UN DOCUMENT N’EST PAS CLAIR
+- ouvrez le Glossaire fiduciaire débutant;
+- ouvrez le Guide des 5 livrables;
+- utilisez les fiches Excel: elles contiennent maintenant une colonne d’explication «ce que cela veut dire / pourquoi je le regarde».
 
 IMPORTANT
-L’ancien paquet ZIP TC01 v1.3 est retiré du parcours actif. Il contenait un fichier Markdown que certains postes Windows associaient à tort à Windows Media Player et une instruction ambiguë pouvant laisser croire qu’il fallait rechercher la société fictive dans Zefix.
+Les anciens CSV ont été remplacés par de vrais fichiers Excel (.xlsx) afin qu’ils s’ouvrent correctement dans Excel avec les accents et les colonnes déjà structurées.
+L’ancien paquet ZIP TC01 v1.3 est retiré du parcours actif.
 
 Aucune donnée client réelle ne doit être saisie dans la plateforme publique.

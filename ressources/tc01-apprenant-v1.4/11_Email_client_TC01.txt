@@ -1,3 +1,10 @@
+TC01 — MODÈLE D’E-MAIL CLIENT
+
+À QUOI ÇA SERT ?
+Transformer vos contrôles internes en une demande simple pour le client: quelles pièces ou confirmations manquent, ce qui peut déjà avancer et ce qui nécessite encore une validation.
+
+Ne copiez pas toute votre analyse interne dans l’e-mail. Le client doit recevoir une demande claire et actionnable, pas vos hésitations de travail.
+
 Objet: Dossier — éléments à confirmer avant poursuite
 
 Bonjour,
@@ -15,7 +22,7 @@ Pour pouvoir poursuivre le traitement dans le périmètre convenu, il nous manqu
 Les éléments suivants ne sont pas inclus ou nécessitent une validation préalable:
 - 
 
-Dès réception / confirmation des éléments ci-dessus, le dossier pourra être soumis au circuit de revue prévu.
+Dès réception / confirmation des éléments ci-dessus, le dossier pourra avancer selon le circuit prévu.
 
 Meilleures salutations,
 

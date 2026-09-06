@@ -25,9 +25,10 @@ const forbiddenPathPatterns = [
 for (const path of files) if (forbiddenPathPatterns.some((pattern) => pattern.test(path))) failures.push(`Chemin privé publié: ${path}`);
 
 for (const required of [
-  ".nojekyll", "index.html", "index-multifile.html", "README.md", "PILOTE_MOIS_1.md",
+  ".nojekyll", "index.html", "index-multifile.html", "README.md", "PILOTE_MOIS_1.md", "favicon.svg",
   "data/tc01-v1.4.js", "data/tc02-v1.0.js", "data/tc03-v1.0.js", "data/tc04-v1.0.js",
-  "data/runtime-enhancements.js", "data/autonomy-first.js"
+  "data/runtime-enhancements.js", "data/autonomy-first.js", "data/beginner-ux.js",
+  "ressources/Glossaire_fiduciaire_debutant.html"
 ]) {
   if (!existsSync(join(root, required))) failures.push(`Fichier public requis absent: ${required}`);
 }
@@ -37,10 +38,10 @@ const packages = {
     dir: "ressources/tc01-apprenant-v1.4",
     files: [
       "00_LIRE_EN_PREMIER.txt", "01_Exercice_Zefix_reel_Nestle.html", "02_Mode_emploi_cas_simule.html",
-      "03_B_Extrait_RC_ancien_corrige.html", "04_Fiche_Zefix_reel_Nestle.csv", "05_Cours_TC01_v1.4.html",
-      "06_Dossier_apprenant_TC01_v1.4.html", "07_Fiche_ouverture_TC01.csv", "08_Calendrier_TC01.csv",
-      "09_Registre_hors_mandat_TC01.csv", "10_Note_decision_TC01.txt", "11_Email_client_TC01.txt",
-      "12_Journal_verification_TC01.csv", "13_Exercice_IDE_TVA_reel.html", "14_Fiche_IDE_TVA_reel.csv"
+      "03_B_Extrait_RC_ancien_corrige.html", "04_Fiche_Zefix_reel_Nestle.xlsx", "05_Cours_TC01_v1.4.html",
+      "06_Dossier_apprenant_TC01_v1.4.html", "07_Fiche_ouverture_TC01.xlsx", "08_Calendrier_TC01.xlsx",
+      "09_Registre_hors_mandat_TC01.xlsx", "10_Note_decision_TC01.txt", "11_Email_client_TC01.txt",
+      "13_Exercice_IDE_TVA_reel.html", "14_Fiche_IDE_TVA_reel.xlsx", "15_Guide_des_livrables_TC01.html"
     ]
   },
   TC02: {
@@ -64,8 +65,18 @@ for (const [code, pack] of Object.entries(packages)) {
   }
 }
 
-if (existsSync(join(root, "ressources/tc01-apprenant-v1.3.zip"))) failures.push("Ancien ZIP TC01 v1.3 encore publié dans le parcours actif");
-if (existsSync(join(root, "ressources/tc01-apprenant-v1.3/Dossier_simule/00_Protocole_de_remise.md"))) failures.push("Protocole de remise destiné au responsable encore présent dans le paquet apprenant TC01");
+for (const removed of [
+  "ressources/tc01-apprenant-v1.3.zip",
+  "ressources/tc01-apprenant-v1.3/Dossier_simule/00_Protocole_de_remise.md",
+  "ressources/tc01-apprenant-v1.4/04_Fiche_Zefix_reel_Nestle.csv",
+  "ressources/tc01-apprenant-v1.4/07_Fiche_ouverture_TC01.csv",
+  "ressources/tc01-apprenant-v1.4/08_Calendrier_TC01.csv",
+  "ressources/tc01-apprenant-v1.4/09_Registre_hors_mandat_TC01.csv",
+  "ressources/tc01-apprenant-v1.4/12_Journal_verification_TC01.csv",
+  "ressources/tc01-apprenant-v1.4/14_Fiche_IDE_TVA_reel.csv"
+]) {
+  if (existsSync(join(root, removed))) failures.push(`Ancien fichier TC01 encore publié: ${removed}`);
+}
 
 const source = readFileSync(join(root, "app.js"), "utf8");
 const built = readFileSync(join(root, "index.html"), "utf8");
@@ -75,6 +86,8 @@ const tc03 = readFileSync(join(root, "data/tc03-v1.0.js"), "utf8");
 const tc04 = readFileSync(join(root, "data/tc04-v1.0.js"), "utf8");
 const runtime = readFileSync(join(root, "data/runtime-enhancements.js"), "utf8");
 const autonomy = readFileSync(join(root, "data/autonomy-first.js"), "utf8");
+const beginner = readFileSync(join(root, "data/beginner-ux.js"), "utf8");
+const glossary = readFileSync(join(root, "ressources/Glossaire_fiduciaire_debutant.html"), "utf8");
 const pilot = readFileSync(join(root, "PILOTE_MOIS_1.md"), "utf8");
 const zefixExercise = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/01_Exercice_Zefix_reel_Nestle.html"), "utf8");
 const vatExercise = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/13_Exercice_IDE_TVA_reel.html"), "utf8");
@@ -83,28 +96,34 @@ const caseGuide = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/02_Mod
 const oldRcReplacement = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/03_B_Extrait_RC_ancien_corrige.html"), "utf8");
 const course = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/05_Cours_TC01_v1.4.html"), "utf8");
 const dossier = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/06_Dossier_apprenant_TC01_v1.4.html"), "utf8");
+const deliverablesGuide = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/15_Guide_des_livrables_TC01.html"), "utf8");
 
 if (!source.includes("Édition publique de démonstration")) failures.push("Statut public absent de l’application source");
-if (!built.includes("data/autonomy-first") && !built.includes("2.5-autonomy-first")) failures.push("Couche autonomy-first absente de la version autonome");
+if (!built.includes("2.5-autonomy-first") || !built.includes("FIDUCIAIRE_BEGINNER_UX")) failures.push("Couches autonomie/beginner absentes de la version autonome");
+if (!built.includes("favicon.svg")) failures.push("Favicon absent de la version autonome");
 if (!built.includes('class="skip-link"')) failures.push("Lien d’évitement absent de la version autonome");
 if (!tc01.includes("Nestlé S.A.")) failures.push("Exercice Zefix réel TC01 absent du module actif");
 if (!tc01.includes("Léman Atelier Sàrl reste entièrement fictive")) failures.push("Séparation registre réel / cas fictif absente de TC01");
 if (!tc01.includes("05_Cours_TC01_v1.4.html") || !tc01.includes("06_Dossier_apprenant_TC01_v1.4.html")) failures.push("Cours/dossier TC01 v1.4 non utilisés par le paquet actif");
 if (tc01.includes("01_Cours_TC01.docx") || tc01.includes("02_Dossier_apprenant_TC01.docx") || tc01.includes("04_Outils_TC01_apprenant.xlsx")) failures.push("Le paquet actif TC01 référence encore des outils pédagogiques v1.3 obsolètes");
 if (!zefixExercise.includes("https://zefix.ch/") || !zefixExercise.includes("Nestlé S.A.")) failures.push("Exercice Zefix réel incomplet");
+if (!zefixExercise.includes("data-tip=") || !zefixExercise.includes("04_Fiche_Zefix_reel_Nestle.xlsx")) failures.push("Aide contextuelle ou fiche Excel Zefix absente");
 if (!vatExercise.includes("https://www.uid.admin.ch/") || !vatExerciseLower.includes("statut registre tva") || !vatExerciseLower.includes("fin de l’assujettissement") || !vatExerciseLower.includes("groupe d’imposition tva")) failures.push("Exercice IDE/TVA ne contrôle pas les champs critiques");
-if (!vatExerciseLower.includes("statut ide") || !vatExerciseLower.includes("statut rc")) failures.push("Exercice IDE/TVA ne distingue pas identité, RC et TVA");
+if (!vatExerciseLower.includes("statut ide") || !vatExerciseLower.includes("statut rc") || !vatExercise.includes("14_Fiche_IDE_TVA_reel.xlsx")) failures.push("Exercice IDE/TVA ne distingue pas identité, RC et TVA avec fiche Excel");
 if (!caseGuide.includes("Ne recherchez pas Léman Atelier Sàrl")) failures.push("Consigne de non-recherche du cas fictif absente");
 if (!oldRcReplacement.includes("l’extrait simulé actualisé est fourni uniquement dans la Remise 2")) failures.push("Ancien extrait RC TC01 conserve une consigne ambiguë");
-if (!course.includes("Registre du commerce: deux exercices différents")) failures.push("Séparation pédagogique Zefix absente du cours TC01 v1.4");
-if (!dossier.includes("Nestlé S.A.")) failures.push("Dossier apprenant TC01 ne rappelle pas l’exercice Zefix séparé");
+if (!course.includes("Cinq livrables utiles") || !course.includes("Il n’y a plus de journal de vérification séparé")) failures.push("Cours TC01 n’intègre pas la simplification des livrables");
+if (!dossier.includes("5 livrables finaux") || !dossier.includes("Pas de journal séparé")) failures.push("Dossier apprenant TC01 conserve la double saisie");
+if (!deliverablesGuide.includes("À quoi servent les 5 livrables") || !deliverablesGuide.includes("Note de décision")) failures.push("Guide des livrables débutant incomplet");
+if (!glossary.includes("IDE / UID") || !glossary.includes("Note de décision") || !glossary.includes("Assujettissement TVA")) failures.push("Glossaire débutant incomplet");
 
 if (!autonomy.includes("Aucun fichier n’est envoyé au site")) failures.push("Workflow sans faux upload absent");
 if (!autonomy.includes("Autocontrôle guidé")) failures.push("Autocontrôle guidé absent");
 if (!autonomy.includes("Revue humaine ciblée")) failures.push("Principe de revue humaine ciblée absent");
-if (!autonomy.includes("saveAutonomyCheck")) failures.push("Sauvegarde de l’autocontrôle absente");
-if (!autonomy.includes("toggleEvidenceCompletion")) failures.push("Marquage des livrables terminé absent");
-if (!autonomy.includes("13_Exercice_IDE_TVA_reel.html")) failures.push("Exercice TVA réel non rattaché au TC01");
+if (!beginner.includes('item.id !== "verification_log"')) failures.push("Journal de vérification TC01 non supprimé du runtime actif");
+if (!beginner.includes("07_Fiche_ouverture_TC01.xlsx") || !beginner.includes("14_Fiche_IDE_TVA_reel.xlsx")) failures.push("Templates XLSX TC01 non reliés au runtime actif");
+if (!beginner.includes("Glossaire") || !beginner.includes("term-help")) failures.push("Glossaire ou infobulles débutant absents");
+if (!beginner.includes('["Importer", "Exporter"]')) failures.push("Importer/Exporter restent dans la navigation principale");
 if (!runtime.includes("autonomyMode")) failures.push("Runtime ne respecte pas le mode autonomie");
 
 if (!tc02.includes('module.status = "core"')) failures.push("TC02 n’est pas promu au statut cœur");
@@ -134,6 +153,11 @@ console.log(JSON.stringify({
   tc01LearnerFilesChecked: packages.TC01.files.length,
   tc01RealRegistryExercise: "Nestlé S.A.",
   tc01RealVatExercise: true,
+  tc01XlsxTemplates: 5,
+  tc01DuplicateJournalRemoved: true,
+  beginnerGlossary: true,
+  contextualTooltips: true,
+  favicon: true,
   autonomyFirst: true,
   falseUploadRemoved: true,
   targetedHumanReview: true,

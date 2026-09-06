@@ -1,0 +1,40 @@
+TC01 — NOTE DE DÉCISION
+
+Dossier / référence anonymisée:
+Date:
+Version: 1 / 2
+
+1. FAITS CONFIRMÉS
+- 
+
+2. PIÈCES / CONTRÔLES MANQUANTS
+- 
+
+3. PÉRIMÈTRE DU MANDAT
+Inclus:
+- 
+À confirmer:
+- 
+Hors mandat:
+- 
+À escalader:
+- 
+
+4. RISQUES / DÉPENDANCES
+- 
+
+5. DÉCISION PROPOSÉE
+[ ] GO
+[ ] GO SOUS CONDITIONS
+[ ] NO-GO
+
+Motif:
+
+6. ACTIONS SUIVANTES
+- Action:
+  Responsable:
+  Échéance:
+  Preuve attendue:
+
+7. POINTS À SOUMETTRE AU RESPONSABLE
+- 

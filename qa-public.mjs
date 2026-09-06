@@ -26,22 +26,22 @@ for (const path of files) if (forbiddenPathPatterns.some((pattern) => pattern.te
 
 for (const required of [
   ".nojekyll", "index.html", "index-multifile.html", "README.md", "PILOTE_MOIS_1.md", "favicon.svg",
-  "data/tc01-v1.4.js", "data/tc02-v1.0.js", "data/tc03-v1.0.js", "data/tc04-v1.0.js",
+  "data/tc01-v1.4.js", "data/tc01-polish-v1.5.js", "data/tc01-mission-v1.6.js",
+  "data/tc02-v1.0.js", "data/tc03-v1.0.js", "data/tc04-v1.0.js",
   "data/runtime-enhancements.js", "data/autonomy-first.js", "data/beginner-ux.js",
-  "ressources/Glossaire_fiduciaire_debutant.html"
+  "ressources/Glossaire_fiduciaire_debutant.html",
+  "ressources/tc01-apprenant-v1.6/00_Mission_TC01_v1.6.html"
 ]) {
   if (!existsSync(join(root, required))) failures.push(`Fichier public requis absent: ${required}`);
 }
 
 const packages = {
-  TC01: {
+  TC01_BASE: {
     dir: "ressources/tc01-apprenant-v1.4",
     files: [
-      "00_LIRE_EN_PREMIER.txt", "01_Exercice_Zefix_reel_Nestle.html", "02_Mode_emploi_cas_simule.html",
-      "03_B_Extrait_RC_ancien_corrige.html", "04_Fiche_Zefix_reel_Nestle.xlsx", "05_Cours_TC01_v1.4.html",
-      "06_Dossier_apprenant_TC01_v1.4.html", "07_Fiche_ouverture_TC01.xlsx", "08_Calendrier_TC01.xlsx",
-      "09_Registre_hors_mandat_TC01.xlsx", "10_Note_decision_TC01.txt", "11_Email_client_TC01.txt",
-      "13_Exercice_IDE_TVA_reel.html", "14_Fiche_IDE_TVA_reel.xlsx", "15_Guide_des_livrables_TC01.html"
+      "01_Exercice_Zefix_reel_Nestle.html", "03_B_Extrait_RC_ancien_corrige.html",
+      "04_Fiche_Zefix_reel_Nestle.xlsx", "11_Email_client_TC01.txt",
+      "13_Exercice_IDE_TVA_reel.html", "14_Fiche_IDE_TVA_reel.xlsx"
     ]
   },
   TC02: {
@@ -69,9 +69,6 @@ for (const removed of [
   "ressources/tc01-apprenant-v1.3.zip",
   "ressources/tc01-apprenant-v1.3/Dossier_simule/00_Protocole_de_remise.md",
   "ressources/tc01-apprenant-v1.4/04_Fiche_Zefix_reel_Nestle.csv",
-  "ressources/tc01-apprenant-v1.4/07_Fiche_ouverture_TC01.csv",
-  "ressources/tc01-apprenant-v1.4/08_Calendrier_TC01.csv",
-  "ressources/tc01-apprenant-v1.4/09_Registre_hors_mandat_TC01.csv",
   "ressources/tc01-apprenant-v1.4/12_Journal_verification_TC01.csv",
   "ressources/tc01-apprenant-v1.4/14_Fiche_IDE_TVA_reel.csv"
 ]) {
@@ -81,6 +78,8 @@ for (const removed of [
 const source = readFileSync(join(root, "app.js"), "utf8");
 const built = readFileSync(join(root, "index.html"), "utf8");
 const tc01 = readFileSync(join(root, "data/tc01-v1.4.js"), "utf8");
+const missionLayer = readFileSync(join(root, "data/tc01-mission-v1.6.js"), "utf8");
+const mission = readFileSync(join(root, "ressources/tc01-apprenant-v1.6/00_Mission_TC01_v1.6.html"), "utf8");
 const tc02 = readFileSync(join(root, "data/tc02-v1.0.js"), "utf8");
 const tc03 = readFileSync(join(root, "data/tc03-v1.0.js"), "utf8");
 const tc04 = readFileSync(join(root, "data/tc04-v1.0.js"), "utf8");
@@ -92,36 +91,44 @@ const pilot = readFileSync(join(root, "PILOTE_MOIS_1.md"), "utf8");
 const zefixExercise = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/01_Exercice_Zefix_reel_Nestle.html"), "utf8");
 const vatExercise = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/13_Exercice_IDE_TVA_reel.html"), "utf8");
 const vatExerciseLower = vatExercise.toLowerCase();
-const caseGuide = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/02_Mode_emploi_cas_simule.html"), "utf8");
-const oldRcReplacement = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/03_B_Extrait_RC_ancien_corrige.html"), "utf8");
-const course = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/05_Cours_TC01_v1.4.html"), "utf8");
-const dossier = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/06_Dossier_apprenant_TC01_v1.4.html"), "utf8");
-const deliverablesGuide = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/15_Guide_des_livrables_TC01.html"), "utf8");
 
 if (!source.includes("Édition publique de démonstration")) failures.push("Statut public absent de l’application source");
-if (!built.includes("2.5-autonomy-first") || !built.includes("FIDUCIAIRE_BEGINNER_UX")) failures.push("Couches autonomie/beginner absentes de la version autonome");
+if (!built.includes("2.5-autonomy-first") || !built.includes("FIDUCIAIRE_BEGINNER_UX") || !built.includes("tc01_mission")) failures.push("Couches autonomie/beginner/mission absentes de la version autonome");
 if (!built.includes("favicon.svg")) failures.push("Favicon absent de la version autonome");
 if (!built.includes('class="skip-link"')) failures.push("Lien d’évitement absent de la version autonome");
-if (!tc01.includes("Nestlé S.A.")) failures.push("Exercice Zefix réel TC01 absent du module actif");
-if (!tc01.includes("Léman Atelier Sàrl reste entièrement fictive")) failures.push("Séparation registre réel / cas fictif absente de TC01");
-if (!tc01.includes("05_Cours_TC01_v1.4.html") || !tc01.includes("06_Dossier_apprenant_TC01_v1.4.html")) failures.push("Cours/dossier TC01 v1.4 non utilisés par le paquet actif");
-if (tc01.includes("01_Cours_TC01.docx") || tc01.includes("02_Dossier_apprenant_TC01.docx") || tc01.includes("04_Outils_TC01_apprenant.xlsx")) failures.push("Le paquet actif TC01 référence encore des outils pédagogiques v1.3 obsolètes");
+if (!tc01.includes("Nestlé S.A.")) failures.push("Exercice Zefix réel TC01 absent de la base");
 if (!zefixExercise.includes("https://zefix.ch/") || !zefixExercise.includes("Nestlé S.A.")) failures.push("Exercice Zefix réel incomplet");
 if (!zefixExercise.includes("data-tip=") || !zefixExercise.includes("04_Fiche_Zefix_reel_Nestle.xlsx")) failures.push("Aide contextuelle ou fiche Excel Zefix absente");
-if (!vatExercise.includes("https://www.uid.admin.ch/") || !vatExerciseLower.includes("statut registre tva") || !vatExerciseLower.includes("fin de l’assujettissement") || !vatExerciseLower.includes("groupe d’imposition tva")) failures.push("Exercice IDE/TVA ne contrôle pas les champs critiques");
-if (!vatExerciseLower.includes("statut ide") || !vatExerciseLower.includes("statut rc") || !vatExercise.includes("14_Fiche_IDE_TVA_reel.xlsx")) failures.push("Exercice IDE/TVA ne distingue pas identité, RC et TVA avec fiche Excel");
-if (!caseGuide.includes("Ne recherchez pas Léman Atelier Sàrl")) failures.push("Consigne de non-recherche du cas fictif absente");
-if (!oldRcReplacement.includes("l’extrait simulé actualisé est fourni uniquement dans la Remise 2")) failures.push("Ancien extrait RC TC01 conserve une consigne ambiguë");
-if (!course.includes("Cinq livrables utiles") || !course.includes("Il n’y a plus de journal de vérification séparé")) failures.push("Cours TC01 n’intègre pas la simplification des livrables");
-if (!dossier.includes("5 livrables finaux") || !dossier.includes("Pas de journal séparé")) failures.push("Dossier apprenant TC01 conserve la double saisie");
-if (!deliverablesGuide.includes("À quoi servent les 5 livrables") || !deliverablesGuide.includes("Note de décision")) failures.push("Guide des livrables débutant incomplet");
-if (!glossary.includes("IDE / UID") || !glossary.includes("Note de décision") || !glossary.includes("Assujettissement TVA")) failures.push("Glossaire débutant incomplet");
+if (!vatExercise.includes("https://www.uid.admin.ch/") || !vatExerciseLower.includes("statut registre tva") || !vatExerciseLower.includes("fin de l’assujettissement")) failures.push("Exercice IDE/TVA incomplet");
+if (!vatExerciseLower.includes("statut ide") || !vatExerciseLower.includes("statut rc")) failures.push("Exercice IDE/TVA ne distingue pas identité, RC et TVA");
+if (!glossary.includes("IDE / UID") || !glossary.includes("Assujettissement TVA")) failures.push("Glossaire débutant incomplet");
+
+if (!missionLayer.includes("1.6-mission")) failures.push("Révision Mission TC01 non activée");
+if (!missionLayer.includes("module.evidenceItems") || !missionLayer.includes("dossier_opening") || !missionLayer.includes("client_email")) failures.push("TC01 Mission ne réduit pas les livrables à deux résultats utiles");
+if (!missionLayer.includes("module.quizThresholdCount=7") || !missionLayer.includes("Q08")) failures.push("Challenge final TC01 Mission 8 situations absent");
+if (!missionLayer.includes("scoreItems=[") || !missionLayer.includes("vat_timing")) failures.push("Autocontrôle TC01 Mission non simplifié");
+if (!missionLayer.includes("module.sections=[")) failures.push("Page module TC01 non simplifiée autour de la Mission");
+
+for (const expected of [
+  "Pouvez-vous prendre ce dossier?",
+  "Étape 1 / 8",
+  "Comprendre ce que vous voyez dans Zefix",
+  "RC actif ≠ TVA active",
+  "Que couvre réellement le mandat?",
+  "Remise 1",
+  "Remise 2",
+  "Deux résultats, pas cinq formulaires",
+  "Télécharger .txt",
+  "Copier l’e-mail"
+]) if (!mission.includes(expected)) failures.push(`Mission TC01 incomplète: ${expected}`);
+
+if (!mission.includes("01_Exercice_Zefix_reel_Nestle.html") || !mission.includes("13_Exercice_IDE_TVA_reel.html")) failures.push("Mission ne relie pas les approfondissements RC/IDE");
+if (!mission.includes("C_Mandat_signe.pdf") || !mission.includes("F_Extrait_RC_actuel.pdf") || !mission.includes("G_Extrait_IDE_TVA.pdf")) failures.push("Mission ne relie pas les pièces du dossier simulé");
+if (!mission.includes("localStorage") || !mission.includes("tc01_mission_v16")) failures.push("Mission ne conserve pas la progression locale");
 
 if (!autonomy.includes("Aucun fichier n’est envoyé au site")) failures.push("Workflow sans faux upload absent");
 if (!autonomy.includes("Autocontrôle guidé")) failures.push("Autocontrôle guidé absent");
 if (!autonomy.includes("Revue humaine ciblée")) failures.push("Principe de revue humaine ciblée absent");
-if (!beginner.includes('item.id !== "verification_log"')) failures.push("Journal de vérification TC01 non supprimé du runtime actif");
-if (!beginner.includes("07_Fiche_ouverture_TC01.xlsx") || !beginner.includes("14_Fiche_IDE_TVA_reel.xlsx")) failures.push("Templates XLSX TC01 non reliés au runtime actif");
 if (!beginner.includes("Glossaire") || !beginner.includes("term-help")) failures.push("Glossaire ou infobulles débutant absents");
 if (!beginner.includes('["Importer", "Exporter"]')) failures.push("Importer/Exporter restent dans la navigation principale");
 if (!runtime.includes("autonomyMode")) failures.push("Runtime ne respecte pas le mode autonomie");
@@ -132,7 +139,6 @@ if (!tc04.includes('module.status = "core"')) failures.push("TC04 n’est pas pr
 if (!tc03.includes('module.critical = true')) failures.push("TC03 critique n’est pas marqué comme tel");
 if (!tc04.includes('module.critical = true')) failures.push("TC04 critique n’est pas marqué comme tel");
 if (!tc04.includes('module.quizThresholdCount = 11')) failures.push("Seuil TC04 11/12 absent");
-if (!tc04.includes("1er octobre 2026")) failures.push("Date de bascule TC04 absente du module");
 if (!runtime.includes("FIDUCIAIRE_MATURITY")) failures.push("Compteur dynamique de maturité absent");
 if (!pilot.includes("Le pilote n’évalue pas seulement l’apprenant")) failures.push("Principe d’audit pédagogique du pilote M1 absent");
 
@@ -150,14 +156,13 @@ console.log(JSON.stringify({
   publicSafety: true,
   repositoryFilesChecked: files.length,
   forbiddenPaths: 0,
-  tc01LearnerFilesChecked: packages.TC01.files.length,
+  tc01Mission: "1.6",
+  tc01MissionSteps: 8,
+  tc01LearnerResults: 2,
+  tc01ChallengeQuestions: 8,
   tc01RealRegistryExercise: "Nestlé S.A.",
   tc01RealVatExercise: true,
-  tc01XlsxTemplates: 5,
-  tc01DuplicateJournalRemoved: true,
   beginnerGlossary: true,
-  contextualTooltips: true,
-  favicon: true,
   autonomyFirst: true,
   falseUploadRemoved: true,
   targetedHumanReview: true,

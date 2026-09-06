@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102f3c">
+<title>Mission TC01 — Pouvez-vous prendre ce dossier?</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<style>
+:root{--navy:#102f3c;--teal:#0d6f69;--cream:#f7f4ec;--line:#d9e0e2;--green:#edf7f1;--orange:#fff3ef;--red:#fff1f0;--text:#183744;--muted:#60747b;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);font-family:Inter,Arial,sans-serif;color:var(--text);line-height:1.55}.wrap{max-width:1080px;margin:auto;padding:22px}.hero{background:linear-gradient(135deg,#102f3c,#17495a);color:#fff;border-radius:24px;padding:28px 30px;box-shadow:0 16px 40px rgba(16,47,60,.16)}.eyebrow{display:inline-block;background:rgba(255,255,255,.12);padding:5px 10px;border-radius:999px;font-size:.8rem;font-weight:800;letter-spacing:.04em}.hero h1{font-size:clamp(1.8rem,4vw,3rem);margin:.6rem 0}.hero p{max-width:780px;color:#dce9eb}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.meta span{border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 10px;font-size:.88rem}.progress{margin:18px 0 0;height:9px;background:rgba(255,255,255,.15);border-radius:999px;overflow:hidden}.progress>i{display:block;height:100%;width:12.5%;background:#76c5b8;transition:.25s}.step{display:none;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;margin-top:18px;box-shadow:0 8px 24px rgba(16,47,60,.06)}.step.active{display:block}.step h2{color:var(--navy);margin-top:0}.mail{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:18px 0}.mail-head{background:#f2f6f6;padding:12px 15px;font-size:.92rem}.mail-body{padding:18px}.choices{display:grid;gap:10px;margin:16px 0}.choice{border:1px solid var(--line);background:#fff;border-radius:12px;padding:14px 16px;text-align:left;font:inherit;color:var(--text);cursor:pointer}.choice:hover,.choice:focus{border-color:var(--teal);outline:none}.choice.good{background:var(--green);border-color:#8bc5ae}.choice.bad{background:var(--red);border-color:#e7a29d}.feedback{display:none;border-radius:12px;padding:14px 16px;margin:12px 0}.feedback.show{display:block}.feedback.good{background:var(--green);border-left:5px solid #2e7957}.feedback.bad{background:var(--red);border-left:5px solid #b42318}.toolbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:16px 0}.tool{border:1px solid var(--line);border-radius:14px;padding:16px}.tool strong{color:var(--navy)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--navy);color:#fff;text-decoration:none;border:0;border-radius:10px;padding:11px 16px;font-weight:800;cursor:pointer}.btn.secondary{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn.teal{background:var(--teal)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.tip{background:#eef5f8;border-left:5px solid #3b7185;border-radius:10px;padding:14px 16px;margin:16px 0}.warn{background:var(--orange);border-left:5px solid #d86d50;border-radius:10px;padding:14px 16px;margin:16px 0}.critical{background:var(--red);border-left:5px solid #b42318;border-radius:10px;padding:14px 16px;margin:16px 0}.success{background:var(--green);border-left:5px solid #2e7957;border-radius:10px;padding:14px 16px;margin:16px 0}.mini{font-size:.9rem;color:var(--muted)}details{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:12px 0;background:#fbfcfc}summary{font-weight:800;color:var(--navy);cursor:pointer}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:14px;padding:15px}.card h3{margin:.1rem 0 .5rem;color:var(--navy)}.classify{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:6px;align-items:center;margin:14px 0}.classify>*{padding:8px}.classify .head{font-size:.8rem;font-weight:800;color:var(--muted)}.classify label{font-size:.88rem;text-align:center}.classify input{display:block;margin:0 auto 4px}.docs{display:flex;gap:8px;flex-wrap:wrap}.docs a{background:#f2f6f6;border:1px solid var(--line);border-radius:9px;padding:8px 10px;text-decoration:none;color:var(--navy);font-weight:700}.changed{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.changed .card select{width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;margin-top:8px}.work{display:grid;grid-template-columns:1fr 1fr;gap:14px}.work textarea,.work input,.decision-box textarea,.decision-box select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px;font:inherit}.work textarea{min-height:240px}.decision-box{border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0}.decision-box textarea{min-height:90px;margin-top:8px}.statusline{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.pill{background:#f2f6f6;border-radius:999px;padding:5px 9px;font-size:.82rem}.topnav{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:14px 0}.stepcount{font-weight:800;color:var(--teal)}.gloss{font-size:.9rem;color:var(--muted)}.gloss a{color:var(--teal);font-weight:700}.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.final-grid .card{background:#fbfcfc}@media(max-width:760px){.wrap{padding:10px}.hero,.step{padding:20px}.classify{grid-template-columns:1fr}.classify .head{display:none}.classify label{text-align:left;display:flex;gap:8px}.classify input{margin:3px 0}.work,.final-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><div class="wrap">
+<section class="hero">
+  <span class="eyebrow">MISSION 01 · PREMIER DOSSIER</span>
+  <h1>Pouvez-vous prendre ce dossier?</h1>
+  <p>Un client demande une TVA urgente et ajoute une tâche qui n’était peut-être pas prévue. Votre mission: décider jusqu’où vous pouvez avancer sans inventer, sans bloquer inutilement le dossier et sans appeler un responsable pour chaque détail.</p>
+  <div class="meta"><span>⏱ 35–45 min</span><span>🧭 autonomie guidée</span><span>🔎 Zefix + IDE/TVA réels</span><span>📁 dossier simulé</span></div>
+  <div class="progress" aria-label="Progression"><i id="bar"></i></div>
+</section>
+<div class="topnav"><span class="stepcount" id="stepCount">Étape 1 / 8</span><span class="gloss">Un terme inconnu? <a href="../Glossaire_fiduciaire_debutant.html" target="_blank" rel="noopener noreferrer">Glossaire ↗</a></span></div>
+
+<section class="step active" data-step="1">
+  <h2>📨 08:42 — Une demande urgente arrive</h2>
+  <div class="mail"><div class="mail-head"><strong>De:</strong> Marc Dubois · Léman Atelier Sàrl<br><strong>Objet:</strong> TVA urgente</div><div class="mail-body">Bonjour,<br><br>Pouvez-vous déposer notre TVA rapidement? Et merci de préparer aussi les salaires ce mois-ci. Je peux vous envoyer mon mot de passe ePortal si nécessaire.<br><br>Merci,<br>Marc</div></div>
+  <p><strong>Votre première décision?</strong></p>
+  <div class="choices" data-quiz="first">
+    <button class="choice" data-value="a">A. Je commence immédiatement le décompte TVA.</button>
+    <button class="choice" data-value="b">B. Je confirme au client que TVA et salaires seront faits.</button>
+    <button class="choice" data-value="c">C. Je vérifie d’abord l’entité, le mandat et les pouvoirs avant de promettre ou transmettre quoi que ce soit.</button>
+    <button class="choice" data-value="d">D. Je transfère directement tout au responsable.</button>
+  </div>
+  <div class="feedback good" data-feedback="c"><strong>Oui.</strong> Le bon réflexe n’est ni de tout faire, ni de tout escalader. Vous commencez par les contrôles que vous pouvez faire vous-même: bonne entité, mandat, pouvoirs, statut et échéance.</div>
+  <div class="feedback bad" data-feedback="other"><strong>Pas encore.</strong> Avant de produire ou d’escalader, vous pouvez déjà vérifier plusieurs faits accessibles. C’est précisément l’objectif du module.</div>
+  <div class="tip"><strong>Le fil rouge:</strong> fait → contrôle → source → décision → trace.</div>
+  <div class="actions"><button class="btn teal next" disabled>Continuer →</button></div>
+</section>
+
+<section class="step" data-step="2">
+  <h2>🔎 Quelle entreprise est réellement concernée?</h2>
+  <p>Un nom dans un e-mail ne suffit pas. Avant de travailler, vous devez savoir quelle <strong>entité juridique</strong> vous avez devant vous.</p>
+  <div class="toolbox"><div class="tool"><strong>RC</strong><p>Registre du commerce. Il permet notamment de confirmer la raison sociale, la forme juridique, le siège, le statut et les pouvoirs publiés.</p></div><div class="tool"><strong>Zefix</strong><p>Moteur de recherche central des entités inscrites dans les registres suisses du commerce.</p></div></div>
+  <div class="warn"><strong>Cas fictif:</strong> ne recherchez pas Léman Atelier Sàrl dans Zefix. Pour apprendre l’outil sans collision avec une société réelle, l’exercice se fait sur <strong>Nestlé S.A.</strong></div>
+  <div class="actions"><a class="btn" href="../tc01-apprenant-v1.4/01_Exercice_Zefix_reel_Nestle.html" target="_blank" rel="noopener noreferrer">Ouvrir l’exercice Zefix ↗</a></div>
+  <details><summary>Comprendre ce que vous voyez dans Zefix</summary>
+    <div class="grid"><div class="card"><h3>Raison sociale</h3><p>Nom juridique officiel. Une marque connue peut correspondre à plusieurs sociétés.</p></div><div class="card"><h3>Forme juridique</h3><p>SA, Sàrl, entreprise individuelle, etc. Elle influence notamment les organes et la responsabilité.</p></div><div class="card"><h3>Siège</h3><p>Commune du siège juridique. Ce n’est pas nécessairement le seul lieu d’activité.</p></div><div class="card"><h3>Statut</h3><p>Actif, radié ou autre état affiché. Un ancien document peut être dépassé.</p></div><div class="card"><h3>IDE / UID</h3><p>Identifiant de l’entreprise. IDE est l’abréviation française; UID est utilisée en allemand/anglais.</p></div><div class="card"><h3>Mode de signature</h3><p>Indique comment une personne publiée peut engager l’entité: individuelle, collective à deux, etc.</p></div></div>
+  </details>
+  <div class="decision-box"><label><strong>En une phrase:</strong> pourquoi le nom «Nestlé» ne suffit-il pas pour choisir une société?</label><textarea id="rcReflection" placeholder="Parce que..."></textarea></div>
+  <div class="actions"><button class="btn secondary prev">← Retour</button><button class="btn teal next">J’ai compris le contrôle RC →</button></div>
+</section>
+
+<section class="step" data-step="3">
+  <h2>🧾 La société existe. Mais sa TVA est-elle valable pour la période?</h2>
+  <p>Un ancien numéro TVA n’est pas une preuve suffisante. Le contrôle utile consiste à comparer le <strong>statut TVA</strong> et les dates d’<strong>assujettissement</strong> à la période réellement traitée.</p>
+  <div class="toolbox"><div class="tool"><strong>IDE / UID</strong><p>Identifie l’entreprise et donne accès à plusieurs informations administratives.</p></div><div class="tool"><strong>Statut RC</strong><p>Répond à la question: l’entité juridique est-elle active?</p></div><div class="tool"><strong>Statut TVA</strong><p>Répond à une autre question: l’entreprise est-elle inscrite à la TVA pour la période concernée?</p></div></div>
+  <div class="critical"><strong>À retenir:</strong> RC actif ≠ TVA active. IDE actif ≠ TVA active.</div>
+  <div class="actions"><a class="btn" href="../tc01-apprenant-v1.4/13_Exercice_IDE_TVA_reel.html" target="_blank" rel="noopener noreferrer">Ouvrir l’exercice IDE / TVA ↗</a></div>
+  <details><summary>Comprendre les champs TVA importants</summary><p><strong>Début d’assujettissement:</strong> première date couverte par l’inscription TVA affichée. <strong>Fin d’assujettissement:</strong> si une date existe, ne présumez pas que la TVA reste applicable après. <strong>Groupe TVA:</strong> certaines entités sont intégrées dans un groupe d’imposition; il faut alors comprendre qui porte le traitement TVA.</p></details>
+  <p><strong>Mini-décision:</strong> RC actif. Fin d’assujettissement TVA: 31.12.2025. Facture: 18.06.2026 avec TVA.</p>
+  <div class="choices" data-quiz="vat">
+    <button class="choice" data-value="a">A. Je comptabilise normalement, la société existe toujours.</button>
+    <button class="choice" data-value="b">B. Je supprime moi-même la TVA de la facture.</button>
+    <button class="choice" data-value="c">C. Je vérifie l’incohérence avant de traiter et je n’invente pas la correction.</button>
+  </div>
+  <div class="feedback good" data-feedback="c"><strong>Exact.</strong> Vous avez identifié une incohérence de période. Le bon réflexe est de vérifier avant traitement, pas d’inventer une correction fiscale.</div>
+  <div class="feedback bad" data-feedback="other"><strong>À reprendre.</strong> L’existence juridique de l’entreprise ne prouve pas l’assujettissement TVA pour juin 2026.</div>
+  <div class="actions"><button class="btn secondary prev">← Retour</button><button class="btn teal next" disabled>Continuer →</button></div>
+</section>
+
+<section class="step" data-step="4">
+  <h2>📄 Que couvre réellement le mandat?</h2>
+  <p>Le mandat n’est pas un PDF à archiver et oublier. Pour vous, c’est la frontière de travail: <strong>ce que la fiduciaire a accepté de faire</strong>, ce qui est exclu et ce qui doit être clarifié.</p>
+  <div class="example"></div>
+  <div class="docs"><a href="../tc01-apprenant-v1.3/Dossier_simule/01_Remise_initiale/C_Mandat_signe.pdf" target="_blank">C · Mandat signé ↗</a><a href="../tc01-apprenant-v1.3/Dossier_simule/01_Remise_initiale/D_Email_Marc.pdf" target="_blank">D · E-mail de Marc ↗</a></div>
+  <p class="mini">Ouvrez les deux pièces, puis classez les demandes. Le but est de justifier votre choix par le document, pas de deviner ce que «le client voulait sûrement».</p>
+  <div class="classify">
+    <div class="head">Demande</div><div class="head">Inclus</div><div class="head">À confirmer</div><div class="head">Hors mandat</div><div class="head">À escalader</div>
+    <strong>Préparation TVA</strong><label><input type="radio" name="m1" value="in">Inclus</label><label><input type="radio" name="m1" value="confirm">À confirmer</label><label><input type="radio" name="m1" value="out">Hors mandat</label><label><input type="radio" name="m1" value="esc">À escalader</label>
+    <strong>Paie / salaires</strong><label><input type="radio" name="m2" value="in">Inclus</label><label><input type="radio" name="m2" value="confirm">À confirmer</label><label><input type="radio" name="m2" value="out">Hors mandat</label><label><input type="radio" name="m2" value="esc">À escalader</label>
+    <strong>Paiement fournisseur</strong><label><input type="radio" name="m3" value="in">Inclus</label><label><input type="radio" name="m3" value="confirm">À confirmer</label><label><input type="radio" name="m3" value="out">Hors mandat</label><label><input type="radio" name="m3" value="esc">À escalader</label>
+  </div>
+  <div class="tip"><strong>Débutant:</strong> «hors mandat» ne veut pas dire «le cabinet ne le fera jamais». Cela veut dire: la demande n’est pas couverte par ce que vous avez sous les yeux; il faut la traiter comme une modification ou une clarification, pas l’absorber silencieusement.</div>
+  <div class="actions"><button class="btn secondary prev">← Retour</button><button class="btn teal next">Continuer →</button></div>
+</section>
+
+<section class="step" data-step="5">
+  <h2>📁 Remise 1 — Que pouvez-vous conclure aujourd’hui?</h2>
+  <p>Vous avez seulement le premier lot. Ne cherchez pas à rendre le dossier «complet» dans votre tête. Votre travail est de séparer <strong>confirmé / insuffisant / manquant</strong>.</p>
+  <div class="docs"><a href="../tc01-apprenant-v1.3/Dossier_simule/01_Remise_initiale/A_Fiche_client.pdf" target="_blank">A · Fiche client ↗</a><a href="../tc01-apprenant-v1.4/03_B_Extrait_RC_ancien_corrige.html" target="_blank">B · RC ancien ↗</a><a href="../tc01-apprenant-v1.3/Dossier_simule/01_Remise_initiale/C_Mandat_signe.pdf" target="_blank">C · Mandat ↗</a><a href="../tc01-apprenant-v1.3/Dossier_simule/01_Remise_initiale/D_Email_Marc.pdf" target="_blank">D · E-mail ↗</a><a href="../tc01-apprenant-v1.3/Dossier_simule/01_Remise_initiale/E_Inventaire_pieces.xlsx">E · Inventaire ↗</a></div>
+  <div class="decision-box"><label><strong>Décision provisoire Remise 1</strong></label><select id="decision1"><option value="">Choisir…</option><option>GO</option><option>GO sous conditions</option><option>NO-GO</option></select><label><strong>Pourquoi? Maximum 3 phrases.</strong></label><textarea id="why1" placeholder="Je peux / je ne peux pas... parce que..."></textarea></div>
+  <div class="warn"><strong>Ne trichez pas avec la Remise 2.</strong> Une vraie compétence consiste à prendre une décision avec les informations disponibles à cet instant, puis à savoir la mettre à jour lorsque de nouveaux faits arrivent.</div>
+  <div class="actions"><button class="btn secondary prev">← Retour</button><button class="btn teal next">Enregistrer cette première décision →</button></div>
+</section>
+
+<section class="step" data-step="6">
+  <h2>📬 Remise 2 — De nouveaux faits arrivent</h2>
+  <div class="docs"><a href="../tc01-apprenant-v1.3/Dossier_simule/02_Remise_apres_relance/F_Extrait_RC_actuel.pdf" target="_blank">F · RC actuel ↗</a><a href="../tc01-apprenant-v1.3/Dossier_simule/02_Remise_apres_relance/G_Extrait_IDE_TVA.pdf" target="_blank">G · IDE / TVA ↗</a><a href="../tc01-apprenant-v1.3/Dossier_simule/02_Remise_apres_relance/H_Delegation_interne.pdf" target="_blank">H · Délégation ↗</a><a href="../tc01-apprenant-v1.3/Dossier_simule/02_Remise_apres_relance/I_Simulation_ePortal_TVA.pdf" target="_blank">I · ePortal ↗</a><a href="../tc01-apprenant-v1.3/Dossier_simule/02_Remise_apres_relance/J_Calendrier_source.xlsx">J · Calendrier source ↗</a></div>
+  <p>Pour chaque point, indiquez ce que la nouvelle remise change.</p>
+  <div class="changed">
+    <div class="card"><strong>Identité / RC</strong><select><option>Choisir…</option><option>Maintenant confirmé</option><option>Toujours inconnu</option><option>Ne change rien</option></select></div>
+    <div class="card"><strong>Pouvoir de Marc</strong><select><option>Choisir…</option><option>Maintenant confirmé</option><option>Confirmé seulement pour une tâche limitée</option><option>Toujours insuffisant</option></select></div>
+    <div class="card"><strong>Statut TVA</strong><select><option>Choisir…</option><option>Maintenant vérifiable</option><option>Toujours inconnu</option><option>Ne change rien</option></select></div>
+    <div class="card"><strong>Paie</strong><select><option>Choisir…</option><option>Devient incluse</option><option>Reste hors mandat</option><option>Toujours à confirmer</option></select></div>
+  </div>
+  <div class="tip"><strong>Compétence visée:</strong> ne pas réécrire l’histoire. Votre première conclusion pouvait être prudente et correcte avec Remise 1; Remise 2 doit montrer <em>ce qui a changé</em>, pas faire disparaître votre raisonnement précédent.</div>
+  <div class="actions"><button class="btn secondary prev">← Retour</button><button class="btn teal next">Mettre à jour ma décision →</button></div>
+</section>
+
+<section class="step" data-step="7">
+  <h2>✅ Jusqu’où pouvez-vous avancer maintenant?</h2>
+  <p>Choisissez une décision finale. Une bonne décision n’est pas forcément «GO». Elle est bonne si elle correspond aux faits, au mandat et aux conditions encore ouvertes.</p>
+  <div class="decision-box"><label><strong>Décision finale</strong></label><select id="decisionFinal"><option value="">Choisir…</option><option>GO</option><option>GO sous conditions</option><option>NO-GO</option></select><label><strong>Ce qui est confirmé</strong></label><textarea id="confirmed"></textarea><label><strong>Ce qui manque ou reste limité</strong></label><textarea id="missing"></textarea><label><strong>Étape suivante</strong></label><textarea id="nextAction"></textarea></div>
+  <div class="critical"><strong>Quand demander une revue humaine ciblée?</strong> Quand un point reste réellement incertain après vos contrôles, quand les sources se contredisent, ou quand l’action réelle dépasse votre délégation. Pas pour faire vérifier mécaniquement tout le dossier.</div>
+  <div class="actions"><button class="btn secondary prev">← Retour</button><button class="btn teal next">Préparer mes 2 résultats →</button></div>
+</section>
+
+<section class="step" data-step="8">
+  <h2>🏁 Deux résultats, pas cinq formulaires</h2>
+  <p>Vous terminez TC01 avec deux productions utiles: <strong>une note de dossier structurée</strong> et <strong>un e-mail client</strong>. Les contrôles RC, IDE/TVA, mandat et échéance sont intégrés dans la note au lieu d’être recopiés dans plusieurs fichiers.</p>
+  <div class="work">
+    <div><h3>1 · Note de dossier</h3><textarea id="dossierNote" placeholder="ENTITÉ / RC:\n...\n\nIDE / TVA:\n...\n\nMANDAT / PÉRIMÈTRE:\n...\n\nÉCHÉANCE:\n...\n\nDÉCISION:\n..."></textarea><div class="actions"><button class="btn secondary" id="fillNote">Préremplir depuis mes réponses</button><button class="btn" id="downloadNote">Télécharger .txt</button></div></div>
+    <div><h3>2 · E-mail client</h3><textarea id="clientEmail" placeholder="Objet: éléments à confirmer avant poursuite\n\nBonjour,\n..."></textarea><div class="actions"><button class="btn secondary" id="emailExample">Voir une structure</button><button class="btn" id="copyEmail">Copier l’e-mail</button></div></div>
+  </div>
+  <div class="final-grid"><div class="card"><h3>Je peux continuer seul si…</h3><p>les faits importants sont vérifiés, les limites sont visibles et l’étape suivante reste dans mon périmètre.</p></div><div class="card"><h3>Je demande une revue ciblée si…</h3><p>un point critique reste incertain ou l’action réelle dépasse ma délégation.</p></div></div>
+  <div class="success"><strong>Mission terminée lorsque vous pouvez expliquer, sans relire le cours:</strong> quelle entité vous traitez, ce que couvre le mandat, si la TVA est cohérente pour la période, ce qui manque encore et jusqu’où le dossier peut avancer.</div>
+  <div class="actions"><button class="btn secondary prev">← Retour</button><a class="btn teal" href="../../index.html#module/TC01">Retour au module TC01 →</a></div>
+</section>
+</div>
+<script>
+(function(){
+const steps=[...document.querySelectorAll('.step')];let current=0;const bar=document.getElementById('bar'),count=document.getElementById('stepCount');
+function show(i){current=Math.max(0,Math.min(steps.length-1,i));steps.forEach((s,n)=>s.classList.toggle('active',n===current));bar.style.width=((current+1)/steps.length*100)+'%';count.textContent=`Étape ${current+1} / ${steps.length}`;localStorage.setItem('tc01_mission_step',String(current));window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>show(current+1)));document.querySelectorAll('.prev').forEach(b=>b.addEventListener('click',()=>show(current-1)));
+document.querySelectorAll('[data-quiz]').forEach(box=>{box.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',()=>{box.querySelectorAll('.choice').forEach(x=>x.classList.remove('good','bad'));const ok=btn.dataset.value==='c';btn.classList.add(ok?'good':'bad');const step=box.closest('.step');step.querySelectorAll('.feedback').forEach(x=>x.classList.remove('show'));(step.querySelector(ok?'[data-feedback="c"]':'[data-feedback="other"]')).classList.add('show');const next=step.querySelector('.next');if(next)next.disabled=false;}));});
+const key='tc01_mission_v16';function save(){const data={rcReflection:val('rcReflection'),decision1:val('decision1'),why1:val('why1'),decisionFinal:val('decisionFinal'),confirmed:val('confirmed'),missing:val('missing'),nextAction:val('nextAction'),dossierNote:val('dossierNote'),clientEmail:val('clientEmail')};localStorage.setItem(key,JSON.stringify(data));}function val(id){return document.getElementById(id)?.value||'';}function restore(){try{const d=JSON.parse(localStorage.getItem(key)||'{}');Object.entries(d).forEach(([k,v])=>{const el=document.getElementById(k);if(el)el.value=v;});}catch(e){}}document.addEventListener('input',save);document.addEventListener('change',save);
+document.getElementById('fillNote').addEventListener('click',()=>{const text=`ENTITÉ / RC:\n${val('rcReflection')}\n\nIDE / TVA:\nContrôle réalisé sur le registre officiel; comparer le statut et les dates à la période du dossier.\n\nMANDAT / PÉRIMÈTRE:\nTVA, paie, paiements et dépôt classés à partir du mandat et des délégations.\n\nDÉCISION REMISE 1:\n${val('decision1')} — ${val('why1')}\n\nDÉCISION FINALE:\n${val('decisionFinal')}\nConfirmé: ${val('confirmed')}\nManquant / limité: ${val('missing')}\nÉtape suivante: ${val('nextAction')}`;document.getElementById('dossierNote').value=text;save();});
+document.getElementById('downloadNote').addEventListener('click',()=>{const blob=new Blob([val('dossierNote')],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='TC01_note_dossier.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);});
+document.getElementById('emailExample').addEventListener('click',()=>{document.getElementById('clientEmail').value=`Objet: Dossier — éléments à confirmer avant poursuite\n\nBonjour,\n\nMerci pour les éléments transmis.\n\nPour poursuivre le traitement dans le périmètre convenu, merci de nous confirmer / transmettre:\n- …\n- …\n\nLes éléments déjà suffisamment documentés peuvent être préparés en parallèle.\n\nDès réception des points ci-dessus, le dossier pourra poursuivre son circuit.\n\nMeilleures salutations,`;save();});
+document.getElementById('copyEmail').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(val('clientEmail'));alert('E-mail copié.');}catch(e){alert('Copie automatique indisponible: sélectionnez le texte et copiez-le manuellement.');}});
+restore();const saved=Number(localStorage.getItem('tc01_mission_step'));if(Number.isInteger(saved)&&saved>=0&&saved<steps.length)show(saved);else show(0);
+})();
+</script>
+</body></html>

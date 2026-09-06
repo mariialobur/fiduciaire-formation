@@ -33,13 +33,15 @@ Pour chaque module:
 
 1. lire le cours et le dossier dans l’ordre prévu;
 2. conserver la première analyse lorsque le cas contient plusieurs remises;
-3. ouvrir les modèles correspondant aux six livrables et produire ses propres documents;
+3. ouvrir les modèles correspondant aux livrables demandés et produire ses propres documents;
 4. passer le quiz et lire les corrections;
 5. reprendre les erreurs détectées;
 6. compléter la note de travail;
 7. effectuer l’autocontrôle guidé sur les critères professionnels;
 8. continuer seul si l’autocontrôle est conforme;
 9. demander une revue humaine uniquement si un point critique, une incertitude ou une décision hors périmètre reste ouverte.
+
+Le nombre de livrables dépend du module. **TC01 utilise 5 livrables essentiels et ne demande plus de journal de vérification séparé**: la source/date du contrôle est conservée directement dans le document où elle sert à la décision.
 
 Le but n’est pas de «faire valider» chaque document. Le but est d’apprendre à produire un travail que quelqu’un pourrait reprendre sans devoir tout refaire.
 

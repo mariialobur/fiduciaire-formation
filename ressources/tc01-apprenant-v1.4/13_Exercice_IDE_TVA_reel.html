@@ -1,53 +1,13 @@
 <!doctype html>
 <html lang="fr-CH">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TC01 — Exercice réel IDE / TVA</title>
-<style>
-body{font-family:Inter,Arial,sans-serif;max-width:1040px;margin:auto;padding:32px;background:#f7f4ec;color:#183744;line-height:1.55}main{background:#fff;padding:34px;border-radius:18px;box-shadow:0 10px 30px rgba(16,47,60,.08)}h1,h2,h3{color:#102f3c}.tag{display:inline-block;background:#e5f3f1;color:#0d6f69;padding:6px 11px;border-radius:999px;font-weight:700;font-size:.85rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}.card{border:1px solid #d9e0e2;border-radius:14px;padding:16px}.ok{background:#edf7f1;border-left:5px solid #2e7957;padding:16px;margin:18px 0}.warn{background:#fff3ef;border-left:5px solid #d86d50;padding:16px;margin:18px 0}.critical{background:#fff1f0;border-left:5px solid #b42318;padding:16px;margin:18px 0}table{width:100%;border-collapse:collapse;margin:14px 0}th,td{border:1px solid #d9e0e2;padding:10px;text-align:left;vertical-align:top}th{background:#e8f1f0}a.btn{display:inline-block;background:#102f3c;color:#fff;text-decoration:none;padding:11px 16px;border-radius:9px;font-weight:700;margin-right:8px;margin-bottom:8px}.small{font-size:.9rem;color:#60747b}.step{font-weight:700;color:#0d6f69}.term{position:relative;display:inline-flex;align-items:center;gap:5px;border-bottom:1px dotted #0d6f69;color:#0d6f69;font-weight:700;cursor:help}.term::after{content:'?';display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:50%;background:#e5f3f1;font-size:11px}.term:hover::before,.term:focus::before{content:attr(data-tip);position:absolute;z-index:20;left:0;bottom:calc(100% + 8px);width:min(360px,75vw);background:#102f3c;color:#fff;padding:10px 12px;border-radius:9px;font-weight:400;font-size:.88rem;line-height:1.4;box-shadow:0 8px 24px rgba(0,0,0,.18)}.term:focus{outline:2px solid #0d6f69;outline-offset:2px}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="refresh" content="0; url=../tc01-apprenant-v1.6/02_IDE_TVA_MicroMission.html">
+<title>TC01 · IDE / TVA</title>
+<link rel="canonical" href="../tc01-apprenant-v1.6/02_IDE_TVA_MicroMission.html">
 </head>
-<body><main>
-<span class="tag">EXERCICE RÉEL · REGISTRE IDE / TVA</span>
-<h1>Vérifier qu’une entreprise est encore assujettie à la TVA</h1>
-<p><strong>Objectif:</strong> ne jamais conclure «TVA active» uniquement parce qu’un ancien document contient un numéro TVA. Le contrôle porte sur l’entité exacte, le statut actuel et surtout la période concernée.</p>
-
-<p><a class="btn" href="https://www.uid.admin.ch/" target="_blank" rel="noopener noreferrer">Ouvrir le registre IDE officiel ↗</a><a class="btn" href="14_Fiche_IDE_TVA_reel.xlsx">Télécharger la fiche Excel</a><a class="btn" href="../Glossaire_fiduciaire_debutant.html" target="_blank" rel="noopener noreferrer">Glossaire débutant</a></p>
-<p class="small">Exercice conseillé: rechercher <strong>Nestlé S.A.</strong>. Passez la souris sur les termes soulignés pour voir une définition courte.</p>
-
-<h2>1. Lire trois blocs séparément</h2>
-<div class="grid">
-<div class="card"><h3>Identité <span class="term" tabindex="0" data-tip="IDE = numéro d’identification des entreprises. UID est l’abréviation allemande/anglaise du même identifiant.">IDE / UID</span></h3><p><span class="step">À relever:</span> raison sociale exacte, IDE, forme juridique, siège, <span class="term" tabindex="0" data-tip="Indique si l’entité est active dans le registre IDE. Ce statut ne suffit pas pour conclure sur la TVA.">statut IDE</span>, date de dernière validation.</p><p><strong>Question:</strong> suis-je sur la bonne entité?</p></div>
-<div class="card"><h3><span class="term" tabindex="0" data-tip="RC = registre du commerce. Il confirme notamment l’existence juridique, la forme, le siège et les organes publiés.">Registre du commerce (RC)</span></h3><p><span class="step">À relever:</span> statut RC, numéro de référence RC, canton/registre.</p><p><strong>Question:</strong> l’entité juridique est-elle toujours active?</p></div>
-<div class="card"><h3>Données TVA</h3><p><span class="step">À relever:</span> <span class="term" tabindex="0" data-tip="Statut de l’inscription dans le registre TVA. À lire séparément du statut IDE et du statut RC.">statut Registre TVA</span>, numéro TVA, <span class="term" tabindex="0" data-tip="Période pendant laquelle l’entreprise est soumise à la TVA. Les dates de début et de fin doivent être comparées à la période de la facture ou du décompte.">début / fin de l’assujettissement</span>, éventuel <span class="term" tabindex="0" data-tip="Certaines entreprises peuvent appartenir à un groupe TVA. Le traitement fiscal peut alors se faire au niveau du groupe plutôt qu’entité par entité.">groupe d’imposition TVA</span>.</p><p><strong>Question:</strong> était-elle assujettie pour la période que je traite?</p></div>
-</div>
-
-<div class="critical"><strong>Point critique:</strong> «Statut IDE: Actif» ou «Statut RC: Actif» ne signifie pas automatiquement «Statut Registre TVA: Actif». Les trois informations répondent à des questions différentes.</div>
-
-<h2>2. Ce qui doit déclencher une vérification supplémentaire</h2>
-<table>
-<thead><tr><th>Ce que vous voyez</th><th>Réflexe</th></tr></thead>
-<tbody>
-<tr><td><strong>Statut Registre TVA: Actif</strong> et aucune date de fin</td><td>Bon signal pour la situation actuelle, mais vérifier que la date de début couvre bien la période de facture/décompte.</td></tr>
-<tr><td><strong>Date de fin d’assujettissement</strong> renseignée</td><td>Ne pas utiliser automatiquement le numéro TVA pour une période postérieure. Vérifier la date de l’opération et escalader toute facture avec TVA incohérente.</td></tr>
-<tr><td><strong>Date de début</strong> postérieure à la période traitée</td><td>Ne pas supposer un assujettissement antérieur. Vérifier le contexte et la période avant tout traitement TVA.</td></tr>
-<tr><td>Statut TVA vide / non actif / aucun numéro TVA</td><td>Ne pas conclure que l’entreprise est assujettie. Conserver la référence du contrôle dans la fiche de travail et demander clarification si le dossier utilise pourtant de la TVA.</td></tr>
-<tr><td><strong>IDE du groupe d’imposition TVA</strong> présent</td><td>Identifier le groupe et l’entité qui porte le traitement TVA. Ne pas raisonner comme si chaque société était forcément assujettie isolément.</td></tr>
-<tr><td>Nom, siège ou entité ne correspondent pas au dossier</td><td>Stop: revenir à l’identification de l’entité exacte avant d’utiliser les données TVA.</td></tr>
-</tbody>
-</table>
-
-<h2>3. Mini-décisions</h2>
-<div class="grid">
-<div class="card"><strong>Cas A</strong><p>Entreprise active au RC, mais fin d’assujettissement TVA au 31.12.2025. Vous traitez une facture de juin 2026 avec TVA.</p><p><strong>Action:</strong> ne pas accepter le traitement automatiquement; vérifier l’origine de la TVA facturée et escalader.</p></div>
-<div class="card"><strong>Cas B</strong><p>Statut TVA actif, début d’assujettissement 01.07.2026. Vous traitez une facture de mai 2026.</p><p><strong>Action:</strong> la situation actuelle ne suffit pas; la période de mai doit être analysée séparément.</p></div>
-<div class="card"><strong>Cas C</strong><p>Statut RC actif, aucun statut TVA exploitable.</p><p><strong>Action:</strong> ne jamais déduire l’assujettissement de l’existence de l’entreprise.</p></div>
-<div class="card"><strong>Cas D</strong><p>Statut TVA actif et IDE d’un groupe TVA indiqué.</p><p><strong>Action:</strong> comprendre le périmètre du groupe avant de qualifier facturation et décompte.</p></div>
-</div>
-
-<h2>4. Résultat attendu</h2>
-<div class="ok"><strong>Votre fiche Excel doit permettre de répondre:</strong> quelle entité ai-je contrôlée? à quelle date? quel est son statut RC? quel est son statut TVA? quelles sont les dates d’assujettissement? y a-t-il un groupe TVA? et que puis-je conclure pour la période du dossier?</div>
-<p>La fiche Excel complétée est votre trace. <strong>Pas de journal séparé à recopier ensuite.</strong></p>
-
-<div class="warn"><strong>Cas pédagogique Léman Atelier Sàrl:</strong> ne recherchez pas cette société fictive dans le registre réel. L’exercice réel IDE/TVA se fait sur Nestlé S.A.; le dossier Léman utilise uniquement les extraits simulés fournis.</div>
-</main></body></html>
+<body>
+<p>Nouvelle version de l’exercice IDE / TVA: <a href="../tc01-apprenant-v1.6/02_IDE_TVA_MicroMission.html">ouvrir la micro-mission IDE / TVA</a>.</p>
+</body>
+</html>

@@ -119,15 +119,16 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   const tc02 = window.FIDUCIAIRE_DATA.modules.TC02;
   const tc03 = window.FIDUCIAIRE_DATA.modules.TC03;
   const tc04 = window.FIDUCIAIRE_DATA.modules.TC04;
-  assert(tc01.contentVersion === "1.6" && tc01.lessonRevision === "1.6-mission", "TC01 Mission 1.6 non active");
+  assert(tc01.contentVersion === "1.7" && tc01.lessonRevision === "1.7-mission", "TC01 Mission 1.7 non active");
   assert(tc01.quiz.length === 8 && tc01.quizThresholdCount === 7, "Challenge TC01 doit contenir 8 situations avec seuil 7/8");
   assert(tc01.quiz.filter((q) => q.critical).length === 3, "TC01 Mission doit contenir 3 questions critiques");
-  assert(tc01.evidenceItems.length === 2, "TC01 Mission doit contenir 2 résultats utiles");
-  assert(tc01.evidenceItems.some((item) => item.id === "dossier_opening"), "Note de dossier TC01 absente");
-  assert(tc01.evidenceItems.some((item) => item.id === "client_email"), "E-mail client TC01 absent");
-  assert(tc01.evidenceItems.every((item) => item.templatePath), "TC01: modèles de résultats non reliés");
+  assert(tc01.evidenceItems.length === 1, "TC01 Mission doit contenir 1 résultat utile");
+  assert(tc01.evidenceItems[0]?.id === "dossier_opening", "Note de dossier TC01 absente");
+  assert(!tc01.evidenceItems.some((item) => item.id === "client_email"), "E-mail client ne doit plus être un livrable TC01");
+  assert(tc01.evidenceItems.every((item) => item.templatePath), "TC01: modèle de résultat non relié");
   assert(tc01.practicalReview.scoreItems.length === 4, "Autocontrôle TC01 non simplifié à 4 critères");
-  assert(tc01.learnerPackage.files[0].path.endsWith("00_Mission_TC01_v1.6.html"), "Mission TC01 n’est pas le premier contenu apprenant");
+  assert(tc01.learnerPackage.files[0].path.endsWith("00_Mission_TC01_v1.7.html"), "Mission TC01 v1.7 n’est pas le premier contenu apprenant");
+  assert(!tc01.learnerPackage.files.some((item) => item.path.endsWith("11_Email_client_TC01.txt")), "Ancien modèle e-mail encore présent dans le learner-pack TC01");
   assert(tc01.sections.length === 3 && tc01.sections[0].title.includes("Mission 01"), "Page module TC01 non recentrée sur la Mission");
   assert(tc02.evidenceItems.every((item) => item.templatePath), "TC02: modèles de livrables non reliés");
   assert(tc03.evidenceItems.every((item) => item.templatePath), "TC03: modèles de livrables non reliés");
@@ -136,10 +137,10 @@ const { JSDOM, VirtualConsole } = require("jsdom");
 
   await navigate("#module/TC01");
   assert(!document.querySelector(".file-pick"), "TC01 affiche encore Choisir un fichier");
-  assert(document.querySelectorAll(".evidence-completion").length === 2, "TC01 n’affiche pas 2 résultats terminés");
-  assert(document.querySelectorAll(".evidence-autonomy-actions a").length === 2, "TC01 n’affiche pas les 2 modèles correspondant aux résultats");
-  assert(document.querySelectorAll(".evidence-purpose").length === 2, "TC01 n’explique pas la fonction des 2 résultats");
-  assert(document.querySelectorAll(".term-help").length >= 2, "Aide contextuelle absente des résultats TC01");
+  assert(document.querySelectorAll(".evidence-completion").length === 1, "TC01 n’affiche pas 1 résultat terminé");
+  assert(document.querySelectorAll(".evidence-autonomy-actions a").length === 1, "TC01 n’affiche pas le modèle correspondant à la note de dossier");
+  assert(document.querySelectorAll(".evidence-purpose").length === 1, "TC01 n’explique pas la fonction de la note de dossier");
+  assert(document.querySelectorAll(".term-help").length >= 1, "Aide contextuelle absente du résultat TC01");
   assert(Array.from(document.querySelectorAll("a")).some((a) => a.textContent.includes("Commencer la Mission 01")), "CTA Mission 01 absent du module");
   assert(document.querySelector(".practical-review h2")?.textContent.includes("Je vérifie mon propre dossier"), "Autocontrôle guidé non rendu");
   assert(document.querySelector(".validation-panel .fine-print")?.textContent.includes("revue humaine devient ciblée"), "Aide autonomie absente");
@@ -206,8 +207,8 @@ const { JSDOM, VirtualConsole } = require("jsdom");
     blueprints: 21,
     autonomyFirst: true,
     beginnerUx: true,
-    tc01Mission: "1.6",
-    tc01MissionResults: 2,
+    tc01Mission: "1.7",
+    tc01MissionResults: 1,
     tc01ChallengeQuestions: 8,
     tc01ShortSelfCheck: 4,
     falseUploadRemoved: true,

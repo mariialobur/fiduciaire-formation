@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102f3c">
+<title>Mission TC01 — Pouvez-vous prendre ce dossier?</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<style>
+:root{--navy:#102f3c;--teal:#0d6f69;--cream:#f7f4ec;--line:#d9e0e2;--green:#edf7f1;--orange:#fff3ef;--red:#fff1f0;--text:#183744;--muted:#60747b;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);font-family:Inter,Arial,sans-serif;color:var(--text);line-height:1.55}.wrap{max-width:1040px;margin:auto;padding:22px}.hero{background:linear-gradient(135deg,#102f3c,#17495a);color:#fff;border-radius:24px;padding:28px 30px;box-shadow:0 16px 40px rgba(16,47,60,.16)}.eyebrow{display:inline-block;background:rgba(255,255,255,.12);padding:5px 10px;border-radius:999px;font-size:.8rem;font-weight:800}.hero h1{font-size:clamp(1.9rem,4vw,3rem);margin:.6rem 0}.hero p{max-width:780px;color:#dce9eb}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.meta span{border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 10px;font-size:.88rem}.progress{margin-top:18px;height:9px;background:rgba(255,255,255,.15);border-radius:999px;overflow:hidden}.progress>i{display:block;height:100%;width:12.5%;background:#76c5b8;transition:.25s}.topnav{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:14px 0}.stepcount{font-weight:800;color:var(--teal)}.gloss{font-size:.9rem;color:var(--muted)}.gloss a{color:var(--teal);font-weight:700}.step{display:none;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;margin-top:18px;box-shadow:0 8px 24px rgba(16,47,60,.06)}.step.active{display:block}.step h2{margin-top:0;color:var(--navy)}.mail{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:18px 0}.mail-head{background:#f2f6f6;padding:12px 15px;font-size:.92rem}.mail-body{padding:18px}.choices{display:grid;gap:10px;margin:16px 0}.choice{border:1px solid var(--line);background:#fff;border-radius:12px;padding:14px 16px;text-align:left;font:inherit;color:var(--text);cursor:pointer}.choice:hover,.choice:focus{border-color:var(--teal);outline:none}.choice.good{background:var(--green);border-color:#8bc5ae}.choice.bad{background:var(--red);border-color:#e7a29d}.feedback{display:none;border-radius:12px;padding:14px 16px;margin:12px 0}.feedback.show{display:block}.feedback.good{background:var(--green);border-left:5px solid #2e7957}.feedback.bad{background:var(--red);border-left:5px solid #b42318}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--navy);color:#fff;text-decoration:none;border:0;border-radius:10px;padding:11px 16px;font-weight:800;cursor:pointer}.btn.secondary{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn.teal{background:var(--teal)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.tip{background:#eef5f8;border-left:5px solid #3b7185;border-radius:10px;padding:14px 16px;margin:16px 0}.warn{background:var(--orange);border-left:5px solid #d86d50;border-radius:10px;padding:14px 16px;margin:16px 0}.critical{background:var(--red);border-left:5px solid #b42318;border-radius:10px;padding:14px 16px;margin:16px 0}.success{background:var(--green);border-left:5px solid #2e7957;border-radius:10px;padding:14px 16px;margin:16px 0}.card{border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}.card h3{margin:.1rem 0 .5rem;color:var(--navy)}.decision-box{border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0}.decision-box textarea,.decision-box select,.note textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px;font:inherit}.decision-box textarea{min-height:90px;margin-top:8px}.note textarea{min-height:330px}.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.final-grid .card{background:#fbfcfc}.micro{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;border:1px solid var(--line);border-radius:15px;padding:16px;margin:14px 0;background:#fbfcfc}.micro p{margin:.3rem 0;color:var(--muted)}@media(max-width:700px){.wrap{padding:10px}.hero,.step{padding:20px}.topnav{align-items:flex-start;flex-direction:column}.micro{grid-template-columns:1fr}.final-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><div class="wrap">
+<section class="hero">
+<span class="eyebrow">MISSION 01 · PREMIER DOSSIER</span>
+<h1>Pouvez-vous prendre ce dossier?</h1>
+<p>Vous recevez une demande TVA urgente avec des informations incomplètes. Votre travail n’est pas de tout savoir immédiatement: vous devez vérifier ce qui est accessible, garder les limites visibles et décider jusqu’où le dossier peut avancer.</p>
+<div class="meta"><span>⏱ 35–45 min</span><span>🧭 autonomie guidée</span><span>🔎 RC + IDE/TVA</span><span>📁 dossier simulé</span></div>
+<div class="progress"><i id="bar"></i></div>
+</section>
+<div class="topnav"><span class="stepcount" id="stepCount">Étape 1 / 8</span><span class="gloss">Un terme inconnu? <a href="../Glossaire_fiduciaire_debutant.html" target="_blank">Glossaire ↗</a></span></div>
+
+<section class="step active">
+<h2>📨 08:42 — Une demande urgente arrive</h2>
+<div class="mail"><div class="mail-head"><strong>De:</strong> Marc Dubois · Léman Atelier Sàrl<br><strong>Objet:</strong> TVA urgente</div><div class="mail-body">Bonjour,<br><br>Pouvez-vous déposer notre TVA rapidement? Et merci de préparer aussi les salaires ce mois-ci. Je peux vous envoyer mon mot de passe ePortal si nécessaire.<br><br>Merci,<br>Marc</div></div>
+<p><strong>Quel est votre premier réflexe?</strong></p>
+<div class="choices" data-quiz><button class="choice" data-value="a">A. Commencer immédiatement la TVA.</button><button class="choice" data-value="b">B. Confirmer TVA + salaires au client.</button><button class="choice" data-value="c">C. Vérifier d’abord l’entité, le mandat et les pouvoirs.</button><button class="choice" data-value="d">D. Tout envoyer immédiatement au responsable.</button></div>
+<div class="feedback good" data-feedback="c"><strong>Oui.</strong> Vous faites d’abord les contrôles accessibles vous-même.</div><div class="feedback bad" data-feedback="other"><strong>Pas encore.</strong> L’urgence ne supprime ni le mandat, ni les pouvoirs, ni le contrôle de l’entité.</div>
+<div class="actions"><button class="btn teal next" disabled>Continuer →</button></div>
+</section>
+
+<section class="step">
+<h2>🔎 Étape 2 — RC / Zefix</h2>
+<div class="micro"><div><strong>Question de travail</strong><p>Quelle entité juridique est réellement concernée, et que dit le RC?</p></div><a class="btn" href="01_Zefix_MicroMission_RC.html" target="_blank">Faire la micro-mission RC ↗</a></div>
+<div class="decision-box"><label><strong>En une phrase, ce que RC/Zefix vous permet de confirmer:</strong></label><textarea id="rcReflection" placeholder="Entité exacte, forme, siège, statut, pouvoirs..."></textarea></div>
+<div class="tip"><strong>À retenir:</strong> une marque, un e-mail ou un ancien PDF ne remplace pas l’identification de l’entité actuelle.</div>
+<div class="actions"><button class="btn secondary prev">← Retour</button><button class="btn teal next">Continuer →</button></div>
+</section>
+
+<section class="step">
+<h2>🧾 Étape 3 — IDE / TVA</h2>
+<div class="micro"><div><strong>Question de travail</strong><p>Le statut TVA couvre-t-il vraiment la période que vous traitez?</p></div><a class="btn" href="02_IDE_TVA_MicroMission.html" target="_blank">Faire la micro-mission IDE / TVA ↗</a></div>
+<div class="critical"><strong>Réflexe clé:</strong> RC actif ≠ TVA active. IDE actif ≠ TVA active. Il faut comparer début/fin d’assujettissement à la période du dossier.</div>
+<div class="actions"><button class="btn secondary prev">← Retour</button><button class="btn teal next">Continuer →</button></div>
+</section>
+
+<section class="step">
+<h2>📄 Étape 4 — Mandat</h2>
+<div class="micro"><div><strong>Question de travail</strong><p>Qu’est-ce qui est inclus, à confirmer ou hors mandat?</p></div><a class="btn" href="03_Mandat_MicroMission.html" target="_blank">Faire la micro-mission Mandat ↗</a></div>
+<div class="tip"><strong>À retenir:</strong> une demande du client n’élargit pas silencieusement le mandat. Préparer une tâche ne signifie pas non plus être autorisé à la transmettre.</div>
+<div class="actions"><button class="btn secondary prev">← Retour</button><button class="btn teal next">Continuer →</button></div>
+</section>
+
+<section class="step">
+<h2>📁 Étape 5 — Remise 1</h2>
+<div class="micro"><div><strong>Question de travail</strong><p>Avec seulement la première remise, qu’est-ce qui est confirmé, manquant ou risqué?</p></div><a class="btn" href="04_Remise1_PremiereDecision.html" target="_blank">Faire la micro-mission Remise 1 ↗</a></div>
+<div class="decision-box"><label><strong>Votre décision provisoire</strong></label><select id="decision1"><option value="">Choisir…</option><option>GO</option><option>GO sous conditions</option><option>NO-GO</option></select><label><strong>Pourquoi? 2–3 phrases maximum.</strong></label><textarea id="why1"></textarea></div>
+<div class="actions"><button class="btn secondary prev">← Retour</button><button class="btn teal next">Enregistrer et continuer →</button></div>
+</section>
+
+<section class="step">
+<h2>📬 Étape 6 — Remise 2</h2>
+<div class="micro"><div><strong>Question de travail</strong><p>Quels nouveaux documents changent réellement votre première décision?</p></div><a class="btn" href="05_Remise2_MiseAJourDecision.html" target="_blank">Faire la micro-mission Remise 2 ↗</a></div>
+<div class="tip"><strong>Compétence:</strong> ne pas recommencer le dossier. Vous mettez à jour uniquement le delta: confirmé / limité / inchangé.</div>
+<div class="actions"><button class="btn secondary prev">← Retour</button><button class="btn teal next">Mettre à jour ma décision →</button></div>
+</section>
+
+<section class="step">
+<h2>✅ Étape 7 — Jusqu’où pouvez-vous avancer?</h2>
+<div class="decision-box"><label><strong>Décision finale</strong></label><select id="decisionFinal"><option value="">Choisir…</option><option>GO</option><option>GO sous conditions</option><option>NO-GO</option></select><label><strong>Ce qui est confirmé</strong></label><textarea id="confirmed"></textarea><label><strong>Ce qui manque ou reste limité</strong></label><textarea id="missing"></textarea><label><strong>Étape suivante</strong></label><textarea id="nextAction"></textarea></div>
+<div class="critical"><strong>Revue humaine ciblée seulement si:</strong> un point critique reste incertain après vos contrôles, les sources se contredisent, ou l’action réelle dépasse votre délégation.</div>
+<div class="actions"><button class="btn secondary prev">← Retour</button><button class="btn teal next">Préparer ma note de dossier →</button></div>
+</section>
+
+<section class="step">
+<h2>🏁 Étape 8 — Un seul résultat utile: la note de dossier</h2>
+<p>TC01 se termine par <strong>une note de dossier courte et reprenable</strong>. Elle doit permettre à un collègue de comprendre rapidement les contrôles effectués, les limites encore ouvertes et la décision.</p>
+<div class="note"><textarea id="dossierNote" placeholder="ENTITÉ / RC:\n...\n\nIDE / TVA:\n...\n\nMANDAT / PÉRIMÈTRE:\n...\n\nREMise 1 → REMise 2:\n...\n\nDÉCISION FINALE:\n..."></textarea></div>
+<div class="actions"><button class="btn secondary" id="fillNote">Préremplir depuis mes réponses</button><button class="btn" id="downloadNote">Télécharger la note .txt</button></div>
+<div class="final-grid"><div class="card"><h3>Je peux continuer seul si…</h3><p>les faits importants sont vérifiés, les limites sont visibles et l’étape suivante reste dans mon périmètre.</p></div><div class="card"><h3>Je demande une revue ciblée si…</h3><p>un point critique reste incertain ou l’action réelle dépasse ma délégation.</p></div></div>
+<div class="success"><strong>Mission terminée lorsque vous pouvez expliquer sans relire le cours:</strong> quelle entité vous traitez, ce que couvre le mandat, si la TVA est cohérente pour la période, ce qui a changé avec Remise 2 et jusqu’où le dossier peut avancer.</div>
+<div class="actions"><button class="btn secondary prev">← Retour</button><a class="btn teal" href="../../index.html#module/TC01">Retour au module TC01 →</a></div>
+</section>
+</div>
+<script>
+(function(){const steps=[...document.querySelectorAll('.step')];let current=0;const bar=document.getElementById('bar'),count=document.getElementById('stepCount'),key='tc01_mission_v17';function val(id){return document.getElementById(id)?.value||''}function show(i){current=Math.max(0,Math.min(steps.length-1,i));steps.forEach((s,n)=>s.classList.toggle('active',n===current));bar.style.width=((current+1)/steps.length*100)+'%';count.textContent=`Étape ${current+1} / ${steps.length}`;localStorage.setItem('tc01_mission_step_v17',String(current));window.scrollTo({top:0,behavior:'smooth'})}function save(){const data={rcReflection:val('rcReflection'),decision1:val('decision1'),why1:val('why1'),decisionFinal:val('decisionFinal'),confirmed:val('confirmed'),missing:val('missing'),nextAction:val('nextAction'),dossierNote:val('dossierNote')};localStorage.setItem(key,JSON.stringify(data))}function restore(){try{const d=JSON.parse(localStorage.getItem(key)||'{}');Object.entries(d).forEach(([k,v])=>{const el=document.getElementById(k);if(el)el.value=v})}catch(e){}}
+document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>show(current+1)));document.querySelectorAll('.prev').forEach(b=>b.addEventListener('click',()=>show(current-1)));document.querySelectorAll('[data-quiz]').forEach(box=>box.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',()=>{box.querySelectorAll('.choice').forEach(x=>x.classList.remove('good','bad'));const ok=btn.dataset.value==='c';btn.classList.add(ok?'good':'bad');box.querySelectorAll('.feedback').forEach(x=>x.classList.remove('show'));box.querySelector(ok?'[data-feedback="c"]':'[data-feedback="other"]').classList.add('show');box.closest('.step').querySelector('.next').disabled=false})));document.addEventListener('input',save);document.addEventListener('change',save);
+document.getElementById('fillNote').addEventListener('click',()=>{document.getElementById('dossierNote').value=`ENTITÉ / RC:\n${val('rcReflection')}\n\nIDE / TVA:\nStatut et dates contrôlés par rapport à la période du dossier.\n\nMANDAT / PÉRIMÈTRE:\nDemandes classées selon le mandat et les délégations disponibles.\n\nDÉCISION REMISE 1:\n${val('decision1')} — ${val('why1')}\n\nMISE À JOUR REMISE 2:\nLes nouveaux faits ont été intégrés sans effacer l’analyse initiale.\n\nDÉCISION FINALE:\n${val('decisionFinal')}\nConfirmé: ${val('confirmed')}\nLimité / manquant: ${val('missing')}\nÉtape suivante: ${val('nextAction')}`;save()});document.getElementById('downloadNote').addEventListener('click',()=>{const blob=new Blob([val('dossierNote')],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='TC01_note_dossier.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)});restore();const saved=Number(localStorage.getItem('tc01_mission_step_v17'));show(Number.isInteger(saved)&&saved>=0&&saved<steps.length?saved:0)})();
+</script>
+</body></html>

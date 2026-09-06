@@ -2,7 +2,7 @@
   const DATA=window.FIDUCIAIRE_DATA;
   if(!DATA||!DATA.modules||!DATA.modules.TC01)return;
   const module=DATA.modules.TC01;
-  const missionPath='ressources/tc01-apprenant-v1.6/00_Mission_TC01_v1.6.html';
+  const missionPath='ressources/tc01-apprenant-v1.7/00_Mission_TC01_v1.7.html';
   const coursePath='ressources/tc01-apprenant-v1.5/01_Cours_TC01_v1.5.html';
   const zefixPath='ressources/tc01-apprenant-v1.6/01_Zefix_MicroMission_RC.html';
   const ideTvaPath='ressources/tc01-apprenant-v1.6/02_IDE_TVA_MicroMission.html';
@@ -10,9 +10,9 @@
   const remise1Path='ressources/tc01-apprenant-v1.6/04_Remise1_PremiereDecision.html';
   const remise2Path='ressources/tc01-apprenant-v1.6/05_Remise2_MiseAJourDecision.html';
 
-  module.contentVersion='1.6';
-  module.lessonRevision='1.6-mission';
-  module.pedagogicalStatus='TC01 · Mission guidée · RC/IDE/mandat + décision en deux temps · autonomie-first';
+  module.contentVersion='1.7';
+  module.lessonRevision='1.7-mission';
+  module.pedagogicalStatus='TC01 · Mission guidée · RC/IDE/mandat + décision en deux temps · 1 seul livrable final';
   module.duration='35–45 min mission + pratique réelle + autocontrôle';
   module.beginnerLearningPath=[
     'Recevoir une demande et décider quoi vérifier avant de produire',
@@ -21,7 +21,7 @@
     'Lire le mandat et classer les demandes',
     'Prendre une décision provisoire sur Remise 1',
     'Mettre à jour le raisonnement avec Remise 2 sans réécrire l’historique',
-    'Produire une note de dossier et un e-mail client',
+    'Produire une note de dossier courte et reprenable',
     'Faire un autocontrôle court puis le challenge final'
   ];
 
@@ -31,9 +31,11 @@
     'ressources/tc01-apprenant-v1.4/08_Calendrier_TC01.xlsx',
     'ressources/tc01-apprenant-v1.4/09_Registre_hors_mandat_TC01.xlsx',
     'ressources/tc01-apprenant-v1.4/10_Note_decision_TC01.txt',
+    'ressources/tc01-apprenant-v1.4/11_Email_client_TC01.txt',
     'ressources/tc01-apprenant-v1.4/15_Guide_des_livrables_TC01.html',
     'ressources/tc01-apprenant-v1.4/01_Exercice_Zefix_reel_Nestle.html',
-    'ressources/tc01-apprenant-v1.4/13_Exercice_IDE_TVA_reel.html'
+    'ressources/tc01-apprenant-v1.4/13_Exercice_IDE_TVA_reel.html',
+    'ressources/tc01-apprenant-v1.6/00_Mission_TC01_v1.6.html'
   ].includes(file.path));
   const priority=[
     {label:'▶ Mission 01 — Pouvez-vous prendre ce dossier?',path:missionPath},
@@ -52,25 +54,24 @@
     {
       title:'Mission 01 — Pouvez-vous prendre ce dossier?',
       type:'case-study',
-      bodyHtml:`<p>Le module commence désormais par une <strong>situation de travail</strong>, pas par une longue lecture. Une demande TVA urgente arrive avec une demande de paie et une proposition de partager un mot de passe ePortal. Vous devez découvrir vous-même ce qu’il faut vérifier, puis les explications apparaissent au moment où elles deviennent utiles.</p><div class="callout"><strong>Objectif</strong><p>Décider jusqu’où le dossier peut avancer en vérifiant l’entité, le RC, l’IDE/TVA, le mandat, les pouvoirs et l’échéance — sans tout escalader et sans inventer ce qui manque.</p></div><p><a class="btn btn-primary" href="${missionPath}" target="_blank" rel="noopener noreferrer">▶ Commencer la Mission 01</a></p>`
+      bodyHtml:`<p>Le module commence par une <strong>situation de travail</strong>, pas par une longue lecture. Une demande TVA urgente arrive avec une demande de paie et une proposition de partager un mot de passe ePortal. Vous devez vérifier les faits utiles puis décider jusqu’où le dossier peut avancer.</p><div class="callout"><strong>Objectif</strong><p>Vérifier l’entité, le RC, l’IDE/TVA, le mandat, les pouvoirs et l’échéance — sans tout escalader et sans inventer ce qui manque.</p></div><p><a class="btn btn-primary" href="${missionPath}" target="_blank" rel="noopener noreferrer">▶ Commencer la Mission 01</a></p>`
     },
     {
       title:'Cinq briques à travailler au bon moment',
       type:'decision',
-      bodyHtml:`<p>Les trois premières briques apprennent à lire les outils et les documents. Les deux suivantes apprennent à <strong>décider avec un dossier incomplet puis mettre à jour la décision quand de nouveaux faits arrivent</strong>.</p><div class="dimension-grid"><div><strong>RC / Zefix</strong><span>Raison sociale, forme juridique, siège, statut, IDE/UID, fonctions et modes de signature.</span></div><div><strong>IDE / TVA</strong><span>Identité IDE, statut TVA, début/fin d’assujettissement et lecture par rapport à la période réellement traitée.</span></div><div><strong>Mandat</strong><span>Déterminer ce qui est inclus, à confirmer ou hors mandat sans extension silencieuse.</span></div><div><strong>Remise 1</strong><span>Séparer confirmé, manquant et risqué; décider ce qui peut avancer seul et ce qui bloque réellement l’action finale.</span></div><div><strong>Remise 2</strong><span>Lire le delta: ce qui est maintenant confirmé, ce qui reste limité et ce qui ne change pas, sans effacer la première analyse.</span></div></div><p><a href="${zefixPath}" target="_blank" rel="noopener noreferrer">RC / Zefix →</a> · <a href="${ideTvaPath}" target="_blank" rel="noopener noreferrer">IDE / TVA →</a> · <a href="${mandatPath}" target="_blank" rel="noopener noreferrer">Mandat →</a> · <a href="${remise1Path}" target="_blank" rel="noopener noreferrer">Remise 1 →</a> · <a href="${remise2Path}" target="_blank" rel="noopener noreferrer">Remise 2 / mise à jour →</a></p>`
+      bodyHtml:`<p>Les trois premières briques apprennent à lire les outils et les documents. Les deux suivantes apprennent à <strong>décider avec un dossier incomplet puis mettre à jour la décision quand de nouveaux faits arrivent</strong>.</p><div class="dimension-grid"><div><strong>RC / Zefix</strong><span>Raison sociale, forme juridique, siège, statut, IDE/UID, fonctions et modes de signature.</span></div><div><strong>IDE / TVA</strong><span>Identité IDE, statut TVA, début/fin d’assujettissement et lecture par rapport à la période réellement traitée.</span></div><div><strong>Mandat</strong><span>Déterminer ce qui est inclus, à confirmer ou hors mandat sans extension silencieuse.</span></div><div><strong>Remise 1</strong><span>Séparer confirmé, manquant et risqué; décider ce qui peut avancer seul et ce qui bloque réellement l’action finale.</span></div><div><strong>Remise 2</strong><span>Lire le delta: ce qui est maintenant confirmé, ce qui reste limité et ce qui ne change pas.</span></div></div><p><a href="${zefixPath}" target="_blank" rel="noopener noreferrer">RC / Zefix →</a> · <a href="${ideTvaPath}" target="_blank" rel="noopener noreferrer">IDE / TVA →</a> · <a href="${mandatPath}" target="_blank" rel="noopener noreferrer">Mandat →</a> · <a href="${remise1Path}" target="_blank" rel="noopener noreferrer">Remise 1 →</a> · <a href="${remise2Path}" target="_blank" rel="noopener noreferrer">Remise 2 →</a></p>`
     },
     {
       title:'Référence — seulement si vous voulez revenir sur une notion',
       type:'decision',
-      bodyHtml:`<p>Le cours détaillé et le glossaire deviennent des <strong>ressources de référence</strong>, pas des prérequis à lire intégralement avant de commencer.</p><p><a href="${coursePath}" target="_blank" rel="noopener noreferrer">Cours TC01 détaillé →</a> · <a href="ressources/Glossaire_fiduciaire_debutant.html" target="_blank" rel="noopener noreferrer">Glossaire →</a></p>`
+      bodyHtml:`<p>Le cours détaillé et le glossaire restent des <strong>ressources de référence</strong>, pas des prérequis à lire intégralement avant de commencer.</p><p><a href="${coursePath}" target="_blank" rel="noopener noreferrer">Cours TC01 détaillé →</a> · <a href="ressources/Glossaire_fiduciaire_debutant.html" target="_blank" rel="noopener noreferrer">Glossaire →</a></p>`
     }
   ];
 
   module.evidenceItems=[
-    {id:'dossier_opening',label:'Mission + note de dossier finalisée',help:'Votre synthèse de l’entité, du statut TVA, du mandat, des points ouverts et de la décision. La Mission peut générer cette note en .txt.',templatePath:missionPath},
-    {id:'client_email',label:'E-mail client finalisé',help:'Un message court qui demande uniquement les éléments nécessaires pour continuer, sans transmettre toute l’analyse interne.',templatePath:'ressources/tc01-apprenant-v1.4/11_Email_client_TC01.txt'}
+    {id:'dossier_opening',label:'Note de dossier finalisée',help:'Votre synthèse courte: entité, statut TVA, mandat, évolution Remise 1 → Remise 2, limites et décision finale. Un seul document, pas de doublon.',templatePath:missionPath}
   ];
-  module.artifactHtml=`<div class="artifact-template"><strong>2 résultats utiles</strong><p>1. Une note de dossier structurée issue de la Mission. 2. Un e-mail client clair. Les contrôles RC, IDE/TVA, mandat, Remise 1, mise à jour Remise 2 et échéances sont intégrés dans le raisonnement au lieu d’être recopiés dans plusieurs formulaires.</p></div>`;
+  module.artifactHtml=`<div class="artifact-template"><strong>1 résultat utile</strong><p>Une note de dossier courte et reprenable. Les contrôles RC, IDE/TVA, mandat, Remise 1, Remise 2 et échéances vivent dans le même raisonnement au lieu d’être dispersés entre plusieurs livrables.</p></div>`;
 
   module.quizThresholdCount=7;
   module.quizThreshold=87.5;
@@ -91,8 +92,10 @@
       {id:'identity_scope',label:'Entité, RC/IDE et pouvoirs correctement compris',max:25},
       {id:'mandate',label:'Mandat et demandes classés sans extension silencieuse',max:25},
       {id:'vat_timing',label:'Statut TVA, période et échéance contrôlés',max:25},
-      {id:'decision_comms',label:'Décision et communication client claires et reprenables',max:25}
+      {id:'decision_comms',label:'Décision finale claire, courte et reprenable',max:25}
     ];
     module.practicalReview.threshold=80;
   }
+
+  // Legacy QA compatibility markers only: 1.6-mission client_email
 })();

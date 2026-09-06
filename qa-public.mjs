@@ -1,4 +1,3 @@
-import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 
@@ -45,6 +44,16 @@ for (const required of [
 }
 
 const packages = {
+  TC01: {
+    dir: "ressources/tc01-apprenant-v1.4",
+    files: [
+      "00_LIRE_EN_PREMIER.txt",
+      "01_Exercice_Zefix_reel_Nestle.html",
+      "02_Mode_emploi_cas_simule.html",
+      "03_B_Extrait_RC_ancien_corrige.html",
+      "04_Fiche_Zefix_reel_Nestle.csv"
+    ]
+  },
   TC02: {
     dir: "ressources/tc02-apprenant-v1.0",
     files: [
@@ -89,17 +98,33 @@ for (const [code, pack] of Object.entries(packages)) {
   }
 }
 
+const obsoleteZip = "ressources/tc01-apprenant-v1.3.zip";
+if (existsSync(join(root, obsoleteZip))) failures.push("Ancien ZIP TC01 v1.3 encore publié dans le parcours actif");
+const obsoleteProtocol = "ressources/tc01-apprenant-v1.3/Dossier_simule/00_Protocole_de_remise.md";
+if (existsSync(join(root, obsoleteProtocol))) failures.push("Protocole de remise destiné au responsable encore présent dans le paquet apprenant TC01");
+
 const source = readFileSync(join(root, "app.js"), "utf8");
 const built = readFileSync(join(root, "index.html"), "utf8");
+const tc01 = readFileSync(join(root, "data/tc01-v1.4.js"), "utf8");
 const tc02 = readFileSync(join(root, "data/tc02-v1.0.js"), "utf8");
 const tc03 = readFileSync(join(root, "data/tc03-v1.0.js"), "utf8");
 const tc04 = readFileSync(join(root, "data/tc04-v1.0.js"), "utf8");
 const runtime = readFileSync(join(root, "data/runtime-enhancements.js"), "utf8");
 const pilot = readFileSync(join(root, "PILOTE_MOIS_1.md"), "utf8");
+const zefixExercise = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/01_Exercice_Zefix_reel_Nestle.html"), "utf8");
+const caseGuide = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/02_Mode_emploi_cas_simule.html"), "utf8");
+const oldRcReplacement = readFileSync(join(root, "ressources/tc01-apprenant-v1.4/03_B_Extrait_RC_ancien_corrige.html"), "utf8");
+
 if (!source.includes("Édition publique de démonstration")) failures.push("Statut public absent de l’application source");
 if (!built.includes("Édition publique de démonstration")) failures.push("Statut public absent de la version autonome");
 if (!built.includes('class="skip-link"')) failures.push("Lien d’évitement absent de la version autonome");
 if (!built.includes("validations locales non authentifiées")) failures.push("Limite d’authentification absente de la version autonome");
+if (!tc01.includes("Nestlé S.A.")) failures.push("Exercice Zefix réel TC01 absent du module actif");
+if (!tc01.includes("Léman Atelier Sàrl reste entièrement fictive")) failures.push("Séparation registre réel / cas fictif absente de TC01");
+if (!zefixExercise.includes("https://zefix.ch/")) failures.push("Lien Zefix réel absent de l’exercice TC01");
+if (!zefixExercise.includes("Nestlé S.A.")) failures.push("Entreprise réelle de démonstration absente de l’exercice Zefix");
+if (!caseGuide.includes("Ne recherchez pas Léman Atelier Sàrl")) failures.push("Consigne de non-recherche du cas fictif absente");
+if (!oldRcReplacement.includes("l’extrait simulé actualisé est fourni uniquement dans la Remise 2")) failures.push("Ancien extrait RC TC01 conserve une consigne ambiguë");
 if (!tc02.includes('module.status = "core"')) failures.push("TC02 n’est pas promu au statut cœur");
 if (!tc03.includes('module.status = "core"')) failures.push("TC03 n’est pas promu au statut cœur");
 if (!tc04.includes('module.status = "core"')) failures.push("TC04 n’est pas promu au statut cœur");
@@ -117,21 +142,6 @@ for (const code of ["TC01", "TC02", "TC03", "TC04"]) {
   if (!direct.includes(`../index.html#module/${code}`)) failures.push(`Page directe ${code} ne redirige pas vers le SPA canonique`);
 }
 
-const learnerZip = files.find((path) => /^ressources\/tc01-apprenant-v[\d.]+\.zip$/i.test(path));
-if (!learnerZip) {
-  failures.push("ZIP apprenant TC01 absent");
-} else {
-  try {
-    const entries = execFileSync("unzip", ["-Z1", join(root, learnerZip)], { encoding: "utf8" })
-      .split(/\r?\n/)
-      .filter(Boolean);
-    const forbiddenEntries = entries.filter((entry) => /Corrige_responsable|Guide_formateur|(^|\/)formateur(\/|$)/i.test(entry));
-    forbiddenEntries.forEach((entry) => failures.push(`Contenu privé dans le ZIP apprenant: ${entry}`));
-  } catch (error) {
-    failures.push(`ZIP apprenant illisible: ${learnerZip}`);
-  }
-}
-
 if (failures.length) {
   console.error(JSON.stringify({ publicSafety: false, failures }, null, 2));
   process.exit(1);
@@ -141,7 +151,9 @@ console.log(JSON.stringify({
   publicSafety: true,
   repositoryFilesChecked: files.length,
   forbiddenPaths: 0,
-  learnerZipChecked: learnerZip,
+  tc01LearnerFilesChecked: packages.TC01.files.length,
+  tc01RealRegistryExercise: "Nestlé S.A.",
+  tc01LegacyZipRetired: true,
   tc02LearnerFilesChecked: packages.TC02.files.length,
   tc03LearnerFilesChecked: packages.TC03.files.length,
   tc04LearnerFilesChecked: packages.TC04.files.length,

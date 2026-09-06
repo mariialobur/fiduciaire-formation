@@ -27,9 +27,7 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   const PUBLISHED = new Set(["core", "production", "pilot"]);
   const feedback = "Bilan d’autonomie QA: contrôles, sources, erreurs corrigées, limites et points à escalader ont été relus; le dossier reste traçable et reprenable sans revue humaine systématique.";
 
-  function assert(condition, message) {
-    if (!condition) throw new Error(message);
-  }
+  function assert(condition, message) { if (!condition) throw new Error(message); }
   function tick() { return new Promise((resolve) => window.setTimeout(resolve, 0)); }
   async function settle() { await tick(); await tick(); }
   async function navigate(hash) {
@@ -121,35 +119,38 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   const tc02 = window.FIDUCIAIRE_DATA.modules.TC02;
   const tc03 = window.FIDUCIAIRE_DATA.modules.TC03;
   const tc04 = window.FIDUCIAIRE_DATA.modules.TC04;
-  assert(tc01.contentVersion === "1.4" && tc01.quiz.length === 16 && tc01.quizThresholdCount === 14, "Invariant TC01 cassé");
-  assert(tc01.evidenceItems.length === 5, "TC01 doit contenir 5 livrables après suppression du journal séparé");
-  assert(!tc01.evidenceItems.some((item) => item.id === "verification_log"), "Journal de vérification TC01 encore obligatoire");
-  assert(tc01.evidenceItems.every((item) => item.templatePath), "TC01: modèles de livrables non reliés");
-  assert(tc01.evidenceItems.filter((item) => ["opening", "calendar", "outscope"].includes(item.id)).every((item) => item.templatePath.endsWith(".xlsx")), "TC01: modèles Excel principaux non reliés");
+  assert(tc01.contentVersion === "1.6" && tc01.lessonRevision === "1.6-mission", "TC01 Mission 1.6 non active");
+  assert(tc01.quiz.length === 8 && tc01.quizThresholdCount === 7, "Challenge TC01 doit contenir 8 situations avec seuil 7/8");
+  assert(tc01.quiz.filter((q) => q.critical).length === 3, "TC01 Mission doit contenir 3 questions critiques");
+  assert(tc01.evidenceItems.length === 2, "TC01 Mission doit contenir 2 résultats utiles");
+  assert(tc01.evidenceItems.some((item) => item.id === "dossier_opening"), "Note de dossier TC01 absente");
+  assert(tc01.evidenceItems.some((item) => item.id === "client_email"), "E-mail client TC01 absent");
+  assert(tc01.evidenceItems.every((item) => item.templatePath), "TC01: modèles de résultats non reliés");
+  assert(tc01.practicalReview.scoreItems.length === 4, "Autocontrôle TC01 non simplifié à 4 critères");
+  assert(tc01.learnerPackage.files[0].path.endsWith("00_Mission_TC01_v1.6.html"), "Mission TC01 n’est pas le premier contenu apprenant");
+  assert(tc01.sections.length === 3 && tc01.sections[0].title.includes("Mission 01"), "Page module TC01 non recentrée sur la Mission");
   assert(tc02.evidenceItems.every((item) => item.templatePath), "TC02: modèles de livrables non reliés");
   assert(tc03.evidenceItems.every((item) => item.templatePath), "TC03: modèles de livrables non reliés");
   assert(tc04.evidenceItems.every((item) => item.templatePath), "TC04: modèles de livrables non reliés");
   assert(tc01.sourceRefs.includes("TC01_UID") && tc01.sourceRefs.includes("TC01_ESTV_UID"), "Sources IDE/TVA TC01 absentes");
-  assert(tc01.learnerPackage.files.some((file) => file.path.endsWith("13_Exercice_IDE_TVA_reel.html")), "Exercice IDE/TVA absent du paquet TC01");
-  assert(tc01.learnerPackage.files.some((file) => file.path.endsWith("Glossaire_fiduciaire_debutant.html")), "Glossaire absent du paquet TC01");
-  assert(tc01.sections.some((section) => String(section.title).includes("Contrôle IDE / TVA réel")), "Section IDE/TVA visuelle absente du TC01");
 
   await navigate("#module/TC01");
   assert(!document.querySelector(".file-pick"), "TC01 affiche encore Choisir un fichier");
-  assert(document.querySelectorAll(".evidence-completion").length === 5, "TC01 n’affiche pas 5 cases de livrables terminés");
-  assert(document.querySelectorAll(".evidence-autonomy-actions a").length === 5, "TC01 n’affiche pas les 5 modèles correspondant aux livrables");
-  assert(document.querySelectorAll(".evidence-purpose").length === 5, "TC01 n’explique pas la fonction des 5 livrables");
-  assert(document.querySelectorAll(".term-help").length >= 5, "Infobulles débutant absentes des livrables");
+  assert(document.querySelectorAll(".evidence-completion").length === 2, "TC01 n’affiche pas 2 résultats terminés");
+  assert(document.querySelectorAll(".evidence-autonomy-actions a").length === 2, "TC01 n’affiche pas les 2 modèles correspondant aux résultats");
+  assert(document.querySelectorAll(".evidence-purpose").length === 2, "TC01 n’explique pas la fonction des 2 résultats");
+  assert(document.querySelectorAll(".term-help").length >= 2, "Aide contextuelle absente des résultats TC01");
+  assert(Array.from(document.querySelectorAll("a")).some((a) => a.textContent.includes("Commencer la Mission 01")), "CTA Mission 01 absent du module");
   assert(document.querySelector(".practical-review h2")?.textContent.includes("Je vérifie mon propre dossier"), "Autocontrôle guidé non rendu");
   assert(document.querySelector(".validation-panel .fine-print")?.textContent.includes("revue humaine devient ciblée"), "Aide autonomie absente");
   assert(Array.from(document.querySelectorAll(".nav-actions .nav-link")).some((node) => node.textContent.trim() === "Glossaire"), "Glossaire absent de la navigation principale");
   assert(!Array.from(document.querySelectorAll(".nav-actions .nav-link")).some((node) => ["Importer", "Exporter"].includes(node.textContent.trim())), "Importer/Exporter encore visibles dans la navigation principale");
 
-  const openingInput = document.getElementById("evidence-opening");
-  openingInput.value = "J_Calendrier_source.xlsx";
+  const dossierInput = document.getElementById("evidence-dossier_opening");
+  dossierInput.value = "J_Calendrier_source.xlsx";
   window.FiduApp.saveArtifact("TC01");
   await settle();
-  assert(document.querySelector(".autonomy-warning"), "TC01 ne détecte pas une pièce source utilisée à la place d’un livrable");
+  assert(document.querySelector(".autonomy-warning"), "TC01 ne détecte pas une pièce source utilisée à la place du résultat");
   assert(!document.querySelector(".evidence-completion input")?.checked, "Pièce source marquée terminée à tort");
 
   await completeModule("TC01");
@@ -165,14 +166,8 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   assert(Array.from(document.querySelectorAll(".month-main h2")).some((h) => h.textContent.includes("Mises en situation")), "Travaux encore présentés comme systématiquement supervisés");
 
   const month1 = window.FIDUCIAIRE_ROADMAP.months.find((month) => month.month === 1);
-  for (let i = 0; i < month1.practice.length; i += 1) {
-    window.FiduApp.toggleMonthTask(1, "practice", i, true);
-    await settle();
-  }
-  for (let i = 0; i < month1.deliverables.length; i += 1) {
-    window.FiduApp.toggleMonthTask(1, "deliverables", i, true);
-    await settle();
-  }
+  for (let i = 0; i < month1.practice.length; i += 1) { window.FiduApp.toggleMonthTask(1, "practice", i, true); await settle(); }
+  for (let i = 0; i < month1.deliverables.length; i += 1) { window.FiduApp.toggleMonthTask(1, "deliverables", i, true); await settle(); }
 
   await navigate("#month/1");
   const monthEvidence = "Bilan QA du Mois 1: ouverture du dossier, séparation juridique et patrimoniale, accès, KYC, contrôles de registre, pièces manquantes, erreurs corrigées et limites de délégation ont été documentés de façon autonome.";
@@ -211,14 +206,13 @@ const { JSDOM, VirtualConsole } = require("jsdom");
     blueprints: 21,
     autonomyFirst: true,
     beginnerUx: true,
+    tc01Mission: "1.6",
+    tc01MissionResults: 2,
+    tc01ChallengeQuestions: 8,
+    tc01ShortSelfCheck: 4,
     falseUploadRemoved: true,
-    evidenceTemplatesLinked: true,
-    tc01FiveDeliverables: true,
-    duplicateJournalRemoved: true,
     contextualHelp: true,
     glossaryNav: true,
-    tc01RealVatCheck: true,
-    moduleSelfCheck: true,
     targetedHumanReview: true,
     month1AutonomousValidation: true,
     invalidationAfterEvidenceChange: true

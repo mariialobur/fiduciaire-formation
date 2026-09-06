@@ -6,10 +6,11 @@
   const coursePath='ressources/tc01-apprenant-v1.5/01_Cours_TC01_v1.5.html';
   const zefixPath='ressources/tc01-apprenant-v1.6/01_Zefix_MicroMission_RC.html';
   const ideTvaPath='ressources/tc01-apprenant-v1.6/02_IDE_TVA_MicroMission.html';
+  const mandatPath='ressources/tc01-apprenant-v1.6/03_Mandat_MicroMission.html';
 
   module.contentVersion='1.6';
   module.lessonRevision='1.6-mission';
-  module.pedagogicalStatus='TC01 · Mission guidée · RC/IDE approfondis au bon moment · autonomie-first';
+  module.pedagogicalStatus='TC01 · Mission guidée · RC/IDE/mandat approfondis au bon moment · autonomie-first';
   module.duration='35–45 min mission + pratique réelle + autocontrôle';
   module.beginnerLearningPath=[
     'Recevoir une demande et décider quoi vérifier avant de produire',
@@ -36,6 +37,7 @@
     {label:'▶ Mission 01 — Pouvez-vous prendre ce dossier?',path:missionPath},
     {label:'Micro-mission RC / Zefix — Nestlé S.A.',path:zefixPath},
     {label:'Micro-mission IDE / TVA — vérifier la période',path:ideTvaPath},
+    {label:'Micro-mission Mandat — inclus / à confirmer / hors mandat',path:mandatPath},
     {label:'Cours de référence TC01',path:coursePath},
     {label:'Glossaire fiduciaire débutant',path:'ressources/Glossaire_fiduciaire_debutant.html'}
   ];
@@ -49,9 +51,9 @@
       bodyHtml:`<p>Le module commence désormais par une <strong>situation de travail</strong>, pas par une longue lecture. Une demande TVA urgente arrive avec une demande de paie et une proposition de partager un mot de passe ePortal. Vous devez découvrir vous-même ce qu’il faut vérifier, puis les explications apparaissent au moment où elles deviennent utiles.</p><div class="callout"><strong>Objectif</strong><p>Décider jusqu’où le dossier peut avancer en vérifiant l’entité, le RC, l’IDE/TVA, le mandat, les pouvoirs et l’échéance — sans tout escalader et sans inventer ce qui manque.</p></div><p><a class="btn btn-primary" href="${missionPath}" target="_blank" rel="noopener noreferrer">▶ Commencer la Mission 01</a></p>`
     },
     {
-      title:'Deux outils à vraiment comprendre: RC et IDE / TVA',
+      title:'Trois briques à vraiment comprendre: RC, IDE / TVA et mandat',
       type:'decision',
-      bodyHtml:`<p>Ces deux blocs restent volontairement approfondis. Ils sont souvent montrés au travail sans être expliqués. La mission vous y envoie seulement lorsque le besoin apparaît.</p><div class="dimension-grid"><div><strong>RC / Zefix</strong><span>Raison sociale, forme juridique, siège, statut, IDE/UID, fonctions et modes de signature.</span></div><div><strong>IDE / TVA</strong><span>Identité IDE, statut TVA, début/fin d’assujettissement et lecture par rapport à la période réellement traitée. Le groupe TVA est présenté comme signal complémentaire, pas comme prérequis.</span></div></div><p><a href="${zefixPath}" target="_blank" rel="noopener noreferrer">Micro-mission Zefix / RC →</a> · <a href="${ideTvaPath}" target="_blank" rel="noopener noreferrer">Micro-mission IDE / TVA →</a></p>`
+      bodyHtml:`<p>Ces blocs restent volontairement approfondis parce qu’ils sont souvent montrés au travail sans être expliqués. La mission vous y envoie seulement lorsque le besoin apparaît.</p><div class="dimension-grid"><div><strong>RC / Zefix</strong><span>Raison sociale, forme juridique, siège, statut, IDE/UID, fonctions et modes de signature.</span></div><div><strong>IDE / TVA</strong><span>Identité IDE, statut TVA, début/fin d’assujettissement et lecture par rapport à la période réellement traitée.</span></div><div><strong>Mandat</strong><span>Déterminer ce qui est inclus, à confirmer ou hors mandat sans tout bloquer ni accepter silencieusement une nouvelle tâche.</span></div></div><p><a href="${zefixPath}" target="_blank" rel="noopener noreferrer">Micro-mission Zefix / RC →</a> · <a href="${ideTvaPath}" target="_blank" rel="noopener noreferrer">Micro-mission IDE / TVA →</a> · <a href="${mandatPath}" target="_blank" rel="noopener noreferrer">Micro-mission Mandat →</a></p>`
     },
     {
       title:'Référence — seulement si vous voulez revenir sur une notion',

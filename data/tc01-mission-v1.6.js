@@ -4,6 +4,8 @@
   const module=DATA.modules.TC01;
   const missionPath='ressources/tc01-apprenant-v1.6/00_Mission_TC01_v1.6.html';
   const coursePath='ressources/tc01-apprenant-v1.5/01_Cours_TC01_v1.5.html';
+  const zefixPath='ressources/tc01-apprenant-v1.6/01_Zefix_MicroMission_RC.html';
+  const ideTvaPath='ressources/tc01-apprenant-v1.6/02_IDE_TVA_MicroMission.html';
 
   module.contentVersion='1.6';
   module.lessonRevision='1.6-mission';
@@ -26,12 +28,14 @@
     'ressources/tc01-apprenant-v1.4/08_Calendrier_TC01.xlsx',
     'ressources/tc01-apprenant-v1.4/09_Registre_hors_mandat_TC01.xlsx',
     'ressources/tc01-apprenant-v1.4/10_Note_decision_TC01.txt',
-    'ressources/tc01-apprenant-v1.4/15_Guide_des_livrables_TC01.html'
+    'ressources/tc01-apprenant-v1.4/15_Guide_des_livrables_TC01.html',
+    'ressources/tc01-apprenant-v1.4/01_Exercice_Zefix_reel_Nestle.html',
+    'ressources/tc01-apprenant-v1.4/13_Exercice_IDE_TVA_reel.html'
   ].includes(file.path));
   const priority=[
     {label:'▶ Mission 01 — Pouvez-vous prendre ce dossier?',path:missionPath},
-    {label:'Comprendre Zefix / RC en profondeur',path:'ressources/tc01-apprenant-v1.4/01_Exercice_Zefix_reel_Nestle.html'},
-    {label:'Comprendre IDE / TVA en profondeur',path:'ressources/tc01-apprenant-v1.4/13_Exercice_IDE_TVA_reel.html'},
+    {label:'Micro-mission RC / Zefix — Nestlé S.A.',path:zefixPath},
+    {label:'Micro-mission IDE / TVA — vérifier la période',path:ideTvaPath},
     {label:'Cours de référence TC01',path:coursePath},
     {label:'Glossaire fiduciaire débutant',path:'ressources/Glossaire_fiduciaire_debutant.html'}
   ];
@@ -47,7 +51,7 @@
     {
       title:'Deux outils à vraiment comprendre: RC et IDE / TVA',
       type:'decision',
-      bodyHtml:`<p>Ces deux blocs restent volontairement approfondis. Ils sont souvent montrés au travail sans être expliqués. La mission vous y envoie seulement lorsque le besoin apparaît.</p><div class="dimension-grid"><div><strong>RC / Zefix</strong><span>Raison sociale, forme juridique, siège, statut, IDE/UID, fonctions et modes de signature.</span></div><div><strong>IDE / TVA</strong><span>Statut IDE, statut RC, statut Registre TVA, début/fin d’assujettissement et éventuel groupe TVA.</span></div></div><p><a href="ressources/tc01-apprenant-v1.4/01_Exercice_Zefix_reel_Nestle.html" target="_blank" rel="noopener noreferrer">Approfondir Zefix / RC →</a> · <a href="ressources/tc01-apprenant-v1.4/13_Exercice_IDE_TVA_reel.html" target="_blank" rel="noopener noreferrer">Approfondir IDE / TVA →</a></p>`
+      bodyHtml:`<p>Ces deux blocs restent volontairement approfondis. Ils sont souvent montrés au travail sans être expliqués. La mission vous y envoie seulement lorsque le besoin apparaît.</p><div class="dimension-grid"><div><strong>RC / Zefix</strong><span>Raison sociale, forme juridique, siège, statut, IDE/UID, fonctions et modes de signature.</span></div><div><strong>IDE / TVA</strong><span>Identité IDE, statut TVA, début/fin d’assujettissement et lecture par rapport à la période réellement traitée. Le groupe TVA est présenté comme signal complémentaire, pas comme prérequis.</span></div></div><p><a href="${zefixPath}" target="_blank" rel="noopener noreferrer">Micro-mission Zefix / RC →</a> · <a href="${ideTvaPath}" target="_blank" rel="noopener noreferrer">Micro-mission IDE / TVA →</a></p>`
     },
     {
       title:'Référence — seulement si vous voulez revenir sur une notion',

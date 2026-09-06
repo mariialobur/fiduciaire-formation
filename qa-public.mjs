@@ -110,7 +110,7 @@ if (!vatMicro.includes("https://www.uid.admin.ch/") || !vatMicro.includes("Nestl
 for (const expected of ["Statut IDE", "Statut Registre TVA", "Début d’assujettissement", "Fin d’assujettissement", "Date / période que je traite"]) {
   if (!vatMicro.includes(expected)) failures.push(`Micro-mission IDE/TVA incomplète: ${expected}`);
 }
-if (!vatLower.includes("rc actif") || !vatLower.includes("tva active") || !vatMicro.includes("localStorage")) failures.push("Micro-mission IDE/TVA ne distingue pas RC/IDE/TVA ou ne conserve pas la progression");
+if (!vatLower.includes("rc actif") || !vatLower.includes("statut tva") || !vatMicro.includes("localStorage")) failures.push("Micro-mission IDE/TVA ne distingue pas RC/IDE/TVA ou ne conserve pas la progression");
 if (!vatMicro.includes("groupe d’imposition TVA") || !vatMicro.includes("À savoir, sans devoir tout maîtriser")) failures.push("Groupe TVA n’est pas présenté comme approfondissement progressif");
 if (!legacyVat.includes("02_IDE_TVA_MicroMission.html")) failures.push("Ancienne URL IDE/TVA ne redirige pas vers la micro-mission v1.6");
 

@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const root = dirname(fileURLToPath(import.meta.url));
-const [css, appData, roadmapData, tc01v14, tc02v10, tc03v10, tc04v10, app, runtimeEnhancements] = await Promise.all([
+const [css, appData, roadmapData, tc01v14, tc02v10, tc03v10, tc04v10, app, runtimeEnhancements, autonomyObserverGuard, autonomyFirst] = await Promise.all([
   readFile(join(root, "style.css"), "utf8"),
   readFile(join(root, "data/app-data.js"), "utf8"),
   readFile(join(root, "data/roadmap-data.js"), "utf8"),
@@ -12,7 +12,9 @@ const [css, appData, roadmapData, tc01v14, tc02v10, tc03v10, tc04v10, app, runti
   readFile(join(root, "data/tc03-v1.0.js"), "utf8"),
   readFile(join(root, "data/tc04-v1.0.js"), "utf8"),
   readFile(join(root, "app.js"), "utf8"),
-  readFile(join(root, "data/runtime-enhancements.js"), "utf8")
+  readFile(join(root, "data/runtime-enhancements.js"), "utf8"),
+  readFile(join(root, "data/autonomy-observer-guard.js"), "utf8"),
+  readFile(join(root, "data/autonomy-first.js"), "utf8")
 ]);
 
 const safeScript = (content) => content.replace(/<\/script/gi, "<\\/script");
@@ -37,6 +39,8 @@ const html = `<!doctype html>
   <script>${safeScript(tc04v10)}</script>
   <script>${safeScript(app)}</script>
   <script>${safeScript(runtimeEnhancements)}</script>
+  <script>${safeScript(autonomyObserverGuard)}</script>
+  <script>${safeScript(autonomyFirst)}</script>
   <script>FiduApp.route();</script>
 </body>
 </html>`;
@@ -46,4 +50,4 @@ await Promise.all([
   writeFile(join(root, "LANCER_ICI.html"), html)
 ]);
 
-console.log(`Standalone généré: ${html.length} caractères · 4/25 modules complets`);
+console.log(`Standalone généré: ${html.length} caractères · 4/25 modules complets · autonomie-first activée`);

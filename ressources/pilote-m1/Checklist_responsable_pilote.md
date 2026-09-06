@@ -1,73 +1,69 @@
-# Checklist responsable — pilote Mois 1
+# Checklist de revue ciblée — pilote Mois 1
 
 **Apprenant ID:** ___  
-**Responsable:** ___  
+**Personne de référence:** ___  
 **Date:** ___  
-**Module:** TC0_  
+**Échantillon / point déclencheur:** ___
 
-## 1. Avant la revue
+> Cette checklist n’est pas remplie après chaque module. Elle sert uniquement pour l’échantillon final ou lorsqu’un signal déclenche une revue humaine ciblée.
 
-- [ ] Première version de l’apprenant conservée.
-- [ ] Livrables identifiables et référencés.
-- [ ] Aucune donnée client réelle dans l’édition publique.
-- [ ] Quiz effectué sans accès anticipé à la correction.
-- [ ] Interventions orales du responsable notées dans la fiche d’observation.
+## 1. Pourquoi cette revue existe-t-elle?
 
-## 2. Qualité du raisonnement
+- [ ] Échantillonnage qualité de fin de mois.
+- [ ] Erreur critique persistante.
+- [ ] Réponse «je ne sais pas» à un contrôle critique.
+- [ ] Source ou pièce contradictoire.
+- [ ] Décision réelle hors périmètre.
+- [ ] Autre: ___
 
+## 2. Contrôle rapide du livrable
+
+- [ ] Le document produit par l’apprenant est identifiable; ce n’est pas une pièce source copiée à la place du livrable.
+- [ ] Aucune donnée client réelle n’est saisie dans l’édition publique.
 - [ ] Les faits sont séparés des hypothèses.
-- [ ] Les pièces manquantes sont visibles.
+- [ ] Les pièces manquantes et inconnues restent visibles.
 - [ ] Les sources importantes sont datées.
-- [ ] Le learner n’invente pas une conclusion pour fermer artificiellement le dossier.
-- [ ] Le niveau d’escalade est cohérent avec son rôle.
-- [ ] La correction ne supprime pas l’historique de la première analyse.
+- [ ] Le raisonnement peut être compris sans explication orale supplémentaire.
+- [ ] Le niveau d’escalade est cohérent avec le rôle.
 
-## 3. Origine des difficultés
+## 3. L’autocontrôle a-t-il fonctionné?
 
-Pour chaque difficulté matérielle, cocher la cause principale:
+- [ ] L’erreur principale avait déjà été détectée par le learner / la plateforme.
+- [ ] Les contrôles critiques n’ont pas laissé passer une erreur grave.
+- [ ] Les corrections ont été faites sans effacer la première version utile.
+- [ ] Le learner sait expliquer ce qu’il peut décider seul et ce qu’il doit escalader.
+
+Si une erreur critique n’a pas été détectée par l’autocontrôle, classer le problème en priorité élevée.
+
+## 4. Origine de la difficulté
 
 - [ ] **L — Learner:** connaissance ou raisonnement à travailler.
 - [ ] **C — Contenu:** cours, dossier, exemple ou consigne insuffisant.
 - [ ] **UX — Interface:** libellé, navigation ou interaction source d’erreur.
-- [ ] **P — Prérequis:** notion nécessaire mais placée trop tôt dans le parcours.
-- [ ] **R — Règle/procédure:** source ou procédure interne à revalider.
+- [ ] **P — Prérequis:** notion nécessaire mais placée trop tôt.
+- [ ] **R — Règle/procédure:** source ou procédure à revalider.
 
 ### Description
 
 ___
 
-### Intervention nécessaire
+## 5. Intervention réellement nécessaire
 
 - [ ] Niveau 0 — aucune
-- [ ] Niveau 1 — aide de navigation / technique
+- [ ] Niveau 1 — aide navigation / technique
 - [ ] Niveau 2 — relance méthodologique
 - [ ] Niveau 3 — explication conceptuelle
 - [ ] Niveau 4 — réponse substantielle donnée
 
-## 4. Contrôles critiques
+**Minutes de revue humaine:** ___
 
-- [ ] Aucun point critique n’a été ignoré dans la revue.
-- [ ] Chaque erreur critique est décrite factuellement.
-- [ ] La cause de l’erreur est classée Learner / Contenu / UX / Prérequis / Règle.
-- [ ] Une action corrective existe.
+Les niveaux 3–4 répétés sont un signal de défaut du programme ou de prérequis insuffisant.
 
-## 5. Le dossier est-il reprenable?
+## 6. Décision sur le programme
 
-Un autre collaborateur devrait pouvoir comprendre sans explication orale supplémentaire:
-
-- [ ] ce qui a été reçu;
-- [ ] ce qui a été vérifié;
-- [ ] la conclusion provisoire;
-- [ ] ce qui reste inconnu;
-- [ ] la source de la décision;
-- [ ] ce qui doit être escaladé;
-- [ ] la différence entre version 1 et version corrigée.
-
-## 6. Décision module
-
-- [ ] **ACCEPT** — le standard du module fonctionne tel quel.
-- [ ] **FIX** — corrections ciblées du contenu ou de l’interface.
-- [ ] **REWORK** — architecture ou position dans le parcours à revoir.
+- [ ] **ACCEPT** — l’autocontrôle et le contenu ont suffi; pas de correction importante.
+- [ ] **FIX** — correction ciblée pour éviter une aide humaine répétitive.
+- [ ] **REWORK** — l’autocontrôle laisse passer une erreur critique ou le learner dépend trop d’explications externes.
 
 ### Correctifs à ouvrir
 
@@ -75,14 +71,14 @@ Un autre collaborateur devrait pouvoir comprendre sans explication orale supplé
 2. ___
 3. ___
 
-## 7. Niveau de délégation observé
+## 7. Niveau d’autonomie observé
 
-- [ ] Observation uniquement
-- [ ] Exécution avec checklist
-- [ ] Préparation correcte pour revue
-- [ ] Autonomie sur le périmètre testé
-- [ ] Niveau non démontré / prolongation ciblée
+- [ ] Avance seul avec les modèles et corrections.
+- [ ] Avance seul mais demande une relance méthodologique ponctuelle.
+- [ ] Prépare correctement un point pour revue ciblée.
+- [ ] Autonome sur le périmètre testé.
+- [ ] Dépendance humaine excessive / prolongation ciblée.
 
-### Commentaire final du responsable
+### Commentaire final
 
 ___

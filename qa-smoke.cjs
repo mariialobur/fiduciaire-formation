@@ -108,6 +108,7 @@ const { JSDOM, VirtualConsole } = require("jsdom");
 
   await settle();
   assert(window.FIDUCIAIRE_AUTONOMY?.mode === "autonomy-first", "Couche autonomy-first absente");
+  assert(window.FIDUCIAIRE_BEGINNER_UX?.version === "1.0", "Couche beginner UX absente");
   assert(document.querySelector("h1")?.textContent.includes("autonomie"), "Accueil non rendu");
   assert(document.querySelectorAll(".month-card").length === 12, "La feuille de route ne contient pas 12 mois");
   assert(window.FIDUCIAIRE_ROADMAP.coreModules.length === 25, "Le parcours ne contient pas 25 compétences cœur");
@@ -121,23 +122,29 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   const tc03 = window.FIDUCIAIRE_DATA.modules.TC03;
   const tc04 = window.FIDUCIAIRE_DATA.modules.TC04;
   assert(tc01.contentVersion === "1.4" && tc01.quiz.length === 16 && tc01.quizThresholdCount === 14, "Invariant TC01 cassé");
+  assert(tc01.evidenceItems.length === 5, "TC01 doit contenir 5 livrables après suppression du journal séparé");
+  assert(!tc01.evidenceItems.some((item) => item.id === "verification_log"), "Journal de vérification TC01 encore obligatoire");
   assert(tc01.evidenceItems.every((item) => item.templatePath), "TC01: modèles de livrables non reliés");
+  assert(tc01.evidenceItems.filter((item) => ["opening", "calendar", "outscope"].includes(item.id)).every((item) => item.templatePath.endsWith(".xlsx")), "TC01: modèles Excel principaux non reliés");
   assert(tc02.evidenceItems.every((item) => item.templatePath), "TC02: modèles de livrables non reliés");
   assert(tc03.evidenceItems.every((item) => item.templatePath), "TC03: modèles de livrables non reliés");
   assert(tc04.evidenceItems.every((item) => item.templatePath), "TC04: modèles de livrables non reliés");
   assert(tc01.sourceRefs.includes("TC01_UID") && tc01.sourceRefs.includes("TC01_ESTV_UID"), "Sources IDE/TVA TC01 absentes");
   assert(tc01.learnerPackage.files.some((file) => file.path.endsWith("13_Exercice_IDE_TVA_reel.html")), "Exercice IDE/TVA absent du paquet TC01");
+  assert(tc01.learnerPackage.files.some((file) => file.path.endsWith("Glossaire_fiduciaire_debutant.html")), "Glossaire absent du paquet TC01");
   assert(tc01.sections.some((section) => String(section.title).includes("Contrôle IDE / TVA réel")), "Section IDE/TVA visuelle absente du TC01");
 
-  // Le faux upload est remplacé par modèle + case «terminé».
   await navigate("#module/TC01");
   assert(!document.querySelector(".file-pick"), "TC01 affiche encore Choisir un fichier");
-  assert(document.querySelectorAll(".evidence-completion").length === 6, "TC01 n’affiche pas 6 cases de livrables terminés");
-  assert(document.querySelectorAll(".evidence-autonomy-actions a").length === 6, "TC01 n’affiche pas les 6 modèles correspondant aux livrables");
+  assert(document.querySelectorAll(".evidence-completion").length === 5, "TC01 n’affiche pas 5 cases de livrables terminés");
+  assert(document.querySelectorAll(".evidence-autonomy-actions a").length === 5, "TC01 n’affiche pas les 5 modèles correspondant aux livrables");
+  assert(document.querySelectorAll(".evidence-purpose").length === 5, "TC01 n’explique pas la fonction des 5 livrables");
+  assert(document.querySelectorAll(".term-help").length >= 5, "Infobulles débutant absentes des livrables");
   assert(document.querySelector(".practical-review h2")?.textContent.includes("Je vérifie mon propre dossier"), "Autocontrôle guidé non rendu");
   assert(document.querySelector(".validation-panel .fine-print")?.textContent.includes("revue humaine devient ciblée"), "Aide autonomie absente");
+  assert(Array.from(document.querySelectorAll(".nav-actions .nav-link")).some((node) => node.textContent.trim() === "Glossaire"), "Glossaire absent de la navigation principale");
+  assert(!Array.from(document.querySelectorAll(".nav-actions .nav-link")).some((node) => ["Importer", "Exporter"].includes(node.textContent.trim())), "Importer/Exporter encore visibles dans la navigation principale");
 
-  // Une pièce source ne doit pas être acceptée visuellement comme livrable.
   const openingInput = document.getElementById("evidence-opening");
   openingInput.value = "J_Calendrier_source.xlsx";
   window.FiduApp.saveArtifact("TC01");
@@ -145,13 +152,11 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   assert(document.querySelector(".autonomy-warning"), "TC01 ne détecte pas une pièce source utilisée à la place d’un livrable");
   assert(!document.querySelector(".evidence-completion input")?.checked, "Pièce source marquée terminée à tort");
 
-  // Les 4 modules se valident sans saisie d’un responsable.
   await completeModule("TC01");
   await completeModule("TC02");
   await completeModule("TC03");
   await completeModule("TC04");
 
-  // Mois 1: bilan d’autonomie, pas revue obligatoire du responsable.
   await navigate("#month/1");
   assert(!document.querySelector(".development-warning"), "Mois 1 reste bloqué malgré 4/4 modules publiés");
   assert(document.querySelector(".review-panel h2")?.textContent.includes("Bilan d’autonomie mensuel"), "Jalon mensuel reste présenté comme revue du responsable");
@@ -185,7 +190,6 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   assert(stored.months[1]?.reviewer?.name === "AUTO", "Jalon autonome exige encore un responsable nommé");
   assert(month1.modules.every((code) => stored.modules[code]?.status === "validated"), "Modules M1 non validés avec le jalon autonome");
 
-  // Toute modification d’une preuve doit encore invalider l’autocontrôle et le jalon.
   await navigate("#module/TC04");
   document.getElementById("artifactNotes").value += " Modification post-validation mensuelle.";
   window.FiduApp.saveArtifact("TC04");
@@ -197,7 +201,7 @@ const { JSDOM, VirtualConsole } = require("jsdom");
 
   await navigate("#library");
   assert(document.querySelectorAll(".track-card").length === 11, "Bibliothèque ne contient pas 11 secteurs");
-  assert(typeof window.FiduApp.exportProgress === "function" && typeof window.FiduApp.importProgress === "function", "Import/export progression absent");
+  assert(typeof window.FiduApp.exportProgress === "function" && typeof window.FiduApp.importProgress === "function", "Import/export progression absent en paramètres internes");
   assert(errors.length === 0, `Erreurs navigateur: ${errors.join(" | ")}`);
 
   console.log(JSON.stringify({
@@ -206,8 +210,13 @@ const { JSDOM, VirtualConsole } = require("jsdom");
     publishedCore: 4,
     blueprints: 21,
     autonomyFirst: true,
+    beginnerUx: true,
     falseUploadRemoved: true,
     evidenceTemplatesLinked: true,
+    tc01FiveDeliverables: true,
+    duplicateJournalRemoved: true,
+    contextualHelp: true,
+    glossaryNav: true,
     tc01RealVatCheck: true,
     moduleSelfCheck: true,
     targetedHumanReview: true,

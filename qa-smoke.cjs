@@ -107,6 +107,7 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   await settle();
   assert(window.FIDUCIAIRE_AUTONOMY?.mode === "autonomy-first", "Couche autonomy-first absente");
   assert(window.FIDUCIAIRE_BEGINNER_UX?.version === "1.0", "Couche beginner UX absente");
+  assert(window.FIDUCIAIRE_TC01_FINAL_UX?.version === "1.0", "Couche TC01 final UX absente");
   assert(document.querySelector("h1")?.textContent.includes("autonomie"), "Accueil non rendu");
   assert(document.querySelectorAll(".month-card").length === 12, "La feuille de route ne contient pas 12 mois");
   assert(window.FIDUCIAIRE_ROADMAP.coreModules.length === 25, "Le parcours ne contient pas 25 compétences cœur");
@@ -119,17 +120,20 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   const tc02 = window.FIDUCIAIRE_DATA.modules.TC02;
   const tc03 = window.FIDUCIAIRE_DATA.modules.TC03;
   const tc04 = window.FIDUCIAIRE_DATA.modules.TC04;
-  assert(tc01.contentVersion === "1.7" && tc01.lessonRevision === "1.7-mission", "TC01 Mission 1.7 non active");
+  assert(tc01.contentVersion === "1.8" && tc01.lessonRevision === "1.8-final", "TC01 final 1.8 non actif");
   assert(tc01.quiz.length === 8 && tc01.quizThresholdCount === 7, "Challenge TC01 doit contenir 8 situations avec seuil 7/8");
-  assert(tc01.quiz.filter((q) => q.critical).length === 3, "TC01 Mission doit contenir 3 questions critiques");
-  assert(tc01.evidenceItems.length === 1, "TC01 Mission doit contenir 1 résultat utile");
+  assert(tc01.quiz.filter((q) => q.critical).length === 4, "TC01 final doit contenir 4 situations critiques");
+  assert(tc01.criticalQuestionIds.length === 4 && tc01.criticalQuestionIds.includes("Q07"), "Questions critiques TC01 mal configurées");
+  assert(tc01.evidenceItems.length === 1, "TC01 final doit contenir 1 résultat utile");
   assert(tc01.evidenceItems[0]?.id === "dossier_opening", "Note de dossier TC01 absente");
+  assert(tc01.evidenceItems[0]?.templatePath.endsWith("06_Finalisation_Note_Autocontrole.html"), "Note TC01 ne pointe pas vers la finalisation v1.8");
   assert(!tc01.evidenceItems.some((item) => item.id === "client_email"), "E-mail client ne doit plus être un livrable TC01");
-  assert(tc01.evidenceItems.every((item) => item.templatePath), "TC01: modèle de résultat non relié");
-  assert(tc01.practicalReview.scoreItems.length === 4, "Autocontrôle TC01 non simplifié à 4 critères");
-  assert(tc01.learnerPackage.files[0].path.endsWith("00_Mission_TC01_v1.7.html"), "Mission TC01 v1.7 n’est pas le premier contenu apprenant");
+  assert(tc01.practicalReview.scoreItems.length === 4, "Autocontrôle TC01 doit avoir 4 critères de qualité");
+  assert(tc01.practicalReview.criticalChecks.length === 4, "Autocontrôle TC01 doit avoir 4 contrôles zéro tolérance");
+  assert(tc01.learnerPackage.files[0].path.endsWith("00_Mission_TC01_v1.7.html"), "Mission TC01 n’est pas le premier contenu apprenant");
+  assert(tc01.learnerPackage.files.some((item) => item.path.endsWith("06_Finalisation_Note_Autocontrole.html")), "Finalisation TC01 absente du learner-pack");
   assert(!tc01.learnerPackage.files.some((item) => item.path.endsWith("11_Email_client_TC01.txt")), "Ancien modèle e-mail encore présent dans le learner-pack TC01");
-  assert(tc01.sections.length === 3 && tc01.sections[0].title.includes("Mission 01"), "Page module TC01 non recentrée sur la Mission");
+  assert(tc01.sections.length === 4 && tc01.sections[0].title.includes("Mission 01") && tc01.sections[2].title.includes("Finalisation"), "Page module TC01 non structurée Mission → Finalisation → Référence");
   assert(tc02.evidenceItems.every((item) => item.templatePath), "TC02: modèles de livrables non reliés");
   assert(tc03.evidenceItems.every((item) => item.templatePath), "TC03: modèles de livrables non reliés");
   assert(tc04.evidenceItems.every((item) => item.templatePath), "TC04: modèles de livrables non reliés");
@@ -142,7 +146,10 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   assert(document.querySelectorAll(".evidence-purpose").length === 1, "TC01 n’explique pas la fonction de la note de dossier");
   assert(document.querySelectorAll(".term-help").length >= 1, "Aide contextuelle absente du résultat TC01");
   assert(Array.from(document.querySelectorAll("a")).some((a) => a.textContent.includes("Commencer la Mission 01")), "CTA Mission 01 absent du module");
+  assert(Array.from(document.querySelectorAll("a")).some((a) => a.textContent.includes("Finaliser ma note de dossier")), "CTA finalisation TC01 absent du module");
   assert(document.querySelector(".practical-review h2")?.textContent.includes("Je vérifie mon propre dossier"), "Autocontrôle guidé non rendu");
+  assert(document.querySelector(".autonomy-declaration span")?.textContent.includes("ma note de dossier"), "Déclaration TC01 parle encore de plusieurs livrables");
+  assert(Array.from(document.querySelectorAll("h2,h3")).some((h) => h.textContent.includes("Challenge final · 8 situations de travail")), "Quiz TC01 n’est pas présenté comme challenge final");
   assert(document.querySelector(".validation-panel .fine-print")?.textContent.includes("revue humaine devient ciblée"), "Aide autonomie absente");
   assert(Array.from(document.querySelectorAll(".nav-actions .nav-link")).some((node) => node.textContent.trim() === "Glossaire"), "Glossaire absent de la navigation principale");
   assert(!Array.from(document.querySelectorAll(".nav-actions .nav-link")).some((node) => ["Importer", "Exporter"].includes(node.textContent.trim())), "Importer/Exporter encore visibles dans la navigation principale");
@@ -207,10 +214,13 @@ const { JSDOM, VirtualConsole } = require("jsdom");
     blueprints: 21,
     autonomyFirst: true,
     beginnerUx: true,
-    tc01Mission: "1.7",
+    tc01FinalUx: true,
+    tc01Version: "1.8-final",
     tc01MissionResults: 1,
     tc01ChallengeQuestions: 8,
+    tc01CriticalChallengeQuestions: 4,
     tc01ShortSelfCheck: 4,
+    tc01CriticalSelfCheck: 4,
     falseUploadRemoved: true,
     contextualHelp: true,
     glossaryNav: true,

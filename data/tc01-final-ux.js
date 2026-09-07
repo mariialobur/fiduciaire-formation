@@ -7,7 +7,6 @@
 
   const module=DATA.modules.TC01;
   const FINAL_KEY='tc01_final_note_v18';
-  const PROGRESS_KEY='fiduciaire_formation_progress_v24';
   const systemNote='TC01 utilise la note de dossier finalisée comme note de travail.';
 
   module.artifactNoteMinimumCharacters=1;
@@ -26,7 +25,6 @@
 
   function isTc01(){return /^#\/?module\/TC01(?:$|[/?#])/.test(String(location.hash||''));}
   function finalState(){try{return JSON.parse(localStorage.getItem(FINAL_KEY)||'{}')}catch(e){return {}}}
-  function progressState(){try{return JSON.parse(localStorage.getItem(PROGRESS_KEY)||'{}')}catch(e){return {}}}
   function today(){return new Date().toISOString().slice(0,10)}
 
   function hideDuplicateWorkNote(){
@@ -77,18 +75,20 @@
     }
   }
 
+  function setText(node,text){if(node&&node.textContent!==text)node.textContent=text;}
   function patchLabels(){
     const artifact=document.getElementById('artifact');
-    if(artifact){const kicker=artifact.querySelector('.kicker');if(kicker)kicker.textContent='Résultat de la mission';const h=artifact.querySelector('h2');if(h)h.textContent='Votre note de dossier';}
+    if(artifact){setText(artifact.querySelector('.kicker'),'Résultat de la mission');setText(artifact.querySelector('h2'),'Votre note de dossier');}
     const quiz=document.getElementById('quiz');
-    if(quiz){const kicker=quiz.querySelector('.kicker');if(kicker)kicker.textContent='Mise en situation';const h=quiz.querySelector('h2');if(h)h.textContent='Challenge final · 8 situations de travail';}
-    const declaration=document.querySelector('.autonomy-declaration span');if(declaration)declaration.textContent='J’ai relu ma note de dossier, vérifié les 4 critères et laissé visibles les points que je ne peux pas trancher seul.';
-    const practical=document.querySelector('.practical-review');if(practical){const intro=[...practical.querySelectorAll('p')].find(p=>p.textContent.includes('comparez vos livrables'));if(intro)intro.innerHTML='Comparez votre <strong>note de dossier</strong> aux 4 critères ci-dessous. Seuil: <strong>80/100</strong>; aucune erreur critique ni réponse «je ne sais pas» n’est admise.';}
+    if(quiz){setText(quiz.querySelector('.kicker'),'Mise en situation');setText(quiz.querySelector('h2'),'Challenge final · 8 situations de travail');}
+    const declaration=document.querySelector('.autonomy-declaration span');setText(declaration,'J’ai relu ma note de dossier, vérifié les 4 critères et laissé visibles les points que je ne peux pas trancher seul.');
+    const practical=document.querySelector('.practical-review');
+    if(practical){const intro=[...practical.querySelectorAll('p')].find(p=>p.textContent.includes('comparez vos livrables'));if(intro)intro.innerHTML='Comparez votre <strong>note de dossier</strong> aux 4 critères ci-dessous. Seuil: <strong>80/100</strong>; aucune erreur critique ni réponse «je ne sais pas» n’est admise.';}
   }
 
   function patch(){if(!isTc01())return;hideDuplicateWorkNote();syncFinalNote();patchLabels();prefillAutocontrol();}
 
   const baseRoute=APP.route;
   APP.route=function(){const result=baseRoute.apply(this,arguments);setTimeout(patch,0);return result;};
-  const observer=new MutationObserver(()=>patch());observer.observe(document.documentElement,{childList:true,subtree:true});setTimeout(patch,0);
+  setTimeout(patch,0);
 })();

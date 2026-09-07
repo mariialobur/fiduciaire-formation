@@ -3,18 +3,16 @@
   const DATA=window.FIDUCIAIRE_DATA;
   if(!APP||!DATA||!DATA.modules||!DATA.modules.TC01||APP.__tc01FinalUx)return;
   APP.__tc01FinalUx=true;
-  window.FIDUCIAIRE_TC01_FINAL_UX={version:'1.1-expert-audit'};
+  window.FIDUCIAIRE_TC01_FINAL_UX={version:'1.0',revision:'expert-audit'};
 
   const module=DATA.modules.TC01;
   const FINAL_KEY='tc01_final_note_v18';
   const PROGRESS_KEY='fiduciaire_formation_progress_v24';
   const systemNote='TC01 utilise la note de dossier finalisée comme note de travail.';
 
-  // TC01 n’a plus besoin d’une deuxième «note de travail» générique.
   module.artifactNoteMinimumCharacters=1;
   module.pedagogicalStatus='TC01 · Mission de travail · une note de dossier · autocontrôle zéro tolérance · challenge situationnel';
 
-  // Diversifier la position des bonnes réponses évite le pattern B/C de l’ancienne version.
   module.quiz=[
     {id:'Q01',critical:true,domain:'Séquence de contrôle',q:'Vous recevez une demande TVA urgente. Le dossier contient un ancien RC, un mandat qui inclut la TVA mais exclut la paie, et aucune preuve claire du pouvoir de transmission. Quelle séquence est la plus professionnelle?',choices:['Préparer et transmettre la TVA, puis vérifier le dossier après','Vérifier l’entité actuelle, le statut TVA pour la période, le mandat et les pouvoirs avant l’action finale','Demander au responsable de refaire tous les contrôles','Refuser immédiatement le dossier parce qu’il est incomplet'],answer:1,explain:'Un dossier incomplet n’impose ni action aveugle ni blocage total. Vous réalisez d’abord les contrôles accessibles et gardez visible ce qui limite l’action finale.'},
     {id:'Q02',domain:'RC / pouvoirs',q:'Zefix affiche une signature collective à deux. Marc n’y figure pas, mais une délégation interne lui permet de préparer certaines informations. Que pouvez-vous conclure?',choices:['Marc peut engager seul la société puisque sa délégation est écrite','La signature collective à deux ne concerne que les banques','La délégation doit être lue selon son objet; elle ne transforme pas automatiquement Marc en signataire RC','Marc ne peut jamais intervenir dans le dossier'],answer:2,explain:'Le RC et la délégation répondent à des questions différentes. Il faut respecter la portée exacte de chaque pouvoir.'},

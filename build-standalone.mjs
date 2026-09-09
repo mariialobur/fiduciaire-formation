@@ -3,6 +3,20 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const root = dirname(fileURLToPath(import.meta.url));
+const sourceIndex = await readFile(join(root, "index.html"), "utf8");
+const requiredEntrypointLayers = [
+  "data/tc01-mission-v1.6.js",
+  "data/tc01-final-ux.js",
+  "data/tc02-mission-v1.1.js",
+  "data/tc05-mission-v1.0.js",
+  "data/tc06-mission-v1.0.js",
+  "data/tc08-mission-v1.0.js",
+  "data/developer-credit.js"
+];
+for (const layer of requiredEntrypointLayers) {
+  if (!sourceIndex.includes(layer)) throw new Error(`Entrypoint public incomplet: ${layer} absent de index.html`);
+}
+
 const [css, appData, roadmapData, tc01v14, tc02v10, tc03v10, tc04v10, app, runtimeEnhancements, autonomyObserverGuard, autonomyFirst, beginnerUx, tc01Polish, tc01Mission, tc01FinalUx, tc02Mission, tc05Mission, tc06Mission, tc08Mission, developerCredit] = await Promise.all([
   readFile(join(root, "style.css"), "utf8"),
   readFile(join(root, "data/app-data.js"), "utf8"),

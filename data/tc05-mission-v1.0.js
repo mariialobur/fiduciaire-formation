@@ -11,6 +11,17 @@
   const old=module.learnerPackage?.files||[];module.learnerPackage={files:[{label:'▶ Mission 05 v1.1 — Saisie & double écriture',path:missionPath},...old.filter(f=>!String(f.path||'').includes('tc05-apprenant-v1.0/00_Mission'))]};
   module.evidenceItems=[{id:'journal_commente',label:'Journal de saisie commenté',help:'Date, pièce, libellé, débit, crédit, montant, impact résultat et point ouvert éventuel.',templatePath:missionPath}];
   module.artifact='Journal de saisie commenté et contrôlé.';module.artifactHtml='<div class="artifact-template"><strong>1 résultat professionnel</strong><p>Un journal où chaque ligne est retrouvable, équilibrée et économiquement explicable.</p></div>';
+  module.practicalReview={threshold:80,feedbackMinimumCharacters:80,scoreItems:[
+    {id:'economic_logic',label:'Événement économique correctement compris avant le compte',max:30},
+    {id:'entries',label:'Débit/crédit, montant et impact bilan/résultat cohérents',max:30},
+    {id:'trace',label:'Date, pièce et libellé rendent chaque ligne retrouvable',max:20},
+    {id:'open_points',label:'Incertitudes et comptes d’attente sont pilotés jusqu’à résolution',max:20}
+  ],criticalChecks:[
+    {id:'double_charge',label:'Paiement fournisseur comptabilisé comme seconde charge'},
+    {id:'principal_charge',label:'Principal d’emprunt traité comme charge'},
+    {id:'private_charge',label:'Dépense privée de l’associée masquée en charge'},
+    {id:'unsupported_vat',label:'TVA préalable déduite sans que l’hypothèse/droit soit confirmé'}
+  ],anchorGuidance:{insufficient:'Écriture équilibrée mais événement économique mal qualifié ou erreur critique présente.',partial:'Logique comprise mais trace, impact ou traitement d’une incertitude reste incomplet.',expected:'Écritures économiquement cohérentes, retrouvables et contrôlées.',strong:'Journal immédiatement reprenable avec impacts expliqués et points ouverts pilotés.'}};
   module.quizThresholdCount=5;module.quizThreshold=83;
   module.quiz=[
     {id:'Q01',q:'Une facture fournisseur est déjà enregistrée en charge + créancier. Le paiement apparaît sur la banque. Quelle écriture évite la double charge?',choices:['Charge / Banque','Créancier / Banque','TVA / Banque','Banque / Créancier'],answer:1,explain:'Le paiement solde la dette déjà reconnue.'},

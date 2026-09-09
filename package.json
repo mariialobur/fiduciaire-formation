@@ -1,6 +1,6 @@
 {
   "name": "fiduciaire-formation-12-mois",
-  "version": "2.5.0",
+  "version": "2.4.0",
   "private": true,
   "description": "QA reproductible de la plateforme hors ligne Fiduciaire Formation",
   "scripts": {

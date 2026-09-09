@@ -11,6 +11,16 @@
   const old=module.learnerPackage?.files||[];module.learnerPackage={files:[{label:'▶ Mission 08 v1.1 — Revue analytique',path:missionPath},...old.filter(f=>!String(f.path||'').includes('tc08-apprenant-v1.0/00_Mission'))]};
   module.evidenceItems=[{id:'revue_analytique',label:'Revue analytique priorisée',help:'Priorité, constat, montant/variation, hypothèse, contrôle/pièce et action.',templatePath:missionPath}];
   module.artifact='Revue analytique priorisée du bilan et du résultat.';module.artifactHtml='<div class="artifact-template"><strong>1 résultat professionnel</strong><p>Une revue qui calcule les variations, sépare faits/hypothèses et transforme chaque signal en contrôle précis.</p></div>';
+  module.practicalReview={threshold:80,feedbackMinimumCharacters:80,scoreItems:[
+    {id:'calculations',label:'Ratios et variations significatives correctement calculés',max:20},
+    {id:'diagnosis',label:'Signaux, hypothèses et faits clairement séparés',max:30},
+    {id:'evidence',label:'Grand livre, auxiliaires et pièces choisis pour démontrer la cause',max:30},
+    {id:'priority',label:'Priorités et actions cohérentes avec risque et échéance',max:20}
+  ],criticalChecks:[
+    {id:'arbitrary_fix',label:'Écriture de correction passée uniquement pour rendre le solde plausible'},
+    {id:'negative_cash',label:'Caisse négative acceptée sans investigation'},
+    {id:'vat_unreconciled',label:'Conclusion TVA tirée sans réconciliation comptes/décomptes/paiements'}
+  ],anchorGuidance:{insufficient:'Conclusions tirées du solde seul ou correction arbitraire.',partial:'Anomalies repérées mais calcul, preuve ou priorisation incomplets.',expected:'Variations calculées, causes recherchées dans les bons sous-registres et actions priorisées.',strong:'Revue concise qui sépare fait/hypothèse, démontre les causes et bloque uniquement ce qui doit l’être.'}};
   module.quizThresholdCount=5;module.quizThreshold=83;
   module.quiz=[
     {id:'Q01',q:'La caisse comptable est négative de CHF 2’350. Quel premier geste est le plus défendable?',choices:['Passer CHF 2’350 en produit','Transférer le solde en banque','Ouvrir le GL caisse, vérifier mouvements, pièces et contrepartie banque','Ignorer si la balance équilibre'],answer:2,explain:'La cause doit être démontrée dans les mouvements avant correction.'},

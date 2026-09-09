@@ -33,10 +33,10 @@ const html = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Pilote public de formation fiduciaire suisse sur 12 mois: TC01 à TC04 complets, premier mois entièrement publié.">
+  <meta name="description" content="Parcours public de formation fiduciaire suisse sur 12 mois: missions pratiques, autonomie progressive et dossiers simulés.">
   <meta name="author" content="Mariia Lobur">
   <meta name="theme-color" content="#102f3c">
-  <title>Fiduciaire Formation · Standalone · 4/25 modules complets</title>
+  <title>Fiduciaire Formation · Parcours 12 mois</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <style>${css}</style>
 </head>
@@ -70,4 +70,4 @@ await Promise.all([
   writeFile(join(root, "LANCER_ICI.html"), html)
 ]);
 
-console.log(`Standalone généré: ${html.length} caractères · TC01 final + TC02/TC05/TC06/TC08 missions + autonomie-first activés`);
+console.log(`Standalone généré: ${html.length} caractères · parcours 12 mois · missions TC01/TC02/TC05/TC06/TC08 + autonomie-first activés`);

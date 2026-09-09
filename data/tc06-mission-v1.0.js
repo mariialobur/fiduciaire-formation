@@ -11,6 +11,16 @@
   const old=module.learnerPackage?.files||[];module.learnerPackage={files:[{label:'▶ Mission 06 v1.1 — Codification & libellés',path:missionPath},...old.filter(f=>!String(f.path||'').includes('tc06-apprenant-v1.0/00_Mission'))]};
   module.evidenceItems=[{id:'regle_codification',label:'Règle de codification + exemples de libellés',help:'Nature économique, usage de l’historique, critères de création de compte, auxiliaires, TVA, attente et format de libellé.',templatePath:missionPath}];
   module.artifact='Règle de codification et exemples de saisie reprenables.';module.artifactHtml='<div class="artifact-template"><strong>1 résultat professionnel</strong><p>Une règle courte que deux collaborateurs différents peuvent appliquer de la même manière.</p></div>';
+  module.practicalReview={threshold:80,feedbackMinimumCharacters:80,scoreItems:[
+    {id:'nature',label:'Compte choisi selon la nature économique et non le fournisseur',max:30},
+    {id:'consistency',label:'Historique utilisé avec contrôle et cohérence inter-périodes',max:25},
+    {id:'controls',label:'Auxiliaires, collectifs, TVA et comptes d’attente restent contrôlables',max:25},
+    {id:'labels',label:'Libellés et migrations sont clairs et retrouvables',max:20}
+  ],criticalChecks:[
+    {id:'collective_break',label:'Écriture directe au collectif qui casse la concordance avec l’auxiliaire'},
+    {id:'history_copy',label:'Ancienne codification recopiée malgré une nature économique différente'},
+    {id:'vat_mix',label:'Fonctions TVA préalable, TVA due et règlement mélangées sans piste contrôlable'}
+  ],anchorGuidance:{insufficient:'Codification guidée par fournisseur/habitude ou contrôle auxiliaire cassé.',partial:'Bonne logique mais règles de création, libellés ou migration encore flous.',expected:'Plan stable, codification reproductible et contrôles préservés.',strong:'Un nouveau collaborateur peut coder de façon cohérente sans inventer de comptes ni copier les anciennes erreurs.'}};
   module.quizThresholdCount=5;module.quizThreshold=83;
   module.quiz=[
     {id:'Q01',q:'Trois fournisseurs vendent la même papeterie. Aucun reporting par fournisseur n’est demandé. Quelle logique est la plus stable?',choices:['Un compte par fournisseur','Un compte d’attente','Un compte générique selon la nature «fournitures de bureau»','Le collectif fournisseurs comme charge'],answer:2,explain:'Le fournisseur est déjà traçable dans la pièce et l’auxiliaire.'},

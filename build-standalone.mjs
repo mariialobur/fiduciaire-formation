@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const root = dirname(fileURLToPath(import.meta.url));
-const [css, appData, roadmapData, tc01v14, tc02v10, tc03v10, tc04v10, app, runtimeEnhancements, autonomyObserverGuard, autonomyFirst, beginnerUx, tc01Polish, tc01Mission, tc01FinalUx, tc02Mission, tc05Mission, tc06Mission, developerCredit] = await Promise.all([
+const [css, appData, roadmapData, tc01v14, tc02v10, tc03v10, tc04v10, app, runtimeEnhancements, autonomyObserverGuard, autonomyFirst, beginnerUx, tc01Polish, tc01Mission, tc01FinalUx, tc02Mission, tc05Mission, tc06Mission, tc08Mission, developerCredit] = await Promise.all([
   readFile(join(root, "style.css"), "utf8"),
   readFile(join(root, "data/app-data.js"), "utf8"),
   readFile(join(root, "data/roadmap-data.js"), "utf8"),
@@ -22,6 +22,7 @@ const [css, appData, roadmapData, tc01v14, tc02v10, tc03v10, tc04v10, app, runti
   readFile(join(root, "data/tc02-mission-v1.1.js"), "utf8"),
   readFile(join(root, "data/tc05-mission-v1.0.js"), "utf8"),
   readFile(join(root, "data/tc06-mission-v1.0.js"), "utf8"),
+  readFile(join(root, "data/tc08-mission-v1.0.js"), "utf8"),
   readFile(join(root, "data/developer-credit.js"), "utf8")
 ]);
 
@@ -58,6 +59,7 @@ const html = `<!doctype html>
   <script>${safeScript(tc02Mission)}</script>
   <script>${safeScript(tc05Mission)}</script>
   <script>${safeScript(tc06Mission)}</script>
+  <script>${safeScript(tc08Mission)}</script>
   <script>${safeScript(developerCredit)}</script>
   <script>FiduApp.route();</script>
 </body>
@@ -68,4 +70,4 @@ await Promise.all([
   writeFile(join(root, "LANCER_ICI.html"), html)
 ]);
 
-console.log(`Standalone généré: ${html.length} caractères · TC01 final + TC02/TC05/TC06 missions + autonomie-first activés`);
+console.log(`Standalone généré: ${html.length} caractères · TC01 final + TC02/TC05/TC06/TC08 missions + autonomie-first activés`);

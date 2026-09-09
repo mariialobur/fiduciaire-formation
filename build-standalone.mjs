@@ -3,6 +3,20 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const root = dirname(fileURLToPath(import.meta.url));
+const sourceIndex = await readFile(join(root, "index.html"), "utf8");
+const requiredEntrypointLayers = [
+  "data/tc01-mission-v1.6.js",
+  "data/tc01-final-ux.js",
+  "data/tc02-mission-v1.1.js",
+  "data/tc05-mission-v1.0.js",
+  "data/tc06-mission-v1.0.js",
+  "data/tc08-mission-v1.0.js",
+  "data/developer-credit.js"
+];
+for (const layer of requiredEntrypointLayers) {
+  if (!sourceIndex.includes(layer)) throw new Error(`Entrypoint public incomplet: ${layer} absent de index.html`);
+}
+
 const [css, appData, roadmapData, tc01v14, tc02v10, tc03v10, tc04v10, app, runtimeEnhancements, autonomyObserverGuard, autonomyFirst, beginnerUx, tc01Polish, tc01Mission, tc01FinalUx, tc02Mission, tc05Mission, tc06Mission, tc08Mission, developerCredit] = await Promise.all([
   readFile(join(root, "style.css"), "utf8"),
   readFile(join(root, "data/app-data.js"), "utf8"),
@@ -33,10 +47,10 @@ const html = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Pilote public de formation fiduciaire suisse sur 12 mois: TC01 à TC04 complets, premier mois entièrement publié.">
+  <meta name="description" content="Parcours public de formation fiduciaire suisse sur 12 mois: missions pratiques, autonomie progressive et dossiers simulés.">
   <meta name="author" content="Mariia Lobur">
   <meta name="theme-color" content="#102f3c">
-  <title>Fiduciaire Formation · Standalone · 4/25 modules complets</title>
+  <title>Fiduciaire Formation · Parcours 12 mois</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <style>${css}</style>
 </head>
@@ -70,4 +84,4 @@ await Promise.all([
   writeFile(join(root, "LANCER_ICI.html"), html)
 ]);
 
-console.log(`Standalone généré: ${html.length} caractères · TC01 final + TC02/TC05/TC06/TC08 missions + autonomie-first activés`);
+console.log(`Standalone généré: ${html.length} caractères · parcours 12 mois · missions TC01/TC02/TC05/TC06/TC08 + autonomie-first activés`);

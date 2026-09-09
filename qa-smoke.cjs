@@ -114,12 +114,15 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   const coreModules = window.FIDUCIAIRE_ROADMAP.coreModules.map((code) => window.FIDUCIAIRE_DATA.modules[code]);
   const publishedCore = coreModules.filter((module) => PUBLISHED.has(module.status));
   const blueprints = coreModules.filter((module) => module.status === "blueprint");
-  assert(publishedCore.length === 4 && blueprints.length === 21, "Maturité 4/25 incorrecte");
+  assert(publishedCore.length === 7 && blueprints.length === 18, "Maturité 7/25 incorrecte");
 
   const tc01 = window.FIDUCIAIRE_DATA.modules.TC01;
   const tc02 = window.FIDUCIAIRE_DATA.modules.TC02;
   const tc03 = window.FIDUCIAIRE_DATA.modules.TC03;
   const tc04 = window.FIDUCIAIRE_DATA.modules.TC04;
+  const tc05 = window.FIDUCIAIRE_DATA.modules.TC05;
+  const tc06 = window.FIDUCIAIRE_DATA.modules.TC06;
+  const tc08 = window.FIDUCIAIRE_DATA.modules.TC08;
   assert(tc01.contentVersion === "1.8" && tc01.lessonRevision === "1.8-final", "TC01 final 1.8 non actif");
   assert(tc01.quiz.length === 8 && tc01.quizThresholdCount === 7, "Challenge TC01 doit contenir 8 situations avec seuil 7/8");
   assert(tc01.quiz.filter((q) => q.critical).length === 4, "TC01 final doit contenir 4 situations critiques");
@@ -138,6 +141,13 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   assert(tc03.evidenceItems.every((item) => item.templatePath), "TC03: modèles de livrables non reliés");
   assert(tc04.evidenceItems.every((item) => item.templatePath), "TC04: modèles de livrables non reliés");
   assert(tc01.sourceRefs.includes("TC01_UID") && tc01.sourceRefs.includes("TC01_ESTV_UID"), "Sources IDE/TVA TC01 absentes");
+
+  for (const module of [tc05, tc06, tc08]) {
+    assert(module.status === "core", `${module.code}: le module Mois 2 n’est pas publié comme cœur`);
+    assert(module.contentVersion === "1.1-mission", `${module.code}: version mission 1.1 non active`);
+    assert(module.evidenceItems.length === 1 && module.evidenceItems[0].templatePath.includes('apprenant-v1.1'), `${module.code}: résultat professionnel v1.1 absent`);
+    assert(module.quiz.length === 6 && module.quizThresholdCount === 5, `${module.code}: challenge final doit être 5/6`);
+  }
 
   await navigate("#module/TC01");
   assert(!document.querySelector(".file-pick"), "TC01 affiche encore Choisir un fichier");
@@ -165,6 +175,14 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   await completeModule("TC02");
   await completeModule("TC03");
   await completeModule("TC04");
+
+  await navigate("#month/2");
+  assert(!document.querySelector(".development-warning"), "Mois 2 reste bloqué malgré TC05/TC06/TC08 publiés");
+  assert(Array.from(document.querySelectorAll(".module-card, .module-row, a")).some((node) => node.textContent.includes("TC05")), "TC05 absent du Mois 2");
+
+  await completeModule("TC05");
+  await completeModule("TC06");
+  await completeModule("TC08");
 
   await navigate("#month/1");
   assert(!document.querySelector(".development-warning"), "Mois 1 reste bloqué malgré 4/4 modules publiés");
@@ -210,12 +228,15 @@ const { JSDOM, VirtualConsole } = require("jsdom");
   console.log(JSON.stringify({
     smoke: true,
     coreModules: 25,
-    publishedCore: 4,
-    blueprints: 21,
+    publishedCore: 7,
+    blueprints: 18,
     autonomyFirst: true,
     beginnerUx: true,
     tc01FinalUx: true,
     tc01Version: "1.8-final",
+    month2Published: true,
+    month2Modules: ["TC05", "TC06", "TC08"],
+    month2MissionVersion: "1.1",
     tc01MissionResults: 1,
     tc01ChallengeQuestions: 8,
     tc01CriticalChallengeQuestions: 4,

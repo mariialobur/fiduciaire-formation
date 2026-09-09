@@ -5,10 +5,11 @@
   "description": "QA reproductible de la plateforme hors ligne Fiduciaire Formation",
   "scripts": {
     "build": "node build-standalone.mjs",
-    "test": "node qa-links.mjs && node qa-public.mjs && node qa-smoke.cjs",
+    "test": "node qa-links.mjs && node qa-public.mjs && node qa-smoke.cjs && node qa-month2.cjs",
     "test:links": "node qa-links.mjs",
     "test:public": "node qa-public.mjs",
-    "test:smoke": "node qa-smoke.cjs"
+    "test:smoke": "node qa-smoke.cjs",
+    "test:month2": "node qa-month2.cjs"
   },
   "devDependencies": {
     "jsdom": "26.1.0"

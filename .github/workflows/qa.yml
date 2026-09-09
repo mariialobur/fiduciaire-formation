@@ -29,3 +29,5 @@ jobs:
         run: npm run test:public
       - name: Run browser smoke tests
         run: npm run test:smoke
+      - name: Run Month 2 mission smoke tests
+        run: npm run test:month2

@@ -1,30 +1,34 @@
 (function(){
-  const DATA=window.FIDUCIAIRE_DATA;
-  if(!DATA||!DATA.modules||!DATA.modules.TC05)return;
-  const module=DATA.modules.TC05;
-  const missionPath='ressources/tc05-apprenant-v1.0/00_Mission_TC05_v1.0.html';
-  module.status='blueprint';
-  module.contentVersion='1.0-mission';
-  module.duration='45–60 min de pratique';
-  module.pedagogicalStatus='Mission TC05 disponible · promotion en module cœur avec le bloc complet Mois 2 (TC05 + TC06 + TC08)';
+  const DATA=window.FIDUCIAIRE_DATA;if(!DATA?.modules?.TC05)return;const module=DATA.modules.TC05;
+  const missionPath='ressources/tc05-apprenant-v1.1/00_Mission_TC05_v1.1.html';
+  module.status='core';module.contentVersion='1.1-mission';module.duration='50–60 min de pratique';
+  module.pedagogicalStatus='Module cœur · Mois 2 · étape 1/3: saisir et expliquer l’écriture';
   module.sections=[
-    {title:'Mission 05 — Une écriture équilibrée peut quand même être fausse',type:'case-study',bodyHtml:`<p>Vous traitez sept opérations d’une petite Sàrl: facture fournisseur, paiement, acompte client, achat privé, échéance d’emprunt, facture client et mouvement bancaire sans pièce.</p><p>Le but n’est pas de mémoriser des numéros de comptes. Vous devez expliquer <strong>ce qui s’est passé économiquement</strong>, puis construire l’écriture et lire son effet sur le bilan et le résultat.</p><p><a class="btn btn-primary" href="${missionPath}" target="_blank" rel="noopener noreferrer">▶ Commencer Mission 05</a></p>`},
-    {title:'Les quatre erreurs que TC05 doit éliminer',type:'warning-box',bodyHtml:'<ul class="check-list"><li>Comptabiliser une charge une deuxième fois lors du paiement fournisseur.</li><li>Passer tout remboursement d’emprunt en charge au lieu de séparer principal et intérêts.</li><li>Reconnaître automatiquement un acompte client comme produit.</li><li>Masquer une dépense privée payée par la société dans les frais généraux.</li></ul>'},
-    {title:'Réflexe métier',type:'decision',bodyHtml:'<div class="callout"><strong>Événement → éléments touchés → augmentation/diminution → débit/crédit → contrôle bilan/résultat.</strong><p>Le numéro de compte vient après. TC06 traitera la construction du plan comptable.</p></div>'}
+    {title:'Mission 05 — Montis Digital Sàrl: saisir juste',type:'case-study',bodyHtml:`<p>Vous traitez juin 2026: facture et paiement fournisseur, acompte client, dépense privée, emprunt, facture client et mouvement bancaire inconnu.</p><p>Vous devez passer de <strong>l’événement économique</strong> à une ligne de journal reprenable: date, pièce, libellé, débit, crédit, montant et impact bilan/résultat.</p><p><a class="btn btn-primary" href="${missionPath}" target="_blank" rel="noopener noreferrer">▶ Commencer Mission 05</a></p>`},
+    {title:'Ce que TC05 doit rendre automatique',type:'decision',bodyHtml:'<ul class="check-list"><li>Facture et paiement sont deux événements différents.</li><li>Principal d’emprunt ≠ charge d’intérêt.</li><li>Dépense privée payée par la société ≠ charge automatique.</li><li>TVA préalable seulement si le droit est confirmé; l’exercice l’indique explicitement lorsqu’il suppose ce droit.</li><li>Un mouvement inconnu reste visible jusqu’à résolution.</li><li>Le libellé doit permettre de retrouver la pièce et la nature.</li></ul>'},
+    {title:'Chaîne Mois 2',type:'decision',bodyHtml:'<div class="callout"><strong>TC05 saisir → TC06 coder → TC08 relire.</strong><p>Les trois missions utilisent le même dossier Montis Digital Sàrl afin de montrer la chaîne complète.</p></div>'}
   ];
-  const old=module.learnerPackage&&Array.isArray(module.learnerPackage.files)?module.learnerPackage.files:[];
-  module.learnerPackage={files:[{label:'▶ Mission 05 — Double écriture',path:missionPath},...old.filter(f=>f.path!==missionPath)]};
-  module.evidenceItems=[{id:'journal_commente',label:'Journal commenté des écritures',help:'Pour chaque opération: événement, débit, crédit, montant et impact bilan/résultat.',templatePath:missionPath}];
-  module.artifact='Journal commenté des écritures et impacts bilan/résultat.';
-  module.artifactHtml='<div class="artifact-template"><strong>1 résultat professionnel</strong><p>Un journal où chaque écriture est reliée à l’événement économique et où l’impact bilan/résultat peut être expliqué.</p></div>';
-  module.quizThresholdCount=5;
-  module.quizThreshold=83;
+  const old=module.learnerPackage?.files||[];module.learnerPackage={files:[{label:'▶ Mission 05 v1.1 — Saisie & double écriture',path:missionPath},...old.filter(f=>!String(f.path||'').includes('tc05-apprenant-v1.0/00_Mission'))]};
+  module.evidenceItems=[{id:'journal_commente',label:'Journal de saisie commenté',help:'Date, pièce, libellé, débit, crédit, montant, impact résultat et point ouvert éventuel.',templatePath:missionPath}];
+  module.artifact='Journal de saisie commenté et contrôlé.';module.artifactHtml='<div class="artifact-template"><strong>1 résultat professionnel</strong><p>Un journal où chaque ligne est retrouvable, équilibrée et économiquement explicable.</p></div>';
+  module.practicalReview={threshold:80,feedbackMinimumCharacters:80,scoreItems:[
+    {id:'economic_logic',label:'Événement économique correctement compris avant le compte',max:30},
+    {id:'entries',label:'Débit/crédit, montant et impact bilan/résultat cohérents',max:30},
+    {id:'trace',label:'Date, pièce et libellé rendent chaque ligne retrouvable',max:20},
+    {id:'open_points',label:'Incertitudes et comptes d’attente sont pilotés jusqu’à résolution',max:20}
+  ],criticalChecks:[
+    {id:'double_charge',label:'Paiement fournisseur comptabilisé comme seconde charge'},
+    {id:'principal_charge',label:'Principal d’emprunt traité comme charge'},
+    {id:'private_charge',label:'Dépense privée de l’associée masquée en charge'},
+    {id:'unsupported_vat',label:'TVA préalable déduite sans que l’hypothèse/droit soit confirmé'}
+  ],anchorGuidance:{insufficient:'Écriture équilibrée mais événement économique mal qualifié ou erreur critique présente.',partial:'Logique comprise mais trace, impact ou traitement d’une incertitude reste incomplet.',expected:'Écritures économiquement cohérentes, retrouvables et contrôlées.',strong:'Journal immédiatement reprenable avec impacts expliqués et points ouverts pilotés.'}};
+  module.quizThresholdCount=5;module.quizThreshold=83;
   module.quiz=[
-    {id:'Q01',q:'Une facture fournisseur a déjà été comptabilisée en charge et créancier. Au paiement, quelle logique est correcte?',choices:['Nouvelle charge / banque','Créancier / banque','TVA / banque','Produit / banque'],answer:1,explain:'Le paiement solde la dette; il ne recrée pas la charge.'},
-    {id:'Q02',q:'Une échéance bancaire de CHF 2’500 contient CHF 2’000 de principal et CHF 500 d’intérêts. Quel montant affecte le résultat?',choices:['CHF 2’500','CHF 2’000','CHF 500','CHF 0'],answer:2,explain:'Le principal réduit la dette; les intérêts sont une charge.'},
-    {id:'Q03',q:'La société paie CHF 486 de restaurant familial privé de l’associée. Quel premier réflexe?',choices:['Frais de représentation','Relation/compte courant avec associée, pas charge automatique','Salaire','TVA déductible'],answer:1,explain:'Le moyen de paiement ne transforme pas une dépense privée en charge.'},
-    {id:'Q04',q:'Un acompte client est reçu avant que la prestation soit gagnée. Quel impact économique de base?',choices:['Banque augmente et produit augmente automatiquement','Banque augmente et une obligation/acompte envers client augmente','Charge augmente','Débiteur augmente'],answer:1,explain:'Avant reconnaissance du produit, l’encaissement représente une obligation envers le client; la TVA est traitée séparément selon les règles applicables.'},
-    {id:'Q05',q:'Un débit bancaire n’a aucune pièce ni libellé fiable. Que faire?',choices:['Frais divers définitifs','Le supprimer','L’isoler temporairement en attente avec propriétaire, action et échéance','Le passer en salaire'],answer:2,explain:'L’incertitude doit rester visible jusqu’à identification.'},
-    {id:'Q06',q:'Pourquoi vérifier l’impact bilan/résultat après une écriture?',choices:['Pour remplacer la pièce','Pour détecter une écriture équilibrée mais économiquement incohérente','Pour éviter le débit/crédit','Pour choisir le numéro de compte au hasard'],answer:1,explain:'Débit = crédit ne garantit pas que la qualification est correcte.'}
+    {id:'Q01',q:'Une facture fournisseur est déjà enregistrée en charge + créancier. Le paiement apparaît sur la banque. Quelle écriture évite la double charge?',choices:['Charge / Banque','Créancier / Banque','TVA / Banque','Banque / Créancier'],answer:1,explain:'Le paiement solde la dette déjà reconnue.'},
+    {id:'Q02',q:'Une mensualité d’emprunt de CHF 2’500 contient CHF 2’000 de principal et CHF 500 d’intérêts. Quel montant diminue le résultat?',choices:['CHF 2’500','CHF 2’000','CHF 500','CHF 0'],answer:2,explain:'Le principal réduit la dette; les intérêts sont une charge.'},
+    {id:'Q03',q:'Une facture d’achat affiche de la TVA, mais le droit à déduction n’a pas encore été contrôlé. Quel réflexe est correct?',choices:['Déduire systématiquement la TVA','Mettre systématiquement toute la TVA en charge','Ignorer la facture','Ne pas présumer le droit à déduction; appliquer le traitement TVA seulement après le contrôle prévu'],answer:3,explain:'La présence d’un montant TVA sur la pièce ne prouve pas à elle seule le droit à déduction.'},
+    {id:'Q04',q:'Une dépense familiale de l’associée est payée avec la carte de la Sàrl. Quelle première qualification de travail est la plus défendable?',choices:['Relation/compte courant avec l’associée, pas charge automatique','Frais de représentation','Salaire automatique','TVA préalable'],answer:0,explain:'Le moyen de paiement ne change pas la nature privée de la dépense.'},
+    {id:'Q05',q:'Un acompte client est reçu avant que la prestation soit gagnée. Quel principe de base faut-il préserver?',choices:['L’encaissement crée toujours le produit','Séparer l’encaissement de la reconnaissance du produit; traiter la TVA selon les règles applicables','Passer une charge','Créer un débiteur supplémentaire'],answer:1,explain:'Cash reçu et produit acquis ne sont pas automatiquement la même chose.'},
+    {id:'Q06',q:'Un débit bancaire de CHF 900 n’a aucune pièce ni libellé fiable. Quelle action est la plus contrôlable?',choices:['Frais divers définitifs','Le supprimer','Le passer en salaire','L’isoler temporairement avec propriétaire, action et échéance de résolution'],answer:3,explain:'L’incertitude doit rester visible et pilotée.'}
   ];
 })();

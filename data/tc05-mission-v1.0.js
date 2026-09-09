@@ -3,10 +3,10 @@
   if(!DATA||!DATA.modules||!DATA.modules.TC05)return;
   const module=DATA.modules.TC05;
   const missionPath='ressources/tc05-apprenant-v1.0/00_Mission_TC05_v1.0.html';
-  module.status='core';
+  module.status='blueprint';
   module.contentVersion='1.0-mission';
   module.duration='45–60 min de pratique';
-  module.pedagogicalStatus='Mission comptable · logique économique → débit/crédit → impact bilan/résultat';
+  module.pedagogicalStatus='Mission TC05 disponible · promotion en module cœur avec le bloc complet Mois 2 (TC05 + TC06 + TC08)';
   module.sections=[
     {title:'Mission 05 — Une écriture équilibrée peut quand même être fausse',type:'case-study',bodyHtml:`<p>Vous traitez sept opérations d’une petite Sàrl: facture fournisseur, paiement, acompte client, achat privé, échéance d’emprunt, facture client et mouvement bancaire sans pièce.</p><p>Le but n’est pas de mémoriser des numéros de comptes. Vous devez expliquer <strong>ce qui s’est passé économiquement</strong>, puis construire l’écriture et lire son effet sur le bilan et le résultat.</p><p><a class="btn btn-primary" href="${missionPath}" target="_blank" rel="noopener noreferrer">▶ Commencer Mission 05</a></p>`},
     {title:'Les quatre erreurs que TC05 doit éliminer',type:'warning-box',bodyHtml:'<ul class="check-list"><li>Comptabiliser une charge une deuxième fois lors du paiement fournisseur.</li><li>Passer tout remboursement d’emprunt en charge au lieu de séparer principal et intérêts.</li><li>Reconnaître automatiquement un acompte client comme produit.</li><li>Masquer une dépense privée payée par la société dans les frais généraux.</li></ul>'},
